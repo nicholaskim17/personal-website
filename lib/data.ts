@@ -79,45 +79,15 @@ export const about = {
 // server-side in lib/hevy.ts; the remaining fields configure external links
 // and the guitar card.
 export const hobbies = {
-  training: {
     heading: 'Gym',
     hevyProfileHref: 'https://hevy.com/user/kimmer17',
     profileLinkLabel: 'Open my Hevy training profile in a new tab',
-    fallbackWorkout: {
-      title: 'Push Day',
-      durationMinutes: 52,
-      exerciseSummary: 'Bench press, incline dumbbell press, lateral raises',
-      exercises: [
-        {
-          name: 'Bench Press (Barbell)',
-          sets: [
-            { weightLb: 135, reps: 8, durationSeconds: null, distanceMeters: null },
-            { weightLb: 135, reps: 8, durationSeconds: null, distanceMeters: null },
-            { weightLb: 135, reps: 6, durationSeconds: null, distanceMeters: null },
-          ],
-        },
-        {
-          name: 'Incline Dumbbell Press',
-          sets: [
-            { weightLb: 50, reps: 10, durationSeconds: null, distanceMeters: null },
-            { weightLb: 50, reps: 9, durationSeconds: null, distanceMeters: null },
-          ],
-        },
-        {
-          name: 'Lateral Raise (Machine)',
-          sets: [
-            { weightLb: 30, reps: 12, durationSeconds: null, distanceMeters: null },
-            { weightLb: 30, reps: 11, durationSeconds: null, distanceMeters: null },
-          ],
-        },
-      ],
-    },
-  },
+    
   guitar: {
     heading: 'Guitar',
     image: '/images/guitar.jpg',
     imageAlt: 'Nick playing guitar and singing at home',
-    sentence: "Just for fun — I post covers sometimes lol.",
+    sentence: "Just for fun, I post covers sometimes lol.",
     tiktokHandle: '@kimmer_music17',
     tiktokHref: 'https://www.tiktok.com/@kimmer_music17',
     cta: 'Watch my covers',
@@ -155,7 +125,7 @@ export const work: WorkEntry[] = [
     title: 'Machine Learning Research Intern',
     dates: 'June 2026 — Present',
     description:
-      'Researching safer, self-improving LLM systems using retrieval augmentation and adaptive evaluation.',
+      'Researching AI safety and evaluation by testing different inference-time harnesses for open-weight LLMs in CBRNE domains.',
     tags: ['Python', 'LLMs', 'AI Safety', 'RAG', 'Machine Learning', 'Research'],
   },
   {

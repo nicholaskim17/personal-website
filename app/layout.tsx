@@ -21,7 +21,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nickkim.dev'),
-  title: 'Nick Kim — Portfolio',
+  title: 'Nick Kim\'s Portfolio',
   description: site.description,
   alternates: {
     canonical: 'https://nickkim.dev',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     apple: '/favicon.svg',
   },
   openGraph: {
-    title: 'Nick Kim — Portfolio',
+    title: 'Nick Kim\' Portfolio',
     description: site.description,
     url: 'https://nickkim.dev',
     type: 'website',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nick Kim — Portfolio',
+    title: 'Nick Kim\' Portfolio',
     description: site.description,
     images: ['/images/og-image.png'],
   },
