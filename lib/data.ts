@@ -79,10 +79,11 @@ export const about = {
 // server-side in lib/hevy.ts; the remaining fields configure external links
 // and the guitar card.
 export const hobbies = {
+  training: {
     heading: 'Gym',
     hevyProfileHref: 'https://hevy.com/user/kimmer17',
     profileLinkLabel: 'Open my Hevy training profile in a new tab',
-    
+  },
   guitar: {
     heading: 'Guitar',
     image: '/images/guitar.jpg',
