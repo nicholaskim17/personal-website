@@ -116,7 +116,7 @@ export const work: WorkEntry[] = [
     dates: 'Sept 2026 — Present',
     description:
       'Adaptive-Compute Inference for Real-Time Text to Speech',
-    tags: ['Python', 'Machine Learning', 'AI'],
+    tags: ['Python', 'PyTorch', 'Triton', ],
   },
   {
     organization: 'Appli AI',
