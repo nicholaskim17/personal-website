@@ -3,16 +3,17 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
+import { ArrowDown } from 'lucide-react'
 import { about } from '@/lib/data'
 
 const COLS = 2
 const CONTAINER_W = 350
-const CONTAINER_H = 430
+const CONTAINER_H = 380
 const GAP = 14
 const CELL_W = (CONTAINER_W - GAP * (COLS - 1)) / COLS
 const CELL_H = (CONTAINER_H - GAP * 2) / 3
-const PHOTO_W = 200
-const PHOTO_H = 150
+const PHOTO_W = 210
+const PHOTO_H = 140
 
 // Hand-placed offsets/rotations so the resting stack reads as a loose pile of prints.
 const STACK_LAYOUT = [
@@ -32,8 +33,10 @@ function gridTarget(index: number) {
   return {
     x: cellCenterX - CONTAINER_W / 2,
     y: cellCenterY - CONTAINER_H / 2,
-    scaleX: CELL_W / PHOTO_W,
-    scaleY: CELL_H / PHOTO_H,
+    width: CELL_W,
+    height: CELL_H,
+    marginLeft: -CELL_W / 2,
+    marginTop: -CELL_H / 2,
   }
 }
 
@@ -54,6 +57,23 @@ export default function PhotoStack() {
       role="group"
       aria-label="Photo stack, focus or hover to arrange into a grid"
     >
+      <div className="pointer-events-none absolute left-1/2 top-1 z-20 -translate-x-1/2">
+        <motion.div
+          className="flex flex-col items-center gap-0.5 text-sm font-medium text-ink-muted"
+          initial={false}
+          animate={
+            shouldReduceMotion
+              ? { opacity: hovered ? 0 : 1 }
+              : { opacity: hovered ? 0 : 1, y: hovered ? -6 : 0 }
+          }
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          aria-hidden="true"
+        >
+          <span>Recently</span>
+          <ArrowDown size={17} strokeWidth={1.7} className="text-accent" />
+        </motion.div>
+      </div>
+
       {photos.map((photo, i) => {
         const rest = STACK_LAYOUT[i % STACK_LAYOUT.length]
         const target = gridTarget(i)
@@ -74,8 +94,24 @@ export default function PhotoStack() {
               shouldReduceMotion
                 ? undefined
                 : hovered
-                  ? { x: target.x, y: target.y, rotate: 0, scaleX: target.scaleX, scaleY: target.scaleY }
-                  : { x: rest.x, y: rest.y, rotate: rest.rotate, scaleX: 1, scaleY: 1 }
+                  ? {
+                      x: target.x,
+                      y: target.y,
+                      width: target.width,
+                      height: target.height,
+                      marginLeft: target.marginLeft,
+                      marginTop: target.marginTop,
+                      rotate: 0,
+                    }
+                  : {
+                      x: rest.x,
+                      y: rest.y,
+                      width: PHOTO_W,
+                      height: PHOTO_H,
+                      marginLeft: -PHOTO_W / 2,
+                      marginTop: -PHOTO_H / 2,
+                      rotate: rest.rotate,
+                    }
             }
             transition={{
               type: 'spring',
@@ -84,7 +120,7 @@ export default function PhotoStack() {
               delay: hovered ? i * 0.04 : (photos.length - i) * 0.02,
             }}
           >
-            <Image src={photo.src} alt={photo.alt} fill sizes="200px" className="object-cover" />
+            <Image src={photo.src} alt={photo.alt} fill sizes="210px" className="object-cover" />
           </motion.div>
         )
       })}
