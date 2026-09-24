@@ -54,7 +54,7 @@ export const about = {
   watAI: {
     name: 'WAT.ai',
     href: 'https://watai.ca/',
-    logo: '/images/work/wat-ai.svg',
+    logo: '/images/work/watai.png',
   },
   paragraphs: [
     "School always came easy, but nothing really clicked until I started building. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
@@ -110,7 +110,7 @@ export const work: WorkEntry[] = [
   {
     organization: 'WAT.ai',
     organizationHref: 'https://watai.ca/',
-    logo: '/images/work/wat-ai.svg',
+    logo: '/images/work/watai.png',
     logoAlt: 'WAT.ai logo',
     title: 'Machine Learning Engineer',
     dates: 'Sept 2026 — Present',
