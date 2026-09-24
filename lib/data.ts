@@ -57,7 +57,7 @@ export const about = {
     logo: '/images/work/watai.png',
   },
   paragraphs: [
-    "School always came easy, but nothing really clicked until I started building. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
+    "Doctor, Lawyer, Engineer, Investment Banking... I couldn't find a passion. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
     "I study Engineering at the University of Waterloo and work as a Machine Learning Engineer at WAT.ai. Outside of tech: gym, guitar, golf, hockey.",
   ],
   hobbiesCta: { label: 'See my hobbies', href: '#hobbies' },
