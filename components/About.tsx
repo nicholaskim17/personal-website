@@ -34,7 +34,7 @@ function AboutParagraph({ text, showHobbiesLink = false }: { text: string; showH
       {showHobbiesLink && (
         <a
           href={about.hobbiesCta.href}
-          className="group ml-2 inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-accent/10 px-3 py-1 text-sm font-semibold leading-6 text-accent transition-colors hover:bg-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+          className="group ml-2 inline-flex items-center gap-1 whitespace-nowrap font-medium leading-6 text-ink underline decoration-border underline-offset-4 transition-colors hover:text-accent hover:decoration-accent focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           {about.hobbiesCta.label}
           <ArrowDownRight

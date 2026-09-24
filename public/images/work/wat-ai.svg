@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
-  <title id="title">WAT.ai mark</title>
-  <desc id="desc">A stylized WAT.ai mark</desc>
-  <rect width="256" height="256" rx="48" fill="#161513" />
-  <path d="M47 72h29l19 74 21-74h25l21 74 19-74h29l-33 112h-28l-21-70-21 70H80L47 72Z" fill="#e0983f" />
-  <circle cx="194" cy="48" r="13" fill="#e0983f" />
-</svg>

@@ -58,7 +58,7 @@ export const about = {
   },
   paragraphs: [
     "School always came easy, but nothing really clicked until I started building. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
-    "I study engineering at the University of Waterloo and work as a Machine Learning Engineer at WAT.ai. Outside of tech: gym, guitar, golf, hockey.",
+    "I study Engineering at the University of Waterloo and work as a Machine Learning Engineer at WAT.ai. Outside of tech: gym, guitar, golf, hockey.",
   ],
   hobbiesCta: { label: 'See my hobbies', href: '#hobbies' },
   exploring: {
