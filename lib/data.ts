@@ -57,13 +57,13 @@ export const about = {
     logo: '/images/work/watai.png',
   },
   paragraphs: [
-    "Doctor, Lawyer, Engineer, Investment Banking... I couldn't find a passion. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
+    "Doctor, Lawyer, Engineer, Investment Banker... I couldn't find a passion. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
     "I study Engineering at the University of Waterloo and work as a Machine Learning Engineer at WAT.ai. Outside of tech: gym, guitar, golf, hockey.",
   ],
   hobbiesCta: { label: 'See my hobbies', href: '#hobbies' },
   exploring: {
     heading: "What I'm exploring",
-    items: ['AI Saftey', 'AI agents and automation', 'Building useful full-stack products'],
+    items: ['AI Safety', 'AI agents and automation', 'Building useful full-stack products'],
   },
   gallery: [
     { src: '/images/gallery/golf.jpeg', alt: 'Lining up a putt on the green with a friend' },
