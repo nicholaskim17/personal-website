@@ -4,7 +4,7 @@ import { ArrowDownRight } from 'lucide-react'
 import Reveal from './Reveal'
 import PhotoStack from './PhotoStack'
 
-const taggedMentions = [about.waterloo, about.appliAI]
+const taggedMentions = [about.waterloo, about.watAI]
 const mentionPattern = new RegExp(`(${taggedMentions.map(m => m.name).join('|')})`, 'g')
 
 function AboutParagraph({ text, showHobbiesLink = false }: { text: string; showHobbiesLink?: boolean }) {

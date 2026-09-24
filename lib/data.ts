@@ -51,14 +51,14 @@ export const about = {
     href: 'https://uwaterloo.ca/engineering/',
     logo: '/images/work/waterloo-seal.svg',
   },
-  appliAI: {
-    name: 'Appli AI',
-    href: 'https://applisolutions.com',
-    logo: '/images/work/appli-ai.png',
+  watAI: {
+    name: 'WAT.ai',
+    href: 'https://watai.ca/',
+    logo: '/images/work/wat-ai.svg',
   },
   paragraphs: [
     "School always came easy, but nothing really clicked until I started building. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
-    "I study Management Engineering at the University of Waterloo and build as a Software Engineering Intern at Appli AI. Outside of tech: gym, guitar, golf, hockey.",
+    "I study engineering at the University of Waterloo and work as a Machine Learning Engineer at WAT.ai. Outside of tech: gym, guitar, golf, hockey.",
   ],
   hobbiesCta: { label: 'See my hobbies', href: '#hobbies' },
   exploring: {
@@ -108,12 +108,23 @@ export interface WorkEntry {
 
 export const work: WorkEntry[] = [
   {
+    organization: 'WAT.ai',
+    organizationHref: 'https://watai.ca/',
+    logo: '/images/work/wat-ai.svg',
+    logoAlt: 'WAT.ai logo',
+    title: 'Machine Learning Engineer',
+    dates: 'Sept 2026 — Present',
+    description:
+      'Modern AI text-to-speech systems generate audio by iteratively refining it through a fixed number of computation steps, applied uniformly regardless of how difficult a given moment of speech is to synthesize. This project builds an adaptive inference system that predicts, per frame, how many steps are actually needed. We first validate the idea in PyTorch, then use Triton and GPU-aware scheduling only where profiling shows they are needed to turn reduced compute into real wall-clock speedup. We benchmark against existing step-reduction methods and aim to produce an open-source engine and research paper submission.',
+    tags: ['Python', 'Machine Learning', 'AI'],
+  },
+  {
     organization: 'Appli AI',
     organizationHref: 'https://applisolutions.com',
     logo: '/images/work/appli-ai.png',
     logoAlt: 'Appli AI logo',
     title: 'Software Engineering Intern',
-    dates: 'June 2026 — Present',
+    dates: 'June 2026 — Sept 2026',
     description:
       'Building AI-powered matching and backend systems that deliver secure, near-real-time recommendations.',
     tags: ['Python', 'TypeScript', 'Neo4j', 'Recommendation Systems', 'Vector Embeddings', 'Backend Development'],
@@ -124,7 +135,7 @@ export const work: WorkEntry[] = [
     logo: '/images/work/algoverse.jpeg',
     logoAlt: 'Algoverse logo',
     title: 'Machine Learning Research Intern',
-    dates: 'June 2026 — Present',
+    dates: 'June 2026 — Sept 2026',
     description:
       'Researching AI safety and evaluation by testing different inference-time harnesses for open-weight LLMs in CBRNE domains.',
     tags: ['Python', 'LLMs', 'AI Safety', 'RAG', 'Machine Learning', 'Research'],
