@@ -115,7 +115,7 @@ export const work: WorkEntry[] = [
     title: 'Machine Learning Engineer',
     dates: 'Sept 2026 — Present',
     description:
-      'Modern AI text-to-speech systems generate audio by iteratively refining it through a fixed number of computation steps, applied uniformly regardless of how difficult a given moment of speech is to synthesize. This project builds an adaptive inference system that predicts, per frame, how many steps are actually needed. We first validate the idea in PyTorch, then use Triton and GPU-aware scheduling only where profiling shows they are needed to turn reduced compute into real wall-clock speedup. We benchmark against existing step-reduction methods and aim to produce an open-source engine and research paper submission.',
+      'Adaptive-Compute Inference for Real-Time Text to Speech',
     tags: ['Python', 'Machine Learning', 'AI'],
   },
   {
