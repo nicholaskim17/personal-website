@@ -50,23 +50,23 @@ function AboutParagraph({ text, showHobbiesLink = false }: { text: string; showH
 
 export default function About() {
   return (
-    <section id="about" className="px-6 py-24 md:px-10 md:py-32">
+    <section id="about" className="px-6 py-20 md:px-10 md:py-24">
       <div className="mx-auto max-w-content">
         <Reveal>
-          <h2 className="text-sm font-medium uppercase tracking-[0.2em] text-accent">{about.heading}</h2>
+          <h2 className="font-playfair text-2xl font-semibold text-ink">{about.heading}</h2>
         </Reveal>
 
         <div className="mt-8 flex flex-col gap-12 md:flex-row md:items-start md:justify-between md:gap-10">
           <div className="max-w-2xl">
             {about.paragraphs.map((paragraph, i) => (
-              <Reveal key={paragraph} delay={i * 0.08}>
+              <Reveal key={paragraph}>
                 <p className={`${i === 0 ? '' : 'mt-6'} text-lg leading-8 text-ink-muted md:text-xl`}>
                   <AboutParagraph text={paragraph} showHobbiesLink={i === about.paragraphs.length - 1} />
                 </p>
               </Reveal>
             ))}
 
-            <Reveal delay={0.16}>
+            <Reveal>
               <div className="mt-10">
                 <h3 className="font-playfair text-lg font-semibold text-ink">{about.exploring.heading}</h3>
                 <ul className="mt-3 space-y-2 text-sm text-ink-muted">
@@ -81,7 +81,7 @@ export default function About() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.1} className="self-center md:shrink-0 md:self-start">
+          <Reveal className="self-center md:shrink-0 md:self-start">
             <PhotoStack />
           </Reveal>
         </div>

@@ -5,22 +5,22 @@ import GuitarCard from './hobbies/GuitarCard'
 
 export default function Hobbies() {
   return (
-    <section id="hobbies" className="px-6 py-24 md:px-10 md:py-32">
+    <section id="hobbies" className="px-6 py-20 md:px-10 md:py-24">
       <div className="mx-auto max-w-content">
         <Reveal>
-          <h2 className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Hobbies</h2>
+          <h2 className="font-playfair text-2xl font-semibold text-ink">Hobbies</h2>
         </Reveal>
 
-        <div className="mt-12 grid items-start gap-6 md:grid-cols-3">
-          <Reveal delay={0.06}>
+        <div className="mt-10 grid items-start gap-x-8 gap-y-10 md:grid-cols-3">
+          <Reveal>
             <TrainingCard />
           </Reveal>
 
-          <Reveal delay={0.1}>
+          <Reveal>
             <LastWorkoutCard />
           </Reveal>
 
-          <Reveal delay={0.14}>
+          <Reveal>
             <GuitarCard />
           </Reveal>
         </div>

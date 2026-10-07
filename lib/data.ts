@@ -155,6 +155,7 @@ export const work: WorkEntry[] = [
 
 export interface Project {
   title: string
+  year?: number
   description: string
   result?: string
   image: string
@@ -250,8 +251,6 @@ export const projects: Project[] = [
 export const contact = {
   invitation:
     "Feel free to reach out if you'd like to discuss opportunities, have a quick coffee chat, or just say hi! I'm always looking forward to meeting new people.",
-  portraitSrc: '/images/portrait.jpg',
-  portraitAlt: 'Nick in front of the waterloo bridge',
   submitLabel: 'Submit',
 }
 

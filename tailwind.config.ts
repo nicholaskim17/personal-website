@@ -35,21 +35,6 @@ const config: Config = {
       maxWidth: {
         content: '72rem',
       },
-      keyframes: {
-        'fade-up': {
-          '0%': { opacity: '0', transform: 'translateY(16px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        'blob-move': {
-          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-          '33%': { transform: 'translate(4%, -6%) scale(1.05)' },
-          '66%': { transform: 'translate(-3%, 4%) scale(0.97)' },
-        },
-      },
-      animation: {
-        'fade-up': 'fade-up 0.6s ease-out forwards',
-        'blob-move': 'blob-move 22s ease-in-out infinite',
-      },
     },
   },
   plugins: [],

@@ -4,27 +4,29 @@ import { hobbies } from '@/lib/data'
 
 export default function GuitarCard() {
   return (
-    <a
-      href={hobbies.guitar.tiktokHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Watch ${hobbies.guitar.tiktokHandle}'s guitar covers on TikTok`}
-      className="block rounded-2xl border border-border bg-surface-raised p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md sm:p-6 md:h-[410px]"
-    >
-      <div className="flex items-center justify-between">
+    <article className="min-w-0 border-t border-border pt-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
         <div className="flex items-center gap-2">
           <Guitar size={16} className="text-accent" aria-hidden="true" />
           <h3 className="font-playfair text-base font-semibold text-ink">{hobbies.guitar.heading}</h3>
         </div>
-        <ExternalLink size={14} className="text-ink-faint" aria-hidden="true" />
+        <a
+          href={hobbies.guitar.tiktokHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Watch ${hobbies.guitar.tiktokHandle}'s guitar covers on TikTok`}
+          className="inline-flex items-center gap-1 text-xs text-ink-faint transition-colors hover:text-accent"
+        >
+          Covers <ExternalLink size={12} aria-hidden="true" />
+        </a>
       </div>
 
-      <div className="relative mt-3 aspect-[4/3] w-full overflow-hidden rounded-xl border border-border">
+      <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-sm">
         <Image src={hobbies.guitar.image} alt={hobbies.guitar.imageAlt} fill sizes="200px" className="object-cover" />
       </div>
 
-      <p className="mt-3 text-xs leading-5 text-ink-muted">{hobbies.guitar.sentence}</p>
-      <p className="mt-2 text-xs font-medium text-ink">{hobbies.guitar.tiktokHandle}</p>
-    </a>
+      <p className="mt-3 text-sm leading-6 text-ink-muted">{hobbies.guitar.sentence}</p>
+      <p className="mt-1 text-xs text-ink-faint">{hobbies.guitar.tiktokHandle}</p>
+    </article>
   )
 }

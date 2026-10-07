@@ -9,25 +9,27 @@ export default function LastWorkoutCard() {
   const state = useJsonFetch<HevyDashboardData>('/api/hevy')
 
   return (
-    <a
-      href={hobbies.training.hevyProfileHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Open my latest workouts on Hevy"
-      className="block rounded-2xl border border-border bg-surface-raised p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md sm:p-6 md:flex md:h-[410px] md:flex-col md:overflow-hidden"
-    >
-      <div className="flex items-center justify-between">
+    <article className="min-w-0 border-t border-border pt-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
         <div className="flex items-center gap-2">
           <ListChecks size={16} className="text-accent" aria-hidden="true" />
           <h3 className="font-playfair text-base font-semibold text-ink">Last workout</h3>
         </div>
-        <ExternalLink size={14} className="text-ink-faint" aria-hidden="true" />
+        <a
+          href={hobbies.training.hevyProfileHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open my latest workouts on Hevy"
+          className="inline-flex items-center gap-1 text-xs text-ink-faint transition-colors hover:text-accent"
+        >
+          Hevy <ExternalLink size={12} aria-hidden="true" />
+        </a>
       </div>
 
       {state.status === 'loading' && <LastWorkoutSkeleton />}
       {state.status === 'error' && <LastWorkoutUnavailable />}
       {state.status === 'ready' && <LastWorkoutContent data={state.data} />}
-    </a>
+    </article>
   )
 }
 
@@ -43,7 +45,7 @@ function LastWorkoutContent({ data }: { data: HevyDashboardData }) {
   }
 
   return (
-    <div className="mt-4 md:min-h-0 md:flex-1 md:overflow-y-auto md:pr-2">
+    <div className="mt-4">
       <div className="flex items-baseline justify-between gap-2">
         <p className="text-sm font-medium text-ink">{workout.title}</p>
         <p className="flex-shrink-0 text-xs text-ink-faint">
@@ -51,20 +53,13 @@ function LastWorkoutContent({ data }: { data: HevyDashboardData }) {
         </p>
       </div>
 
-      <ul className="mt-4 space-y-3.5">
+      <ul className="mt-4 divide-y divide-border">
         {workout.exercises.map(exercise => (
-          <li key={exercise.name}>
+          <li key={exercise.name} className="py-3 first:pt-0 last:pb-0">
             <p className="text-sm font-medium text-ink">{exercise.name}</p>
-            <div className="mt-1.5 flex flex-wrap gap-1.5">
-              {exercise.sets.map((set, i) => (
-                <span
-                  key={i}
-                  className="rounded-md bg-surface px-2 py-1 text-xs text-ink-muted ring-1 ring-inset ring-border"
-                >
-                  {formatSet(set)}
-                </span>
-              ))}
-            </div>
+            <p className="mt-1 text-xs leading-5 text-ink-muted">
+              {exercise.sets.map(formatSet).join(' · ')}
+            </p>
           </li>
         ))}
       </ul>
@@ -86,15 +81,12 @@ function formatWeight(weightLb: number): string {
 
 function LastWorkoutSkeleton() {
   return (
-    <div className="mt-4 animate-pulse space-y-3.5" role="status" aria-label="Loading last workout">
-      <div className="h-4 w-2/3 rounded bg-surface" />
+    <div className="mt-4 space-y-4" role="status" aria-label="Loading last workout">
+      <div className="h-4 w-2/3 animate-pulse bg-border/40" />
       {[0, 1, 2].map(i => (
-        <div key={i} className="space-y-1.5">
-          <div className="h-3.5 w-1/2 rounded bg-surface" />
-          <div className="flex gap-1.5">
-            <div className="h-6 w-14 rounded-md bg-surface" />
-            <div className="h-6 w-14 rounded-md bg-surface" />
-          </div>
+        <div key={i} className="space-y-2 border-t border-border pt-3">
+          <div className="h-3.5 w-1/2 animate-pulse bg-border/40" />
+          <div className="h-3 w-4/5 animate-pulse bg-border/40" />
         </div>
       ))}
     </div>
@@ -103,8 +95,8 @@ function LastWorkoutSkeleton() {
 
 function LastWorkoutUnavailable() {
   return (
-    <div className="mt-4 rounded-xl border border-dashed border-border px-4 py-6 text-center">
-      <p className="text-sm text-ink-muted">Last workout data is unavailable right now.</p>
+    <div className="mt-5 text-sm text-ink-muted">
+      <p>Last workout data is unavailable right now.</p>
       <p className="mt-1 text-xs text-ink-faint">Check back soon.</p>
     </div>
   )

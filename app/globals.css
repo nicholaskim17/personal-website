@@ -9,9 +9,9 @@
   --color-ink-muted: #57524c;
   --color-ink-faint: #8a8479;
   --color-border: #e5e0d8;
-  --color-accent: #b45309;
-  --color-accent-soft: #fdebd3;
-  --color-accent-strong: #7c3a0a;
+  --color-accent: #6d747b;
+  --color-accent-soft: #e6e8ea;
+  --color-accent-strong: #4b5258;
 }
 
 .dark {
@@ -21,9 +21,9 @@
   --color-ink-muted: #b7b1a6;
   --color-ink-faint: #7a7469;
   --color-border: #322f2a;
-  --color-accent: #e0983f;
-  --color-accent-soft: #3a2c17;
-  --color-accent-strong: #b4630f;
+  --color-accent: #c2c7cc;
+  --color-accent-soft: #353a3f;
+  --color-accent-strong: #e1e4e7;
 }
 
 html {
@@ -64,58 +64,6 @@ body {
   }
   50% {
     transform: scaleY(1);
-  }
-}
-
-/*
-  Ambient drift keyframes for the hero's decorative notebook doodles. Each
-  variant nudges translate/rotate a small amount and back — using the
-  individual `translate`/`rotate` properties (not `transform`) so every
-  doodle can carry its own static resting tilt via the --doodle-rot custom
-  property while still sharing one of these four keyframe definitions.
-*/
-@keyframes doodle-drift-a {
-  0%,
-  100% {
-    translate: 0 0;
-    rotate: var(--doodle-rot, 0deg);
-  }
-  50% {
-    translate: 11px -9px;
-    rotate: calc(var(--doodle-rot, 0deg) + 2deg);
-  }
-}
-@keyframes doodle-drift-b {
-  0%,
-  100% {
-    translate: 0 0;
-    rotate: var(--doodle-rot, 0deg);
-  }
-  50% {
-    translate: -13px 7px;
-    rotate: calc(var(--doodle-rot, 0deg) - 2.5deg);
-  }
-}
-@keyframes doodle-drift-c {
-  0%,
-  100% {
-    translate: 0 0;
-    rotate: var(--doodle-rot, 0deg);
-  }
-  50% {
-    translate: 9px 13px;
-    rotate: calc(var(--doodle-rot, 0deg) + 1.5deg);
-  }
-}
-@keyframes doodle-drift-d {
-  0%,
-  100% {
-    translate: 0 0;
-    rotate: var(--doodle-rot, 0deg);
-  }
-  50% {
-    translate: -10px -12px;
-    rotate: calc(var(--doodle-rot, 0deg) - 1.8deg);
   }
 }
 

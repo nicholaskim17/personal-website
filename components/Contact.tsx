@@ -1,14 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { Github, Linkedin, Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
 import { contact, socialLinks } from '@/lib/data'
 import Reveal from './Reveal'
 import XBrandIcon from './XBrandIcon'
 
 const fieldClassName =
-  'mt-2 w-full rounded-xl border border-border bg-surface-raised px-4 py-3.5 text-base text-ink shadow-sm outline-none transition placeholder:text-ink-faint hover:border-ink-faint focus:border-accent focus:ring-2 focus:ring-accent/20'
+  'mt-2 w-full rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink outline-none transition placeholder:text-ink-faint hover:border-ink-faint focus:border-accent focus:ring-2 focus:ring-accent/20'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -49,12 +48,12 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="border-t border-border px-6 py-24 md:px-10 md:py-32">
+    <section id="contact" className="border-t border-border px-6 py-20 md:px-10 md:py-24">
       <div className="mx-auto max-w-content">
         <Reveal>
-          <div className="max-w-4xl">
+          <div className="max-w-2xl">
             <div className="flex items-center gap-5">
-              <h2 className="text-sm font-medium uppercase tracking-[0.2em] text-accent">Contact</h2>
+              <h2 className="font-playfair text-2xl font-semibold text-ink">Contact</h2>
               <div className="flex items-center gap-4 text-ink-muted">
                 {socialLinks.map(link => {
                   const Icon = iconFor[link.icon]
@@ -73,24 +72,12 @@ export default function Contact() {
                 })}
               </div>
             </div>
-            <p className="mt-6 text-lg leading-8 text-ink-muted md:text-xl md:leading-9">
+            <p className="mt-5 text-lg leading-8 text-ink-muted md:text-xl md:leading-9">
               {contact.invitation}
             </p>
           </div>
 
-          <div className="my-12 flex justify-center md:my-16">
-            <div className="relative aspect-square w-52 overflow-hidden rounded-full ring-1 ring-border md:w-64">
-              <Image
-                src={contact.portraitSrc}
-                alt={contact.portraitAlt}
-                fill
-                sizes="(min-width: 768px) 256px, 208px"
-                className="object-cover"
-              />
-            </div>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="mt-10 max-w-2xl space-y-5">
             {/* Honeypot — hidden from real visitors, catches bots that auto-fill every field */}
             <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
               <label htmlFor="contact-company">Company</label>
