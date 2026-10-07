@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     canonical: 'https://nickkim.dev',
   },
   icons: {
-    icon: [{ url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: [{ url: '/images/silversurfer.webp', type: 'image/webp', sizes: '640x640' }],
+    shortcut: '/images/silversurfer.webp',
+    apple: '/images/silversurfer.webp',
   },
   openGraph: {
     title: 'Nick Kim\' Portfolio',

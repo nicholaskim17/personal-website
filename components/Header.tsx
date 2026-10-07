@@ -43,12 +43,12 @@ export default function Header() {
             className="group relative inline-flex h-8 w-8 items-center justify-center transition-transform duration-150 hover:scale-105 active:scale-95"
           >
             <Image
-              src="/favicon.svg"
+              src="/images/silversurfer.webp"
               alt=""
               width={32}
               height={32}
               priority
-              className="transition-opacity duration-200 group-hover:opacity-0"
+              className="object-cover transition-opacity duration-200 group-hover:opacity-0"
             />
             <Image
               src="/images/korea-flag.png"
