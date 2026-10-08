@@ -10,7 +10,7 @@ export default function Hero() {
     >
       <HeroDoodles />
 
-      <div className="flex max-w-2xl flex-col items-center">
+      <div className="relative z-10 flex max-w-2xl flex-col items-center">
         <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-full border border-border bg-surface-raised md:h-36 md:w-36">
           <Image
             src={hero.portraitSrc}

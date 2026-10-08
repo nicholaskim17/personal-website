@@ -40,21 +40,21 @@ export default function Header() {
             href="#top"
             onClick={handleLogoClick}
             aria-label={`${site.name} — back to top`}
-            className="group relative inline-flex h-8 w-8 items-center justify-center transition-transform duration-150 hover:scale-105 active:scale-95"
+            className="group relative inline-flex h-10 w-10 items-center justify-center transition-transform duration-150 hover:scale-105 active:scale-95"
           >
             <Image
               src="/images/silversurfer.webp"
               alt=""
-              width={32}
-              height={32}
+              width={40}
+              height={40}
               priority
               className="object-cover transition-opacity duration-200 group-hover:opacity-0"
             />
             <Image
               src="/images/korea-flag.png"
               alt=""
-              width={32}
-              height={21}
+              width={40}
+              height={27}
               className="absolute rounded-sm opacity-0 shadow-sm transition-opacity duration-200 group-hover:opacity-100"
             />
           </a>
