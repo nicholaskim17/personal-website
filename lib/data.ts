@@ -226,8 +226,7 @@ export const projects: Project[] = [
     title: 'Atlas',
     description:
       'A spatial memory platform that turns ordinary walkthrough videos into photorealistic 3D places you can revisit, organize, and share.',
-    image: '/images/atlas.png',
-    imageAlt: 'Atlas spatial memory platform interface',
+    video: '/images/atlas.mp4',
     imageHref: 'https://devpost.com/software/a-p87n0x',
     tags: ['Next.js', 'Gaussian Splatting', 'Firebase'],
     sourceHref: 'https://github.com/nicholaskim17/atlas',
