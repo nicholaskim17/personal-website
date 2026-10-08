@@ -116,7 +116,7 @@ export const work: WorkEntry[] = [
     dates: 'Sept 2026 — Present',
     description:
       'Adaptive-Compute Inference for Real-Time Text to Speech',
-    tags: ['Python', 'PyTorch', 'Triton', ],
+    tags: ['Python', 'PyTorch', 'dots.tts', ],
   },
   {
     organization: 'Appli AI',
@@ -175,7 +175,7 @@ export const projects: Project[] = [
     title: 'PolyBot',
     description:
       'Four browser agents race to complete a real web task while a master agent sabotages the page. Spectators watch each run, place virtual YES or NO bets, and turn agent recoveries and failures into training data.',
-    result: '1st Place, Battle of the Schools Web Agents Track (UofT vs. Waterloo).',
+    result: '1st Place, Battle of the Schools (UofT vs. Waterloo).',
     video: '/images/polybot.mp4',
     tags: ['AI Agents', 'Playwright', 'Prediction Markets', 'TypeScript'],
     demoHref: 'https://polybot-inky.vercel.app/',
