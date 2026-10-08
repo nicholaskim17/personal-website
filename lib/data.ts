@@ -185,32 +185,6 @@ export const projects: Project[] = [
     devpostHref: 'https://devpost.com/software/polybot-q1be60',
   },
   {
-    title: 'Rally',
-    description:
-      'A two-player table tennis game where webcam pose tracking turns each player’s hand into a virtual racket. The server keeps the ball, score, and match state in sync across both laptops.',
-    result: '1st Place, General Catalyst Hackathon.',
-    video: '/images/rally.mp4',
-    tags: ['React', 'Three.js', 'MediaPipe', 'Socket.IO'],
-    demoHref: 'https://rally-sharon-browser.azurewebsites.net/',
-    demoLabel: 'Play demo',
-    sourceHref: 'https://github.com/nicholaskim17/rally',
-    sourceLabel: 'Repo',
-  },
-  {
-    title: 'nomad',
-    description:
-      'A Solana-based identity layer that gives AI agents verifiable, revocable permissions.',
-    result: 'Winner of Best Use of Solana, JamHacks',
-    image: '/images/nomad.png',
-    imageAlt: 'Nomad AI agent permission interface',
-    tags: ['Solana', 'Rust / Anchor', 'TypeScript'],
-    demoHref: 'https://x.com/nkimmer_17/status/2066940490096787797',
-    demoLabel: 'Live demo',
-    sourceHref: 'https://github.com/nicholaskim17/nomad',
-    sourceLabel: 'Repo',
-    devpostHref: 'https://devpost.com/software/nomad-nrgx3l',
-  },
-  {
     title: 'Janus',
     description:
       'An AI-powered sensor arbitration system that detects conflicting spacecraft telemetry and selects the safest data source in real time.',
@@ -220,6 +194,18 @@ export const projects: Project[] = [
       'https://www.linkedin.com/posts/waterloo-dev_waterloodev-hackathon-spacetech-activity-7490785925065777152-JRbC?utm_source=share&utm_medium=member_ios&rcm=ACoAAF1Q234B3sUEOFlSCz-3_OZYdZjECt_oVv0',
     tags: ['Gemma', 'AI', 'Sensor Fusion'],
     sourceHref: 'https://github.com/nicholaskim17/sensor-arbitor',
+    sourceLabel: 'Repo',
+  },
+  {
+    title: 'Rally',
+    description:
+      'A two-player table tennis game where webcam pose tracking turns each player’s hand into a virtual racket. The server keeps the ball, score, and match state in sync across both laptops.',
+    result: '1st Place, General Catalyst Hackathon.',
+    video: '/images/rally.mp4',
+    tags: ['React', 'Three.js', 'MediaPipe', 'Socket.IO'],
+    demoHref: 'https://rally-sharon-browser.azurewebsites.net/',
+    demoLabel: 'Play demo',
+    sourceHref: 'https://github.com/nicholaskim17/rally',
     sourceLabel: 'Repo',
   },
   {
@@ -234,17 +220,18 @@ export const projects: Project[] = [
     devpostHref: 'https://devpost.com/software/a-p87n0x',
   },
   {
-    title: 'Buzzy',
+    title: 'nomad',
     description:
-      'A social market where users discover trends and trade virtual shares using in-app tokens.',
-    image: '/images/buzzy.png',
-    imageAlt: 'Buzzy virtual marketplace trading dashboard',
-    tags: ['Next.js', 'TypeScript', 'Firebase'],
-    demoHref: 'https://buzzly-zeta.vercel.app',
-    demoLabel: 'Visit site',
-    sourceHref: 'https://github.com/nicholaskim17/buzzy',
+      'A Solana-based identity layer that gives AI agents verifiable, revocable permissions.',
+    result: 'Winner of Best Use of Solana, JamHacks',
+    image: '/images/nomad.png',
+    imageAlt: 'Nomad AI agent permission interface',
+    tags: ['Solana', 'Rust / Anchor', 'TypeScript'],
+    demoHref: 'https://x.com/nkimmer_17/status/2066940490096787797',
+    demoLabel: 'Live demo',
+    sourceHref: 'https://github.com/nicholaskim17/nomad',
     sourceLabel: 'Repo',
-    devpostHref: 'https://devpost.com/software/buzzy-xd1w2u',
+    devpostHref: 'https://devpost.com/software/nomad-nrgx3l',
   },
   {
     title: 'MarryMap',
@@ -269,6 +256,19 @@ export const projects: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     demoHref: 'https://one2onetutoring.vercel.app/',
     demoLabel: 'Visit site',
+  },
+  {
+    title: 'Buzzy',
+    description:
+      'A social market where users discover trends and trade virtual shares using in-app tokens.',
+    image: '/images/buzzy.png',
+    imageAlt: 'Buzzy virtual marketplace trading dashboard',
+    tags: ['Next.js', 'TypeScript', 'Firebase'],
+    demoHref: 'https://buzzly-zeta.vercel.app',
+    demoLabel: 'Visit site',
+    sourceHref: 'https://github.com/nicholaskim17/buzzy',
+    sourceLabel: 'Repo',
+    devpostHref: 'https://devpost.com/software/buzzy-xd1w2u',
   },
 ]
 
