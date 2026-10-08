@@ -295,7 +295,7 @@ export const research: ResearchEntry[] = [
     authors: 'Nathan Nguyen, Nicholas Kim, Abhitha Vegi, Arko Samad, Suvajit Majumder',
     authorNote: 'Second author',
     venue:
-      'Accepted as a poster at both the NewInML and Trustworthy AI for Good (AI4GOOD) workshops at NeurIPS 2026 in Paris, France.',
+      'Accepted 2x at NeurIPS for NewInML and Trustworthy AI for Good (AI4GOOD) workshops at 2026 in Paris, France.',
     description:
       'Compares 15 inference-time safety harnesses across nine open-weight language models for CBRNE risks, finding that clear boundary clauses improve safety discrimination.',
     href: 'https://openreview.net/forum?id=H6U4KapPog',
