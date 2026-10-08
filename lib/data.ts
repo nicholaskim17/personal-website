@@ -246,18 +246,6 @@ export const projects: Project[] = [
     sourceLabel: 'Repo',
   },
   {
-    title: 'One2One Tutoring',
-    description:
-      "Before this, introducing myself to new families meant a cold text message, now I just send a link. It gives students and parents a proper, visual first impression, instead of going back-and-forth over text.",
-    result: 'My Tutoring Buisness Website',
-    image: '/images/one2one-hero.png',
-    imageAlt: 'One2One Tutoring website homepage',
-    imageHref: 'https://one2onetutoring.vercel.app/',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    demoHref: 'https://one2onetutoring.vercel.app/',
-    demoLabel: 'Visit site',
-  },
-  {
     title: 'Buzzy',
     description:
       'A social market where users discover trends and trade virtual shares using in-app tokens.',
@@ -269,6 +257,18 @@ export const projects: Project[] = [
     sourceHref: 'https://github.com/nicholaskim17/buzzy',
     sourceLabel: 'Repo',
     devpostHref: 'https://devpost.com/software/buzzy-xd1w2u',
+  },
+  {
+    title: 'One2One Tutoring',
+    description:
+      "Before this, introducing myself to new families meant a cold text message, now I just send a link. It gives students and parents a proper, visual first impression, instead of going back-and-forth over text.",
+    result: 'My Tutoring Buisness Website',
+    image: '/images/one2one-hero.png',
+    imageAlt: 'One2One Tutoring website homepage',
+    imageHref: 'https://one2onetutoring.vercel.app/',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    demoHref: 'https://one2onetutoring.vercel.app/',
+    demoLabel: 'Visit site',
   },
 ]
 
