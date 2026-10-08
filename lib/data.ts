@@ -176,8 +176,7 @@ export const projects: Project[] = [
     description:
       'Four browser agents race to complete a real web task while a master agent sabotages the page. Spectators watch each run, place virtual YES or NO bets, and turn agent recoveries and failures into training data.',
     result: '1st Place, Battle of the Schools Web Agents Track (UofT vs. Waterloo).',
-    image: '/images/polybot.png',
-    imageAlt: 'PolyBot browser agent race dashboard',
+    video: '/images/polybot.mp4',
     tags: ['AI Agents', 'Playwright', 'Prediction Markets', 'TypeScript'],
     demoHref: 'https://polybot-inky.vercel.app/',
     demoLabel: 'Live demo',
