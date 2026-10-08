@@ -215,8 +215,7 @@ export const projects: Project[] = [
     description:
       'An AI-powered sensor arbitration system that detects conflicting spacecraft telemetry and selects the safest data source in real time.',
     result: 'Third Overall, Google DeepMind Hackathon.',
-    image: '/images/janus.png',
-    imageAlt: 'Janus deep-space sensor fault arbitration dashboard',
+    video: '/images/sensorarbitor.mp4',
     imageHref:
       'https://www.linkedin.com/posts/waterloo-dev_waterloodev-hackathon-spacetech-activity-7490785925065777152-JRbC?utm_source=share&utm_medium=member_ios&rcm=ACoAAF1Q234B3sUEOFlSCz-3_OZYdZjECt_oVv0',
     tags: ['Gemma', 'AI', 'Sensor Fusion'],
