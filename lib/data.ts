@@ -190,7 +190,7 @@ export const projects: Project[] = [
     description:
       'A two-player table tennis game where webcam pose tracking turns each player’s hand into a virtual racket. The server keeps the ball, score, and match state in sync across both laptops.',
     result: '1st Place, General Catalyst Hackathon.',
-    video: '/images/rally.MOV',
+    video: '/images/rally.mp4',
     tags: ['React', 'Three.js', 'MediaPipe', 'Socket.IO'],
     demoHref: 'https://rally-sharon-browser.azurewebsites.net/',
     demoLabel: 'Play demo',

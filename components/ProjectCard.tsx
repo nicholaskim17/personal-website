@@ -24,7 +24,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
         />
       ) : project.image ? (
         <Image
