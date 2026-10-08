@@ -13,21 +13,34 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     ![project.sourceHref, project.demoHref, project.devpostHref].includes(project.imageHref)
       ? project.imageHref
       : undefined
-  const image = (
+  const media = (
     <div className="relative aspect-video overflow-hidden border border-border bg-surface-raised">
-      <Image
-        src={project.image}
-        alt={project.imageAlt}
-        fill
-        sizes={imageSizes}
-        className="object-contain"
-      />
+      {project.video ? (
+        <video
+          src={project.video}
+          aria-label={`${project.title} project video`}
+          className="h-full w-full object-contain"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+        />
+      ) : project.image ? (
+        <Image
+          src={project.image}
+          alt={project.imageAlt ?? `${project.title} project preview`}
+          fill
+          sizes={imageSizes}
+          className="object-contain"
+        />
+      ) : null}
     </div>
   )
 
   return (
     <article className="min-w-0">
-      {image}
+      {media}
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
         <h3 className="font-sans text-2xl font-bold tracking-tight text-ink">{project.title}</h3>

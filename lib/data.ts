@@ -158,8 +158,9 @@ export interface Project {
   year?: number
   description: string
   result?: string
-  image: string
-  imageAlt: string
+  image?: string
+  imageAlt?: string
+  video?: string
   imageHref?: string
   tags: string[]
   demoHref?: string
@@ -170,6 +171,32 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    title: 'PolyBot',
+    description:
+      'Four browser agents race to complete a real web task while a master agent sabotages the page. Spectators watch each run, place virtual YES or NO bets, and turn agent recoveries and failures into training data.',
+    result: '1st Place, Battle of the Schools Web Agents Track (UofT vs. Waterloo).',
+    image: '/images/polybot.png',
+    imageAlt: 'PolyBot browser agent race dashboard',
+    tags: ['AI Agents', 'Playwright', 'Prediction Markets', 'TypeScript'],
+    demoHref: 'https://polybot-inky.vercel.app/',
+    demoLabel: 'Live demo',
+    sourceHref: 'https://github.com/tkachyn/polybot',
+    sourceLabel: 'Repo',
+    devpostHref: 'https://devpost.com/software/polybot-q1be60',
+  },
+  {
+    title: 'Rally',
+    description:
+      'A two-player table tennis game where webcam pose tracking turns each player’s hand into a virtual racket. The server keeps the ball, score, and match state in sync across both laptops.',
+    result: '1st Place, General Catalyst Hackathon.',
+    video: '/images/rally.MOV',
+    tags: ['React', 'Three.js', 'MediaPipe', 'Socket.IO'],
+    demoHref: 'https://rally-sharon-browser.azurewebsites.net/',
+    demoLabel: 'Play demo',
+    sourceHref: 'https://github.com/nicholaskim17/rally',
+    sourceLabel: 'Repo',
+  },
   {
     title: 'nomad',
     description:
