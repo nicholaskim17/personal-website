@@ -1,4 +1,8 @@
+'use client'
+
 import Image from 'next/image'
+import { useState } from 'react'
+import type { PointerEvent as ReactPointerEvent } from 'react'
 
 // Static hand-drawn details around the hero.
 
@@ -91,14 +95,60 @@ export default function HeroDoodles() {
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
       {doodles.map(doodle => (
-        <div
-          key={doodle.name}
-          className={`absolute ${doodle.visibility} ${doodle.position} opacity-[0.32]`}
-          style={{ rotate: doodle.rotate }}
-        >
-          <Image src={doodle.src} alt="" width={doodle.width} height={doodle.height} className="dark:invert" />
-        </div>
+        <DraggableDoodle key={doodle.name} doodle={doodle} />
       ))}
+    </div>
+  )
+}
+
+function DraggableDoodle({ doodle }: { doodle: Doodle }) {
+  const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const [dragStart, setDragStart] = useState<{ pointerId: number; x: number; y: number; offsetX: number; offsetY: number } | null>(null)
+
+  function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
+    event.preventDefault()
+    event.currentTarget.setPointerCapture(event.pointerId)
+    setDragStart({
+      pointerId: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      offsetX: offset.x,
+      offsetY: offset.y,
+    })
+  }
+
+  function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
+    if (!dragStart || event.pointerId !== dragStart.pointerId) return
+    setOffset({
+      x: dragStart.offsetX + event.clientX - dragStart.x,
+      y: dragStart.offsetY + event.clientY - dragStart.y,
+    })
+  }
+
+  function handlePointerUp(event: ReactPointerEvent<HTMLDivElement>) {
+    if (event.pointerId === dragStart?.pointerId) setDragStart(null)
+  }
+
+  return (
+    <div
+      className={`pointer-events-auto absolute touch-none select-none transition-opacity duration-150 ${doodle.visibility} ${doodle.position} ${dragStart ? 'cursor-grabbing opacity-100' : 'cursor-grab opacity-[0.32]'}`}
+      style={{ rotate: doodle.rotate, transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+    >
+      <Image
+        src={doodle.src}
+        alt=""
+        width={doodle.width}
+        height={doodle.height}
+        draggable={false}
+        className={`pointer-events-none transition-transform duration-150 ${dragStart ? 'scale-110' : 'dark:invert'}`}
+        style={dragStart ? {
+          filter: 'brightness(0) saturate(100%) invert(59%) sepia(94%) saturate(1472%) hue-rotate(1deg) brightness(104%) contrast(103%)',
+        } : undefined}
+      />
     </div>
   )
 }

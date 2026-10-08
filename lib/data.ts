@@ -174,7 +174,7 @@ export const projects: Project[] = [
   {
     title: 'PolyBot',
     description:
-      'Four browser agents race to complete a real web task while a master agent sabotages the page. Spectators watch each run, place virtual YES or NO bets, and turn agent recoveries and failures into training data.',
+      'A master agent sabotages a web task as four browser agents compete to finish it, while spectators watch, place virtual YES or NO bets, and generate training data from their recoveries and failures.',
     result: '1st Place, Battle of the Schools (UofT vs. Waterloo).',
     video: '/images/polybot.mp4',
     tags: ['AI Agents', 'Playwright', 'Prediction Markets', 'TypeScript'],
@@ -199,7 +199,7 @@ export const projects: Project[] = [
   {
     title: 'Rally',
     description:
-      'A two-player table tennis game where webcam pose tracking turns each player’s hand into a virtual racket. The server keeps the ball, score, and match state in sync across both laptops.',
+      'A two-player table tennis game uses webcam pose tracking to turn each player’s hand into a virtual racket and synchronize the ball, score, and match state across laptops.',
     result: '1st Place, General Catalyst Hackathon.',
     video: '/images/rally.mp4',
     tags: ['React', 'Three.js', 'MediaPipe', 'Socket.IO'],
@@ -261,7 +261,7 @@ export const projects: Project[] = [
   {
     title: 'One2One Tutoring',
     description:
-      "Before this, introducing myself to new families meant a cold text message, now I just send a link. It gives students and parents a proper, visual first impression, instead of going back-and-forth over text.",
+      'I built a tutoring website that gives students and families a clear introduction to my services through a single link.',
     result: 'My Tutoring Buisness Website',
     image: '/images/one2one-hero.png',
     imageAlt: 'One2One Tutoring website homepage',
