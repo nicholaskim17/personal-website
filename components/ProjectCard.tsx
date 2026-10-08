@@ -42,10 +42,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <article className="min-w-0">
       {media}
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-        <h3 className="font-sans text-2xl font-bold tracking-tight text-ink">{project.title}</h3>
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div className="flex items-center gap-3">
+          <h3 className="font-sans text-2xl font-bold tracking-tight text-ink">{project.title}</h3>
+          {project.year != null && <span className="text-sm text-ink-faint">{project.year}</span>}
+        </div>
 
-        <div className="flex items-center gap-4 text-ink-muted">
+        <div className="ml-auto flex items-center gap-4 text-ink-muted">
           {project.sourceHref && (
             <a
               href={project.sourceHref}
@@ -90,7 +93,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               <ExternalLink size={22} aria-hidden="true" />
             </a>
           )}
-          {project.year != null && <span className="text-base text-ink-muted">{project.year}</span>}
         </div>
       </div>
 

@@ -7,8 +7,7 @@ export interface NavLink {
 
 export const navLinks: NavLink[] = [
   { href: '#about', label: 'About' },
-  { href: '#work', label: 'Work' },
-  { href: '#projects', label: 'Projects' },
+  { href: '#experience', label: 'Experience' },
   { href: '#hobbies', label: 'Hobbies' },
   { href: '#contact', label: 'Contact' },
 ]
@@ -173,6 +172,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: 'PolyBot',
+    year: 2026,
     description:
       'A master agent sabotages a web task as four browser agents compete to finish it, while spectators watch, place virtual YES or NO bets, and generate training data from their recoveries and failures.',
     result: '1st Place, Battle of the Schools (UofT vs. Waterloo).',
@@ -186,6 +186,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Janus',
+    year: 2026,
     description:
       'An AI-powered sensor arbitration system that detects conflicting spacecraft telemetry and selects the safest data source in real time.',
     result: 'Third Overall, Google DeepMind Hackathon.',
@@ -198,6 +199,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Rally',
+    year: 2026,
     description:
       'A two-player table tennis game uses webcam pose tracking to turn each player’s hand into a virtual racket and synchronize the ball, score, and match state across laptops.',
     result: '1st Place, General Catalyst Hackathon.',
@@ -210,6 +212,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Atlas',
+    year: 2026,
     description:
       'A spatial memory platform that turns ordinary walkthrough videos into photorealistic 3D places you can revisit, organize, and share.',
     video: '/images/atlas.mp4',
@@ -221,6 +224,7 @@ export const projects: Project[] = [
   },
   {
     title: 'nomad',
+    year: 2026,
     description:
       'A Solana-based identity layer that gives AI agents verifiable, revocable permissions.',
     result: 'Winner of Best Use of Solana, JamHacks',
@@ -235,6 +239,7 @@ export const projects: Project[] = [
   },
   {
     title: 'MarryMap',
+    year: 2026,
     description:
       "A shared wedding-planning workspace: couples Tinder-swipe through vendor options together and a built-in CRM tracks every quote from lead to booked.",
     result: 'First Place, Cursor Toronto Hackathon. $3,500 in prize credits.',
@@ -247,6 +252,7 @@ export const projects: Project[] = [
   },
   {
     title: 'Buzzy',
+    year: 2026,
     description:
       'A social market where users discover trends and trade virtual shares using in-app tokens.',
     image: '/images/buzzy.png',
@@ -269,6 +275,30 @@ export const projects: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     demoHref: 'https://one2onetutoring.vercel.app/',
     demoLabel: 'Visit site',
+  },
+]
+
+export interface ResearchEntry {
+  title: string
+  year: number
+  authors: string
+  authorNote: string
+  venue: string
+  description: string
+  href: string
+}
+
+export const research: ResearchEntry[] = [
+  {
+    title: 'Evaluating Context-Window Harnesses for CBRNE Safety',
+    year: 2026,
+    authors: 'Nathan Nguyen, Nicholas Kim, Abhitha Vegi, Arko Samad, Suvajit Majumder',
+    authorNote: 'Second author',
+    venue:
+      'Accepted as a poster at both the NewInML and Trustworthy AI for Good (AI4GOOD) workshops at NeurIPS 2026 in Paris, France.',
+    description:
+      'Compares 15 inference-time safety harnesses across nine open-weight language models for CBRNE risks, finding that clear boundary clauses improve safety discrimination.',
+    href: 'https://openreview.net/forum?id=H6U4KapPog',
   },
 ]
 

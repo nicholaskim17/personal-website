@@ -93,7 +93,7 @@ const doodles: Doodle[] = [
 
 export default function HeroDoodles() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       {doodles.map(doodle => (
         <DraggableDoodle key={doodle.name} doodle={doodle} />
       ))}
@@ -130,25 +130,33 @@ function DraggableDoodle({ doodle }: { doodle: Doodle }) {
   }
 
   return (
-    <div
-      className={`pointer-events-auto absolute touch-none select-none transition-opacity duration-150 ${doodle.visibility} ${doodle.position} ${dragStart ? 'cursor-grabbing opacity-100' : 'cursor-grab opacity-[0.32]'}`}
-      style={{ rotate: doodle.rotate, transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
-    >
-      <Image
-        src={doodle.src}
-        alt=""
-        width={doodle.width}
-        height={doodle.height}
-        draggable={false}
-        className={`pointer-events-none transition-transform duration-150 ${dragStart ? 'scale-110' : 'dark:invert'}`}
-        style={dragStart ? {
-          filter: 'brightness(0) saturate(100%) invert(59%) sepia(94%) saturate(1472%) hue-rotate(1deg) brightness(104%) contrast(103%)',
-        } : undefined}
-      />
-    </div>
+    <>
+      <div
+        className={`pointer-events-none absolute z-0 ${doodle.visibility} ${doodle.position} transition-opacity duration-150 ${dragStart ? 'opacity-100' : 'opacity-[0.32]'}`}
+        style={{ rotate: doodle.rotate, transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
+      >
+        <Image
+          src={doodle.src}
+          alt=""
+          width={doodle.width}
+          height={doodle.height}
+          draggable={false}
+          className={`pointer-events-none transition-transform duration-150 ${dragStart ? 'scale-110' : 'dark:invert'}`}
+          style={dragStart ? {
+            filter: 'brightness(0) saturate(100%) invert(59%) sepia(94%) saturate(1472%) hue-rotate(1deg) brightness(104%) contrast(103%)',
+          } : undefined}
+        />
+      </div>
+      <div
+        className={`pointer-events-auto absolute z-20 touch-none select-none opacity-0 ${doodle.visibility} ${doodle.position} ${dragStart ? 'cursor-grabbing' : 'cursor-grab'}`}
+        style={{ rotate: doodle.rotate, transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+      >
+        <Image src={doodle.src} alt="" width={doodle.width} height={doodle.height} draggable={false} />
+      </div>
+    </>
   )
 }
