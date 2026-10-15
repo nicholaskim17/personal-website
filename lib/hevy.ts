@@ -56,6 +56,7 @@ interface HevyRawWorkout {
 
 const KG_TO_LB = 2.20462262
 const DASHBOARD_TIME_ZONE = 'America/Toronto'
+const WORKOUTS_PER_PAGE = 10
 
 function kgToLb(kg: number): number {
   return Math.round(kg * KG_TO_LB * 2) / 2
@@ -70,22 +71,37 @@ export async function getHevyDashboard(): Promise<HevyDashboardData> {
     throw new Error('HEVY_API_KEY is not configured')
   }
 
-  const workouts = await fetchRecentWorkouts(apiKey)
+  const workouts = await fetchWorkouts(apiKey)
   return buildDashboardFromWorkouts(workouts)
 }
 
-async function fetchRecentWorkouts(apiKey: string): Promise<HevyRawWorkout[]> {
-  const res = await fetch(`${HEVY_API_BASE}/workouts?page=1&pageSize=10`, {
-    headers: { 'api-key': apiKey },
-    next: { revalidate: 300 },
-  })
+async function fetchWorkouts(apiKey: string): Promise<HevyRawWorkout[]> {
+  async function fetchPage(page: number): Promise<{ page_count?: number; workouts?: HevyRawWorkout[] }> {
+    const res = await fetch(
+      `${HEVY_API_BASE}/workouts?page=${page}&pageSize=${WORKOUTS_PER_PAGE}`,
+      {
+        headers: { 'api-key': apiKey },
+        next: { revalidate: 300 },
+      }
+    )
 
-  if (!res.ok) {
-    throw new Error(`Hevy API responded with ${res.status}`)
+    if (!res.ok) {
+      throw new Error(`Hevy API responded with ${res.status}`)
+    }
+
+    return (await res.json()) as { page_count?: number; workouts?: HevyRawWorkout[] }
   }
 
-  const json = (await res.json()) as { workouts?: HevyRawWorkout[] }
-  return json.workouts ?? []
+  const firstPage = await fetchPage(1)
+  const workouts = firstPage.workouts ?? []
+
+  // Stats such as streak length need dates older than the first ten workouts.
+  for (let page = 2; page <= (firstPage.page_count ?? 1); page += 1) {
+    const nextPage = await fetchPage(page)
+    workouts.push(...(nextPage.workouts ?? []))
+  }
+
+  return workouts
 }
 
 function buildDashboardFromWorkouts(workouts: HevyRawWorkout[]): HevyDashboardData {
