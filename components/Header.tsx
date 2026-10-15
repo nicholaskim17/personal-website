@@ -20,15 +20,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const activeId = useActiveSection(sectionIds)
 
-  function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
-    e.preventDefault()
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    setMenuOpen(false)
-  }
-
-  function handleLogoClick(e: React.MouseEvent<HTMLAnchorElement>) {
-    e.preventDefault()
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  function closeMenu() {
     setMenuOpen(false)
   }
 
@@ -38,7 +30,7 @@ export default function Header() {
         <nav className="flex items-center gap-6 md:gap-8" aria-label="Primary">
           <a
             href="#top"
-            onClick={handleLogoClick}
+            onClick={closeMenu}
             aria-label={`${site.name} — back to top`}
             className="group relative inline-flex h-10 w-10 items-center justify-center transition-transform duration-150 hover:scale-105 active:scale-95"
           >
@@ -67,7 +59,7 @@ export default function Header() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={e => handleNavClick(e, link.href)}
+                    onClick={closeMenu}
                     aria-current={isActive ? 'true' : undefined}
                     className={`text-sm transition-colors duration-150 ${
                       isActive ? 'text-ink font-medium' : 'text-ink-muted hover:text-ink'
@@ -128,7 +120,7 @@ export default function Header() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={e => handleNavClick(e, link.href)}
+                    onClick={closeMenu}
                     aria-current={isActive ? 'true' : undefined}
                     className={`text-base ${isActive ? 'text-ink font-medium' : 'text-ink-muted'}`}
                   >
