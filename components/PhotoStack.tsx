@@ -91,34 +91,36 @@ export default function PhotoStack() {
             }}
             initial={false}
             animate={
-              shouldReduceMotion
-                ? undefined
-                : hovered
-                  ? {
-                      x: target.x,
-                      y: target.y,
-                      width: target.width,
-                      height: target.height,
-                      marginLeft: target.marginLeft,
-                      marginTop: target.marginTop,
-                      rotate: 0,
-                    }
-                  : {
-                      x: rest.x,
-                      y: rest.y,
-                      width: PHOTO_W,
-                      height: PHOTO_H,
-                      marginLeft: -PHOTO_W / 2,
-                      marginTop: -PHOTO_H / 2,
-                      rotate: rest.rotate,
-                    }
+              hovered
+                ? {
+                    x: target.x,
+                    y: target.y,
+                    width: target.width,
+                    height: target.height,
+                    marginLeft: target.marginLeft,
+                    marginTop: target.marginTop,
+                    rotate: 0,
+                  }
+                : {
+                    x: rest.x,
+                    y: rest.y,
+                    width: PHOTO_W,
+                    height: PHOTO_H,
+                    marginLeft: -PHOTO_W / 2,
+                    marginTop: -PHOTO_H / 2,
+                    rotate: rest.rotate,
+                  }
             }
-            transition={{
-              type: 'spring',
-              stiffness: 260,
-              damping: 24,
-              delay: hovered ? i * 0.04 : (photos.length - i) * 0.02,
-            }}
+            transition={
+              shouldReduceMotion
+                ? { duration: 0 }
+                : {
+                    type: 'spring',
+                    stiffness: 260,
+                    damping: 24,
+                    delay: hovered ? i * 0.04 : (photos.length - i) * 0.02,
+                  }
+            }
           >
             <Image src={photo.src} alt={photo.alt} fill sizes="210px" className="object-cover" />
           </motion.div>
