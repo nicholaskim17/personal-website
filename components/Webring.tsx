@@ -43,7 +43,7 @@ export default function Webring() {
         target="_blank"
         rel="noopener noreferrer"
         title="Visit uwaterloo.network"
-        className="text-ink transition hover:scale-110"
+        className="text-ink transition hover:scale-110 hover:text-orange-500"
       >
         <span
           aria-hidden="true"
