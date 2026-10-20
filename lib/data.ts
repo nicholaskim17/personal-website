@@ -41,6 +41,7 @@ export const hero = {
   secondaryCta: { label: "Let's Talk", href: '#contact' },
   portraitSrc: '/images/portrait.jpg',
   portraitAlt: 'Portrait photo of Nick',
+  hoverPortraitSrc: '/images/silversurfer.webp',
 }
 
 export const about = {
@@ -274,18 +275,6 @@ export const projects: Project[] = [
     sourceHref: 'https://github.com/nicholaskim17/buzzy',
     sourceLabel: 'Repo',
     devpostHref: 'https://devpost.com/software/buzzy-xd1w2u',
-  },
-  {
-    title: 'One2One Tutoring',
-    description:
-      'I built a tutoring website that gives students and families a clear introduction to my services through a single link.',
-    result: 'My Tutoring Buisness Website',
-    image: '/images/one2one-hero.png',
-    imageAlt: 'One2One Tutoring website homepage',
-    imageHref: 'https://one2onetutoring.vercel.app/',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    demoHref: 'https://one2onetutoring.vercel.app/',
-    demoLabel: 'Visit site',
   },
 ]
 

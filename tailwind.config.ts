@@ -35,6 +35,15 @@ const config: Config = {
       maxWidth: {
         content: '72rem',
       },
+      keyframes: {
+        'fade-up': {
+          from: { opacity: '0', transform: 'translateY(16px)', filter: 'blur(4px)' },
+          to: { opacity: '1', transform: 'translateY(0)', filter: 'none' },
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both',
+      },
     },
   },
   plugins: [],
