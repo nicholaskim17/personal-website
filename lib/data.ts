@@ -171,6 +171,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: 'AutoChem',
+    year: 2026,
+    description:
+      'A low-cost tabletop wet lab where two SO-101 arms and a load-cell scale precisely weigh, dose, and mix chemicals, with a MuJoCo digital twin verifying every move in simulation.',
+    video: '/images/autochem.mp4',
+    tags: ['MuJoCo', 'Robotics', 'SO-101', 'Arduino'],
+    sourceHref: 'https://github.com/nicholaskim17/autochem',
+    sourceLabel: 'Repo',
+    devpostHref: 'https://devpost.com/software/autochem',
+  },
+  {
     title: 'PolyBot',
     year: 2026,
     description:
