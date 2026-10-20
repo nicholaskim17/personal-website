@@ -47,7 +47,7 @@ export default function Webring() {
       >
         <span
           aria-hidden="true"
-          className="block h-12 w-12 bg-current"
+          className="block h-6 w-6 bg-current"
           style={{
             mask: `url(${WEBRING_URL}/icon.svg) center/contain no-repeat`,
             WebkitMask: `url(${WEBRING_URL}/icon.svg) center/contain no-repeat`,
