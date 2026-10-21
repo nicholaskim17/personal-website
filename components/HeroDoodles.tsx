@@ -103,6 +103,7 @@ export default function HeroDoodles() {
 
 function DraggableDoodle({ doodle }: { doodle: Doodle }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const [hovered, setHovered] = useState(false)
   const [dragStart, setDragStart] = useState<{ pointerId: number; x: number; y: number; offsetX: number; offsetY: number } | null>(null)
 
   function handlePointerDown(event: ReactPointerEvent<HTMLDivElement>) {
@@ -129,10 +130,12 @@ function DraggableDoodle({ doodle }: { doodle: Doodle }) {
     if (event.pointerId === dragStart?.pointerId) setDragStart(null)
   }
 
+  const highlighted = hovered || dragStart !== null
+
   return (
     <>
       <div
-        className={`pointer-events-none absolute z-0 ${doodle.visibility} ${doodle.position} transition-opacity duration-150 ${dragStart ? 'opacity-100' : 'opacity-[0.32]'}`}
+        className={`pointer-events-none absolute z-0 ${doodle.visibility} ${doodle.position} transition-opacity duration-150 ${highlighted ? 'opacity-100' : 'opacity-[0.32]'}`}
         style={{ rotate: doodle.rotate, transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
       >
         <Image
@@ -141,8 +144,8 @@ function DraggableDoodle({ doodle }: { doodle: Doodle }) {
           width={doodle.width}
           height={doodle.height}
           draggable={false}
-          className={`pointer-events-none transition-transform duration-150 ${dragStart ? 'scale-110' : 'dark:invert'}`}
-          style={dragStart ? {
+          className={`pointer-events-none transition-transform duration-150 ${dragStart ? 'scale-110' : ''} ${highlighted ? '' : 'dark:invert'}`}
+          style={highlighted ? {
             filter: 'brightness(0) saturate(100%) invert(59%) sepia(94%) saturate(1472%) hue-rotate(1deg) brightness(104%) contrast(103%)',
           } : undefined}
         />
@@ -150,6 +153,8 @@ function DraggableDoodle({ doodle }: { doodle: Doodle }) {
       <div
         className={`pointer-events-auto absolute z-20 touch-none select-none opacity-0 ${doodle.visibility} ${doodle.position} ${dragStart ? 'cursor-grabbing' : 'cursor-grab'}`}
         style={{ rotate: doodle.rotate, transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
+        onPointerEnter={() => setHovered(true)}
+        onPointerLeave={() => setHovered(false)}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}

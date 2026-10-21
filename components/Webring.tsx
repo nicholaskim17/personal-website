@@ -43,11 +43,11 @@ export default function Webring() {
         target="_blank"
         rel="noopener noreferrer"
         title="Visit uwaterloo.network"
-        className="text-ink transition hover:scale-110"
+        className="text-ink transition hover:scale-110 hover:text-orange-500"
       >
         <span
           aria-hidden="true"
-          className="block h-12 w-12 bg-current"
+          className="block h-6 w-6 bg-current"
           style={{
             mask: `url(${WEBRING_URL}/icon.svg) center/contain no-repeat`,
             WebkitMask: `url(${WEBRING_URL}/icon.svg) center/contain no-repeat`,
