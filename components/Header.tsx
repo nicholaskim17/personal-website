@@ -61,8 +61,10 @@ export default function Header() {
                     href={link.href}
                     onClick={closeMenu}
                     aria-current={isActive ? 'true' : undefined}
-                    className={`text-sm transition-colors duration-150 ${
-                      isActive ? 'text-ink font-medium' : 'text-ink-muted hover:text-ink'
+                    className={`relative text-sm transition-colors duration-150 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:bg-current after:transition-transform after:duration-300 after:ease-out ${
+                      isActive
+                        ? 'text-ink font-medium after:scale-x-100'
+                        : 'text-ink-muted hover:text-ink after:scale-x-0 hover:after:scale-x-100'
                     }`}
                   >
                     {link.label}

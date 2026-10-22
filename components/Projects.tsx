@@ -11,8 +11,10 @@ export default function Projects() {
         </Reveal>
 
         <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-2 md:gap-y-16">
-          {projects.map(project => (
-            <ProjectCard key={project.title} project={project} />
+          {projects.map((project, i) => (
+            <Reveal key={project.title} delay={(i % 2) * 0.08}>
+              <ProjectCard project={project} />
+            </Reveal>
           ))}
         </div>
       </div>
