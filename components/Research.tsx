@@ -26,11 +26,11 @@ export default function Research() {
           <h2 className="font-playfair text-2xl font-semibold text-ink">Research</h2>
         </Reveal>
 
-        <ol className="mt-10 space-y-6">
+        <ol className="mt-10 divide-y divide-border border-y border-border">
           {research.map((paper, i) => (
             <li key={paper.title}>
               <Reveal delay={Math.min(i, 4) * 0.08}>
-                <article className="rounded-2xl border border-border bg-surface-raised p-6 shadow-sm transition-shadow duration-300 hover:shadow-md md:p-8">
+                <article className="py-7 md:py-8">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     {paper.highlight ? (
                       <p className="inline-flex flex-wrap items-center gap-2 rounded-full bg-accent-soft px-3.5 py-1.5 text-sm font-medium text-ink">
