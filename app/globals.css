@@ -105,8 +105,8 @@ body { font-size: 1rem; }
   color: var(--color-ink);
   font-family: var(--font-pixel);
   font-size: 1.9rem;
-  font-weight: 550;
-  font-variation-settings: "ELSH" 100;
+  font-weight: 430;
+  font-variation-settings: "ELSH" 50;
   line-height: 1;
   letter-spacing: -.035em;
   text-transform: uppercase;
