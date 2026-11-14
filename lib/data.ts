@@ -46,7 +46,7 @@ export const about = {
     name: 'University of Waterloo',
     href: 'https://uwaterloo.ca/engineering/',
     logo: '/images/work/waterloo-seal.svg',
-    highlight: 'gold',
+    highlight: 'gold' as const,
   },
   gallery: [
     { src: '/images/gallery/golf.jpeg', alt: 'Lining up a putt on the green with a friend' },
