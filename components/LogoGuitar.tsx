@@ -53,12 +53,12 @@ export default function LogoGuitar() {
   return (
     <div className="logo-guitar" role="group" aria-label="Playable guitar" aria-describedby={hintId}>
       <div className="logo-guitar-instrument">
-        <svg className="logo-guitar-shape" viewBox="0 0 100 212" fill="none" aria-hidden="true">
-          <path className="guitar-body" transform="translate(0 32)" d="M38 91c-8-1-16 5-16 15 0 9 10 14 8 22-2 6-9 13-9 22 0 15 11 23 29 23s29-8 29-23c0-9-7-16-9-22-2-8 8-13 8-22 0-10-8-16-16-15-5 0-8 3-12 3s-7-3-12-3Z" />
-          <path className="guitar-neck" d="M34 30h32v120H34zM34 30V12q0-5 5-5h22q5 0 5 5v18Z" />
-          <circle className="guitar-sound-hole" cx="50" cy="158" r="11" />
-          <path className="guitar-frets" d="M34 35h32m-32 8h32m-32 9h32m-32 10h32m-32 11h32m-32 12h32m-32 13h32m-32 14h32m-32 15h32m-32 16h32M28 12h6m32 0h6M28 18h6m32 0h6M28 24h6m32 0h6" />
-          <rect className="guitar-bridge" x="31" y="180" width="38" height="6" rx="2" />
+        <svg className="logo-guitar-shape" viewBox="0 0 100 248" fill="none" aria-hidden="true">
+          <path className="guitar-body" transform="translate(0 68)" d="M38 91c-8-1-16 5-16 15 0 9 10 14 8 22-2 6-9 13-9 22 0 15 11 23 29 23s29-8 29-23c0-9-7-16-9-22-2-8 8-13 8-22 0-10-8-16-16-15-5 0-8 3-12 3s-7-3-12-3Z" />
+          <path className="guitar-neck" d="M39 30h22v156H39zM37 30V12q0-5 5-5h16q5 0 5 5v18Z" />
+          <circle className="guitar-sound-hole" cx="50" cy="194" r="11" />
+          <path className="guitar-frets" d="M39 35h22m-22 9h22m-22 10h22m-22 11h22m-22 12h22m-22 13h22m-22 14h22m-22 15h22m-22 16h22m-22 17h22m-22 18h22M31 12h6m26 0h6M31 18h6m26 0h6M31 24h6m26 0h6" />
+          <rect className="guitar-bridge" x="31" y="216" width="38" height="6" rx="2" />
         </svg>
         <div className="logo-guitar-strings">
           {guitarStrings.map(({ note }, index) => (

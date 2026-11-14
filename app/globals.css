@@ -136,7 +136,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-instrument {
   position: relative;
-  aspect-ratio: 100 / 212;
+  aspect-ratio: 100 / 248;
   transform: rotate(22deg);
   transform-origin: 50% 68%;
 }
@@ -169,7 +169,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-strings {
   position: absolute;
-  inset: 14% 34%;
+  inset: 12% 39% 13%;
   display: flex;
 }
 
@@ -572,11 +572,11 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   }
 
   .portrait-sound-waves path {
-    animation: portrait-wave-ripple 2.1s linear infinite;
+    animation: portrait-wave-ripple 2.7s linear infinite;
   }
 
-  .portrait-sound-waves path:nth-child(2) { animation-delay: -.7s; }
-  .portrait-sound-waves path:nth-child(3) { animation-delay: -1.4s; }
+  .portrait-sound-waves path:nth-child(2) { animation-delay: -.9s; }
+  .portrait-sound-waves path:nth-child(3) { animation-delay: -1.8s; }
 }
 
 @keyframes portrait-track-reveal {
@@ -587,7 +587,8 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 @keyframes portrait-wave-ripple {
   from { transform: scale(.35); opacity: 0; }
   15% { opacity: .75; }
-  84% { opacity: .5; }
+  72% { opacity: .58; }
+  84% { opacity: .38; animation-timing-function: ease-out; }
   to { transform: scale(3.2, 2.1); opacity: 0; }
 }
 
