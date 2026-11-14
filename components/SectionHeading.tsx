@@ -10,7 +10,7 @@ export default function SectionHeading({ children, level = 2 }: {
     <div className="section-heading">
       <div className="section-heading-line">
         <Heading>{children}</Heading>
-        <span aria-hidden="true" className="section-rule"><span>✧</span></span>
+        <span aria-hidden="true" className="section-rule"><span>♪</span></span>
       </div>
     </div>
   )

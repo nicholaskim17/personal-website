@@ -377,7 +377,6 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 .portrait-photo, .portrait-alt { object-fit: cover; transition: opacity 200ms ease; }
-.portrait-photo { filter: grayscale(100%) contrast(.97); }
 .portrait-alt { opacity: 0; }
 .portrait-frame:hover .portrait-alt { opacity: 1; }
 

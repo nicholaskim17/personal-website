@@ -229,7 +229,7 @@ export const projects: Project[] = [
     year: 2026,
     description:
       'A Solana-based identity layer that gives AI agents verifiable, revocable permissions.',
-    result: 'Winner of Best Use of Solana, JamHacks',
+    result: 'Best Use of Solana, JamHacks',
     image: '/images/nomad.png',
     imageAlt: 'Nomad AI agent permission interface',
     tags: ['Solana', 'Rust / Anchor', 'TypeScript'],
@@ -244,7 +244,7 @@ export const projects: Project[] = [
     year: 2026,
     description:
       "A shared wedding-planning workspace: couples Tinder-swipe through vendor options together and a built-in CRM tracks every quote from lead to booked.",
-    result: 'First Place, Cursor Toronto Hackathon. $3,500 in prize credits.',
+    result: 'First Place, Cursor Hackathon.',
     image: '/images/marrymap.png',
     imageAlt: 'Marrymap wedding vendor CRM dashboard',
     imageHref: 'https://x.com/nkimmer_17/status/2080777414423056517',
