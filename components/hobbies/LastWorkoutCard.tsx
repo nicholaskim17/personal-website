@@ -9,7 +9,7 @@ export default function LastWorkoutCard() {
   const state = useJsonFetch<HevyDashboardData>('/api/hevy')
 
   return (
-    <article className="min-w-0 border-t border-border pt-5">
+    <article className="flex min-w-0 flex-col border-t border-border pt-5">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <div className="flex items-center gap-2">
           <ListChecks size={16} className="text-accent" aria-hidden="true" />
@@ -45,15 +45,15 @@ function LastWorkoutContent({ data }: { data: HevyDashboardData }) {
   }
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 flex min-h-0 flex-1 flex-col">
       <div className="flex items-baseline justify-between gap-2">
-        <p className="text-sm font-medium text-ink">{workout.title}</p>
+        <p className="min-w-0 break-words text-sm font-medium text-ink">{workout.title}</p>
         <p className="flex-shrink-0 text-xs text-ink-faint">
           {formatShortDate(workout.date)} · {workout.durationMinutes} min
         </p>
       </div>
 
-      <ul className="mt-4 divide-y divide-border">
+      <ul className="last-workout-exercises mt-4 divide-y divide-border" tabIndex={0} aria-label="Last workout exercises">
         {workout.exercises.map(exercise => (
           <li key={exercise.name} className="py-3 first:pt-0 last:pb-0">
             <p className="text-sm font-medium text-ink">{exercise.name}</p>
