@@ -11,11 +11,8 @@ import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
 
 const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
-const soundWavePaths = [
-  'M 3 -3 Q 6 0 3 3',
-  'M 6.5 -5.5 Q 11.5 0 6.5 5.5',
-  'M 10 -8 Q 17 0 10 8',
-]
+const soundWavePath = 'M 8 -6 Q 13 0 8 6'
+const earcupTransforms = ['translate(34 43) scale(-1 1)', 'translate(68 43)']
 
 export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
@@ -57,12 +54,11 @@ export default function Header({ landing = false }: { landing?: boolean }) {
         <div className="portrait-frame">
           <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
           <svg className="portrait-sound-waves" viewBox="0 0 100 100" aria-hidden="true">
-            <g transform="translate(34 43) scale(-1 1)">
-              {soundWavePaths.map(path => <path key={path} d={path} />)}
-            </g>
-            <g transform="translate(68 43)">
-              {soundWavePaths.map(path => <path key={path} d={path} />)}
-            </g>
+            {earcupTransforms.map(transform => (
+              <g key={transform} transform={transform}>
+                {[1, 2, 3].map(ripple => <path key={ripple} d={soundWavePath} />)}
+              </g>
+            ))}
           </svg>
         </div>
       </figure>

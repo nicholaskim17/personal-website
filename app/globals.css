@@ -549,15 +549,20 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   height: 100%;
   pointer-events: none;
   fill: none;
-  stroke: #ffad59;
-  stroke-width: 1.25;
+  stroke: #ffb66d;
+  stroke-width: 3px;
   stroke-linecap: round;
-  filter: drop-shadow(0 1px 1px #241207);
+  filter: drop-shadow(0 1px 1px #241207) drop-shadow(0 0 1px #241207);
 }
 
-.portrait-sound-waves path { opacity: .85; }
-.portrait-sound-waves path:nth-child(2) { opacity: .7; }
-.portrait-sound-waves path:nth-child(3) { opacity: .55; }
+.portrait-sound-waves path {
+  vector-effect: non-scaling-stroke;
+  transform-origin: 0 0;
+  transform: scale(.55);
+}
+
+.portrait-sound-waves path:nth-child(2) { transform: scale(1.1); opacity: .85; }
+.portrait-sound-waves path:nth-child(3) { transform: scale(1.65); opacity: .7; }
 
 @media (prefers-reduced-motion: no-preference) {
   .portrait-track-text {
@@ -565,11 +570,11 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   }
 
   .portrait-sound-waves path {
-    animation: portrait-wave-pulse 1.8s ease-in-out infinite;
+    animation: portrait-wave-ripple 1.95s linear infinite;
   }
 
-  .portrait-sound-waves path:nth-child(2) { animation-delay: .18s; }
-  .portrait-sound-waves path:nth-child(3) { animation-delay: .36s; }
+  .portrait-sound-waves path:nth-child(2) { animation-delay: -.65s; }
+  .portrait-sound-waves path:nth-child(3) { animation-delay: -1.3s; }
 }
 
 @keyframes portrait-track-reveal {
@@ -577,9 +582,10 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   to { clip-path: inset(0); }
 }
 
-@keyframes portrait-wave-pulse {
-  0%, 60%, 100% { opacity: .32; }
-  24% { opacity: 1; }
+@keyframes portrait-wave-ripple {
+  from { transform: scale(.3); opacity: 0; }
+  12%, 55% { opacity: 1; }
+  to { transform: scale(2); opacity: 0; }
 }
 
 .portrait-frame {
