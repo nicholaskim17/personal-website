@@ -37,7 +37,7 @@ export default function Header({ landing = false }: { landing?: boolean }) {
               })}
             </div>
           </div>
-          <LogoGuitar />
+          {!landing && <LogoGuitar />}
         </div>
         <nav aria-label="Primary navigation" className="sidebar-nav">
           <ul>
@@ -49,6 +49,7 @@ export default function Header({ landing = false }: { landing?: boolean }) {
           </ul>
         </nav>
       </div>
+      {landing && <LogoGuitar />}
       <figure className="sidebar-portrait">
         <PortraitTrack />
         <div className="portrait-frame">

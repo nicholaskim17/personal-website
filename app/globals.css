@@ -773,7 +773,6 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
 .landing-header .sidebar-brand {
   justify-content: center;
-  padding-inline-end: clamp(.85rem, 4vw, 3.3rem);
 }
 
 .landing-header .sidebar-name {
@@ -782,8 +781,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
 .landing-header .logo-guitar {
   width: clamp(68px, 7.5vw, 98px);
-  margin-block-start: clamp(-31px, -2.4vw, -21px);
-  margin-inline-start: clamp(-2.2rem, -2.55vw, -.95rem);
+  margin: 0 0 1.75rem;
 }
 
 .landing-header .logo-guitar-callout {
