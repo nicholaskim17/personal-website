@@ -96,6 +96,7 @@ export const work: WorkEntry[] = [
     logo: '/images/work/hamming.png',
     highlight: 'orange',
     title: 'Software Engineer',
+    dates: 'Nov 2026 — Present',
   },
   {
     organization: 'WAT.ai',
