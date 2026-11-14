@@ -124,6 +124,83 @@ a.sidebar-name:is(:hover, :focus-visible) {
   text-shadow: .035em .035em var(--color-guitar), .07em .07em var(--color-guitar);
 }
 
+.name-bench-press {
+  position: absolute;
+  bottom: .94em;
+  left: .01em;
+  width: .65em;
+  height: .42em;
+  pointer-events: none;
+}
+
+.name-bench-press > span,
+.bench-press-lifter::before,
+.bench-press-lifter::after,
+.bench-press-arms::before,
+.bench-press-arms::after {
+  position: absolute;
+}
+
+.name-bench-press > span { inset: 0; }
+
+.bench-press-bench {
+  background: var(--color-guitar);
+  clip-path: polygon(6% 69%, 69% 69%, 69% 76%, 60% 76%, 60% 100%, 55% 100%, 55% 76%,
+    18% 76%, 18% 100%, 13% 100%, 13% 76%, 6% 76%);
+}
+
+.bench-press-lifter::before {
+  content: '';
+  left: 9%;
+  bottom: 33%;
+  width: 16%;
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.bench-press-lifter::after {
+  content: '';
+  inset: 0;
+  background: currentColor;
+  clip-path: polygon(26% 61%, 63% 61%, 76% 49%, 88% 91%, 97% 91%, 97% 97%, 84% 97%,
+    74% 59%, 65% 68%, 26% 68%);
+}
+
+.bench-press-arms::before, .bench-press-arms::after {
+  content: '';
+  inset: 0;
+  background: currentColor;
+  clip-path: polygon(34% 64%, 37% 41%, 40% 13%, 44% 13%, 41% 43%, 38% 66%);
+}
+
+.bench-press-arms::after { transform: translateX(11%); }
+
+.bench-press-bar {
+  background: var(--color-guitar);
+  clip-path: polygon(17% 12%, 23% 12%, 23% 2%, 29% 2%, 29% 12%, 66% 12%, 66% 2%,
+    72% 2%, 72% 12%, 78% 12%, 78% 18%, 72% 18%, 72% 28%, 66% 28%,
+    66% 18%, 29% 18%, 29% 28%, 23% 28%, 23% 18%, 17% 18%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bench-press-arms::before, .bench-press-arms::after {
+    animation: bench-press-arms 2.2s ease-in-out infinite;
+  }
+
+  .bench-press-bar { animation: bench-press-bar 2.2s ease-in-out infinite; }
+}
+
+@keyframes bench-press-arms {
+  44%, 54% {
+    clip-path: polygon(34% 64%, 28% 65%, 40% 37%, 44% 37%, 34% 69%, 38% 66%);
+  }
+}
+
+@keyframes bench-press-bar {
+  44%, 54% { transform: translateY(24%); }
+}
+
 .logo-guitar {
   position: relative;
   flex: 0 0 auto;

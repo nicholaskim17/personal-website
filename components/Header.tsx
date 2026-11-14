@@ -25,7 +25,15 @@ export default function Header({ landing = false }: { landing?: boolean }) {
         <div className="sidebar-brand">
           <div className="sidebar-brand-name">
             {landing ? (
-              <h1 className="sidebar-name">{hero.name}</h1>
+              <h1 className="sidebar-name">
+                <span className="name-bench-press" aria-hidden="true">
+                  <span className="bench-press-bench" />
+                  <span className="bench-press-lifter" />
+                  <span className="bench-press-arms" />
+                  <span className="bench-press-bar" />
+                </span>
+                {hero.name}
+              </h1>
             ) : (
               <Link href="/" className="sidebar-name" aria-label={`${hero.name}, home`}>{hero.name}</Link>
             )}
