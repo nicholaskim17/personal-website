@@ -10,8 +10,6 @@ import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
 
 const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
-const [firstName, ...surname] = hero.name.split(' ')
-const wordmark = <>{firstName}{' '}<span className="sidebar-name-surname">{surname.join(' ')}</span></>
 
 export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
@@ -24,9 +22,9 @@ export default function Header({ landing = false }: { landing?: boolean }) {
         <div className="sidebar-brand">
           <div className="sidebar-brand-name">
             {landing ? (
-              <h1 className="sidebar-name">{wordmark}</h1>
+              <h1 className="sidebar-name">{hero.name}</h1>
             ) : (
-              <Link href="/" className="sidebar-name" aria-label={`${hero.name}, home`}>{wordmark}</Link>
+              <Link href="/" className="sidebar-name" aria-label={`${hero.name}, home`}>{hero.name}</Link>
             )}
             <div className="sidebar-socials" aria-label="Social links">
               <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>

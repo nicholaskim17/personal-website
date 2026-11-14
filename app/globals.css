@@ -4,7 +4,7 @@
 
 :root {
   color-scheme: dark;
-  --font-pixel: "Bitcount Prop Single", var(--font-geist-mono), monospace;
+  --font-pixel: "Bitcount Prop Single Variable", var(--font-geist-mono), monospace;
   --color-surface: #0b0b0c;
   --color-surface-raised: #141415;
   --color-sidebar: #080809;
@@ -15,6 +15,7 @@
   --color-dot: #2c2b28;
   --color-accent: #d9e5ae;
   --color-guitar: #ffad59;
+  --color-wordmark-shadow: #b65324;
   --color-accent-soft: #282d1f;
   --highlight-gold: #3c3420;
   --highlight-blue: #23364a;
@@ -34,6 +35,7 @@
   --color-dot: #d2cfc0;
   --color-accent: #435425;
   --color-guitar: #aa4b10;
+  --color-wordmark-shadow: #d87938;
   --color-accent-soft: #e6ecd7;
   --highlight-gold: #fbefaf;
   --highlight-blue: #d8e8fa;
@@ -99,23 +101,21 @@ body { font-size: 1rem; }
   position: relative;
   z-index: 1;
   display: block;
-  padding-inline: .04em .1em;
+  padding: 0 .08em .065em 0;
   color: var(--color-ink);
   font-family: var(--font-pixel);
   font-size: 1.9rem;
-  font-weight: 600;
+  font-weight: 550;
+  font-variation-settings: "ELSH" 100;
   line-height: 1;
-  letter-spacing: -.022em;
+  letter-spacing: -.035em;
   text-transform: uppercase;
+  text-shadow: .035em .035em var(--color-wordmark-shadow), .07em .07em var(--color-wordmark-shadow);
   white-space: nowrap;
 }
 
-.sidebar-name-surname {
-  color: var(--color-guitar);
-}
-
 a.sidebar-name:is(:hover, :focus-visible) {
-  color: var(--color-guitar);
+  text-shadow: .035em .035em var(--color-guitar), .07em .07em var(--color-guitar);
 }
 
 .logo-guitar {
@@ -662,7 +662,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 .landing-header .sidebar-name {
-  font-size: clamp(2.3rem, 7.2vw, 6rem);
+  font-size: clamp(2.25rem, 7.35vw, 6.25rem);
 }
 
 .landing-header .logo-guitar {
