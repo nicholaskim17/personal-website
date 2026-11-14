@@ -44,7 +44,7 @@ export default function LogoGuitar() {
   const audio = useRef<AudioContext | null>(null)
   const resumingAudio = useRef<Promise<void> | null>(null)
   const tabVisit = useRef(0)
-  const buffers = useRef(new Map<number, AudioBuffer>())
+  const buffers = useRef<Map<number, AudioBuffer> | null>(null)
   const sequence = useRef(0)
   const [sound, setSound] = useState<'off' | 'on' | 'unavailable'>('off')
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
@@ -81,12 +81,14 @@ export default function LogoGuitar() {
       const context = audio.current
       audio.current = null
       resumingAudio.current = null
-      buffers.current.clear()
+      buffers.current = null
       if (context && context.state !== 'closed') void context.close().catch(() => {})
     }
   }, [resumeAudio])
 
   function pluck({ string, fret = 0 }: GuitarNote, context: AudioContext, when: number) {
+    // Fast Refresh may preserve the array used by the previous cache.
+    if (!(buffers.current instanceof Map)) buffers.current = new Map()
     const source = context.createBufferSource()
     const frequency = guitarStrings[string].frequency * 2 ** (fret / 12)
     const buffer = buffers.current.get(frequency) ?? createPluck(context, frequency)
