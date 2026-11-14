@@ -181,7 +181,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .bench-press-arm {
   background: currentColor;
-  clip-path: polygon(32% 63%, 36% 42%, 39% 16%, 44% 16%, 41% 43%, 37% 65%);
+  clip-path: polygon(32% 63%, 35.5% 41%, 39% 19%, 43% 19%, 40.5% 42%, 37% 65%);
 }
 
 .name-bench-press > .bench-press-plate {
@@ -201,12 +201,12 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 @keyframes bench-press-arm {
   44%, 54% {
-    clip-path: polygon(32% 63%, 23% 70%, 39% 40%, 44% 40%, 31% 72%, 37% 65%);
+    clip-path: polygon(32% 62%, 44.5% 70%, 45% 51%, 49% 51%, 49.5% 78%, 32% 68%);
   }
 }
 
 @keyframes bench-press-plate {
-  44%, 54% { transform: translateY(.101em); }
+  44%, 54% { transform: translate(.039em, .1344em); }
 }
 
 .logo-guitar {
