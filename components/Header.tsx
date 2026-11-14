@@ -47,7 +47,7 @@ export default function Header({ landing = false }: { landing?: boolean }) {
       </div>
       <figure className="sidebar-portrait">
         <div className="portrait-frame">
-          <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority className="portrait-photo" />
+          <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
         </div>
       </figure>
     </header>

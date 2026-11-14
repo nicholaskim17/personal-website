@@ -33,8 +33,8 @@ export const site = {
 export const hero = {
   greeting: "Hi, I'm",
   name: 'Nick Kim',
-  portraitSrc: '/images/portrait-headphones.webp',
-  portraitAlt: 'Nick wearing over-ear headphones',
+  portraitSrc: '/images/portrait-retro-headphones.webp',
+  portraitAlt: 'Nick with illustrated orange headphones',
 }
 
 type HighlightTone = 'gold' | 'blue' | 'violet' | 'green'
