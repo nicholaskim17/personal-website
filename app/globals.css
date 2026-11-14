@@ -434,19 +434,44 @@ a.sidebar-name:is(:hover, :focus-visible) {
 }
 
 .sidebar-nav a {
+  --nav-inline-padding: 0rem;
+  position: relative;
   display: flex;
   align-items: center;
-  padding: .5rem 0;
-  font-size: .8rem;
+  padding: .5rem var(--nav-inline-padding);
+  font: 460 .96rem/1.2 var(--font-pixel);
   color: var(--color-ink-muted);
 }
 
-.sidebar-nav a:hover,
-.sidebar-nav a:focus-visible,
-.sidebar-nav a[aria-current="page"] {
+.sidebar-nav a::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--nav-inline-padding);
+  bottom: .24em;
+  height: 2px;
+  background: var(--color-guitar);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.sidebar-nav a:is(:hover, :focus-visible, [aria-current="page"]) {
   color: var(--color-ink);
-  text-decoration: underline;
-  text-underline-offset: .24em;
+}
+
+.sidebar-nav a:is(:hover, :focus-visible, [aria-current="page"])::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar-nav a:is(:hover, :focus-visible)::after {
+    animation: nav-underline-sweep .33s ease-out both;
+  }
+}
+
+@keyframes nav-underline-sweep {
+  from { transform: translateY(2px) scaleX(0); }
+  70% { transform: translateY(-1px) scaleX(1); }
+  to { transform: translateY(0) scaleX(1); }
 }
 
 .site-content {
@@ -788,11 +813,12 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   .sidebar-nav ul { display: grid; justify-items: center; }
 
   .sidebar-nav a {
+    --nav-inline-padding: .7rem;
     justify-content: center;
-    padding: .31rem .7rem;
+    padding-block: .31rem;
     width: fit-content;
     margin-inline: auto;
-    font-size: .98rem;
+    font-size: 1.13rem;
   }
 
   .sidebar-portrait { display: block; width: min(100%, 16rem, 28svh); }
@@ -884,10 +910,11 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 .landing-header .sidebar-nav a {
+  --nav-inline-padding: .65rem;
   justify-content: center;
   margin-inline: auto;
-  padding: .37rem .65rem;
-  font-size: 1rem;
+  padding-block: .37rem;
+  font-size: 1.24rem;
 }
 
 .landing-header .sidebar-portrait {
