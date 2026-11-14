@@ -33,9 +33,8 @@ export const site = {
 export const hero = {
   greeting: "Hi, I'm",
   name: 'Nick Kim',
-  portraitSrc: '/images/portrait.jpg',
-  portraitAlt: 'Portrait photo of Nick',
-  hoverPortraitSrc: '/images/silversurfer.webp',
+  portraitSrc: '/images/portrait-headphones.webp',
+  portraitAlt: 'Nick wearing over-ear headphones',
 }
 
 type HighlightTone = 'gold' | 'blue' | 'violet' | 'green'

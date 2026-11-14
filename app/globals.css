@@ -82,114 +82,134 @@ body { font-size: 1rem; }
   padding: 1rem var(--gutter) .25rem;
 }
 
-.sidebar-name {
-  display: block;
-  width: fit-content;
-  color: var(--color-ink);
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 2.2rem;
-  font-style: italic;
-  line-height: 1;
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: clamp(.45rem, 1vw, .95rem);
 }
 
-.name-mark {
-  position: relative;
+.sidebar-name {
   display: block;
-  padding: .015em .11em .19em .055em;
+  padding-inline: .04em .1em;
+  color: var(--color-ink);
+  font: italic 2.2rem/1 "Instrument Serif", Georgia, serif;
   letter-spacing: -.055em;
   white-space: nowrap;
 }
 
-.name-mark-flourish {
-  position: absolute;
-  inset: auto .04em .025em 18%;
-  height: .28em;
+a.sidebar-name:is(:hover, :focus-visible) {
   color: var(--color-guitar);
+}
+
+.logo-guitar {
+  flex: 0 0 auto;
+  width: clamp(42px, 5vw, 70px);
+  color: var(--color-guitar);
+  text-align: center;
+}
+
+.logo-guitar-instrument {
+  position: relative;
+  aspect-ratio: 100 / 180;
+}
+
+.logo-guitar-shape {
+  display: block;
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.guitar-body, .guitar-neck {
+  fill: color-mix(in srgb, currentColor 13%, var(--color-sidebar));
+}
+
+.guitar-neck {
+  fill: color-mix(in srgb, currentColor 7%, var(--color-sidebar));
+}
+
+.guitar-sound-hole {
+  fill: var(--color-sidebar);
+  stroke-opacity: .62;
+}
+
+.guitar-frets { stroke-width: 1.2; stroke-opacity: .55; }
+.guitar-bridge { fill: currentColor; stroke: none; }
+
+.logo-guitar-strings {
+  position: absolute;
+  inset: 17% 34% 16%;
+  display: flex;
+}
+
+.logo-guitar-strings button {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  cursor: crosshair;
+  touch-action: manipulation;
+  border-radius: 2px;
+}
+
+.guitar-string {
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: max(1px, .065rem);
+  transform: translateX(-50%);
+  background: currentColor;
+  opacity: .68;
+}
+
+.logo-guitar-strings button:is(:hover, :focus-visible) .guitar-string {
+  background: var(--color-ink);
+  box-shadow: 0 0 5px var(--color-guitar);
+  opacity: 1;
+}
+
+.logo-guitar-strings button:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 1px;
+}
+
+.logo-guitar-hint {
+  display: block;
+  margin-top: .25rem;
+  color: var(--color-ink-faint);
+  font-size: .65rem;
+  line-height: 1.25;
+}
+
+.logo-guitar-notes {
+  position: absolute;
+  top: 63%;
+  left: 62%;
   pointer-events: none;
 }
 
-.name-mark-flourish::before {
-  content: '';
+.logo-guitar-notes svg {
   position: absolute;
-  left: 0;
-  right: .29em;
-  bottom: .06em;
-  height: .18em;
-  border-bottom: max(1px, .011em) solid currentColor;
-  border-radius: 0 0 52% 60%;
-  transform: rotate(-4deg);
-}
-
-.name-mark-guitar {
-  position: absolute;
-  right: -.03em;
-  bottom: -.055em;
-  width: .42em;
-  height: .42em;
-  transform: rotate(27deg);
-}
-
-.name-mark-notes {
-  position: absolute;
-  right: .09em;
-  bottom: .16em;
-}
-
-.name-mark-notes svg {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: clamp(13px, .26em, 38px);
-  height: clamp(13px, .26em, 38px);
+  width: clamp(15px, 2.35vw, 32px);
+  height: auto;
   opacity: 0;
 }
 
-.name-mark-notes svg:nth-child(1) {
-  --note-drift: .42em;
-  --note-rise: -.78em;
-  --note-tilt: -14deg;
-  --note-delay: 0ms;
-}
+.logo-guitar-notes svg[data-string="0"],
+.logo-guitar-notes svg[data-string="3"] { --note-x: 50%; --note-tilt: -15deg; }
 
-.name-mark-notes svg:nth-child(2) {
-  --note-drift: .57em;
-  --note-rise: -.63em;
-  --note-tilt: 12deg;
-  --note-delay: 230ms;
-}
-
-.name-mark-notes svg:nth-child(3) {
-  --note-drift: .27em;
-  --note-rise: -.96em;
-  --note-tilt: -8deg;
-  --note-delay: 460ms;
-}
+.logo-guitar-notes svg[data-string="2"],
+.logo-guitar-notes svg[data-string="5"] { --note-x: 160%; --note-tilt: 12deg; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .landing-header .name-mark-notes svg,
-  a.sidebar-name:is(:hover, :focus-visible) .name-mark-notes svg {
-    animation: guitar-note 4s ease-out var(--note-delay) infinite;
-  }
+  .logo-guitar-notes svg { animation: guitar-note 1.2s ease-out; }
 }
 
 @keyframes guitar-note {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(.55);
-  }
-
-  12%, 47% {
-    opacity: 1;
-  }
-
-  76%, 100% {
-    opacity: 0;
-    transform: translate(var(--note-drift), var(--note-rise)) rotate(var(--note-tilt));
-  }
-}
-
-a.sidebar-name:is(:hover, :focus-visible) {
-  color: var(--color-guitar);
+  0% { opacity: 1; transform: scale(.75); }
+  35% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--note-x, 100%), -220%) rotate(var(--note-tilt, 3deg)); }
 }
 
 .sidebar-caption, .sidebar-portrait { display: none; }
@@ -442,9 +462,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   background: var(--color-surface-raised);
 }
 
-.portrait-photo, .portrait-alt { object-fit: cover; transition: opacity 200ms ease; }
-.portrait-alt { opacity: 0; }
-.portrait-frame:hover .portrait-alt { opacity: 1; }
+.portrait-photo { object-fit: cover; }
 
 @media (min-width: 620px) {
   .project-grid, .hobbies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -467,11 +485,11 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
   .sidebar-tools { right: 1rem; }
 
-  .sidebar-identity { width: min(100%, 18rem); padding: 0; text-align: center; }
+  .sidebar-identity { width: min(100%, 22rem); padding: 0; text-align: center; }
+  .sidebar-brand { justify-content: center; }
 
   .sidebar-name {
-    margin-inline: auto;
-    font-size: clamp(3rem, 5.25vw, 5.8rem);
+    font-size: clamp(2.7rem, 4.8vw, 4.9rem);
   }
 
   .sidebar-caption { display: block; margin-top: .62rem; color: var(--color-ink-faint); }
@@ -533,9 +551,20 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   padding: 0;
 }
 
+.landing-header .sidebar-brand {
+  justify-content: center;
+}
+
 .landing-header .sidebar-name {
-  margin-inline: auto;
-  font-size: clamp(4.5rem, 11.5vw, 9.5rem);
+  font-size: clamp(3.5rem, 10.5vw, 9rem);
+}
+
+.landing-header .logo-guitar {
+  width: clamp(72px, 8vw, 100px);
+}
+
+.landing-header .logo-guitar-hint {
+  font-size: .72rem;
 }
 
 .landing-header .sidebar-caption {
