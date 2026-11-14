@@ -10,9 +10,10 @@ type GuitarNote = { string: number; fret?: number }
 const stringLeft = 39
 const stringRight = 61
 const nutY = 30
-const firstFretY = 35
+const firstFretY = 43
 const stringBottom = 191
 const stringSpacing = (stringRight - stringLeft) / guitarStrings.length
+const acousticBody = 'M38 127C29 125 20 124 17 135C14 145 21 154 19 163C17 172 10 179 10 191C10 207 25 215 50 215C75 215 90 207 90 191C90 179 83 172 81 163C79 154 86 145 83 135C80 124 71 125 62 127C57 128 55 130 50 130C45 130 43 128 38 127Z'
 
 function stringAt(x: number) {
   return Math.max(-1, Math.min(guitarStrings.length, Math.floor((x - stringLeft) / stringSpacing)))
@@ -51,6 +52,7 @@ export default function LogoGuitar() {
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
   const [lessonOpen, setLessonOpen] = useState(false)
   const hintId = useId()
+  const spruceId = `${hintId}-spruce`
 
   const resumeAudio = useCallback((context: AudioContext, fromGesture = false) => {
     if (context.state === 'running') return
@@ -151,11 +153,41 @@ export default function LogoGuitar() {
         }}
       >
         <svg ref={shape} className="logo-guitar-shape" viewBox="0 0 100 221" fill="none" aria-hidden="true">
-          <path className="guitar-body" transform="translate(0 41)" d="M38 91c-8-1-16 5-16 15 0 9 10 14 8 22-2 6-9 13-9 22 0 15 11 23 29 23s29-8 29-23c0-9-7-16-9-22-2-8 8-13 8-22 0-10-8-16-16-15-5 0-8 3-12 3s-7-3-12-3Z" />
-          <path className="guitar-neck" d="M39 30h22v129H39zM37 30V12q0-5 5-5h16q5 0 5 5v18Z" />
-          <circle className="guitar-sound-hole" cx="50" cy="167" r="11" />
-          <path className="guitar-frets" d="M39 35h22m-22 8h22m-22 9h22m-22 10h22m-22 11h22m-22 12h22m-22 13h22m-22 14h22m-22 15h22m-22 16h22M31 12h6m26 0h6M31 18h6m26 0h6M31 24h6m26 0h6" />
-          <rect className="guitar-bridge" x="31" y="189" width="38" height="6" rx="2" />
+          <defs>
+            <linearGradient id={spruceId} x2="100%" y2="12%">
+              <stop stopColor="#b49a6c" />
+              <stop offset=".48" stopColor="#e1cea3" />
+              <stop offset=".54" stopColor="#dcc89d" />
+              <stop offset="1" stopColor="#c6ae7e" />
+            </linearGradient>
+          </defs>
+          <path d={acousticBody} fill={`url(#${spruceId})`} stroke="#31271f" strokeWidth="3" />
+          <path d={acousticBody} stroke="#eddcba" strokeWidth="1.2" />
+          <path d="M28 133c-3 22 2 57-2 70M35 134c-2 29 1 50-1 73M65 134c2 30-1 52 1 73M72 132c3 23-2 57 2 71"
+            stroke="#785e3f" strokeWidth=".75" opacity=".3" />
+          <path d="M63 157c10 3 15 12 15 23 0 7-4 12-9 9-4-2-2-6-7-12-4-5-7-8-7-13Z"
+            fill="#302924" stroke="#211c17" />
+          <circle cx="50" cy="165" r="15" fill="#383027" stroke="#211a14" />
+          <circle cx="50" cy="165" r="12.8" stroke="#c5ac7c" strokeWidth="1.25" />
+          <circle cx="50" cy="165" r="10.9" fill="#201b17" />
+          <path d="M35 9H30m5 7H30m5 7H30M65 9h5m-5 7h5m-5 7h5" stroke="#b5b7b4" />
+          <path d="M35 7q0-3 3-3h24q3 0 3 3v15l-6 8H41l-6-8Z"
+            fill="#5b4131" stroke="#c4ab85" />
+          <path d="M41.5 30 39 9m6 21-6-14m9 14-9-7m13 7 9-7m-6 7 6-14m-2.5 14 2.5-21"
+            stroke="#ac9c87" strokeWidth=".8" opacity=".8" />
+          <path d="M39 9v.1m0 6.9v.1m0 6.9v.1M61 9v.1m0 6.9v.1m0 6.9v.1"
+            stroke="#d0cbbd" strokeWidth="2.1" />
+          <path d="M29 7v4m0 3v4m0 3v4M71 7v4m0 3v4m0 3v4"
+            stroke="#c8c9c2" strokeWidth="2.8" />
+          <path d="M40 30h20l2 126H38Z" fill="#392e27" stroke="#95836b" />
+          <path d="M40 30h20" stroke="#ece3ca" strokeWidth="2.4" />
+          <path d={`M40 ${firstFretY}h20M39.5 56h21M39.5 68h21M39 79h22M39 89h22M39 98h22M39 107h22M38.5 115h23M38.5 123h23M38.5 130h23M38 137h24M38 143h24M38 149h24M38 154h24`}
+            stroke="#a9a497" strokeWidth="1.05" />
+          <path d="M50 62v.1M50 84v.1M50 102v.1M50 119v.1M44.5 140v.1M55.5 140v.1"
+            stroke="#e6ddc7" strokeWidth="2.6" />
+          <path d="M28 187q4 1.5 9 1.5h26q5 0 9-1.5v9q-4-1-9-1H37q-5 0-9 1Z"
+            fill="#4f392c" stroke="#30241c" />
+          <path d="M38.5 191h23" stroke="#ebe0c9" strokeWidth="1.5" />
         </svg>
         <div className="logo-guitar-strings">
           {guitarStrings.map(({ note, capoNote }, index) => (

@@ -225,27 +225,10 @@ a.sidebar-name:is(:hover, :focus-visible) {
   display: block;
   width: 100%;
   height: 100%;
-  stroke: currentColor;
-  stroke-width: 1.7;
+  stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
-.guitar-body, .guitar-neck {
-  fill: color-mix(in srgb, currentColor 13%, var(--color-sidebar));
-}
-
-.guitar-neck {
-  fill: color-mix(in srgb, currentColor 7%, var(--color-sidebar));
-}
-
-.guitar-sound-hole {
-  fill: var(--color-sidebar);
-  stroke-opacity: .62;
-}
-
-.guitar-frets { stroke-width: 1.2; stroke-opacity: .55; }
-.guitar-bridge { fill: currentColor; stroke: none; }
 
 .logo-guitar-strings {
   position: absolute;
@@ -253,13 +236,14 @@ a.sidebar-name:is(:hover, :focus-visible) {
   display: flex;
 }
 
-.logo-guitar[data-capo="1"] .logo-guitar-strings { top: 15.84%; }
+.logo-guitar[data-capo="1"] .logo-guitar-strings { top: 19.46%; }
 
 .guitar-capo {
   position: absolute;
-  inset: 15.84% 35% auto;
+  inset: 19.46% 35% auto;
   height: clamp(2px, .32vw, 4px);
-  background: currentColor;
+  background: #dedfd9;
+  border: 1px solid #454641;
   border-radius: 2px;
   transform: translateY(-50%);
   pointer-events: none;
@@ -286,15 +270,17 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .guitar-string {
   position: absolute;
   inset: 0 auto 0 50%;
-  width: max(1px, .065rem);
+  width: .7px;
   transform: translateX(-50%);
-  background: currentColor;
-  opacity: .68;
+  background: #e7e0cf;
+  opacity: .73;
 }
 
+.logo-guitar-strings button:nth-child(-n+2) .guitar-string { width: .95px; }
+
 .logo-guitar-strings button:is(:hover, :focus-visible) .guitar-string {
-  background: var(--color-ink);
-  box-shadow: 0 0 5px var(--color-guitar);
+  background: #fff8e6;
+  box-shadow: 0 0 3px #f1ddaa80;
   opacity: 1;
 }
 
@@ -305,7 +291,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-callout {
   position: absolute;
-  top: 36%;
+  top: 22%;
   left: 96%;
   display: flex;
   flex-direction: column;
@@ -396,33 +382,34 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-notes {
   position: absolute;
-  top: 67%;
-  left: 70%;
+  top: 74%;
+  left: 67%;
+  color: var(--color-ink-muted);
   pointer-events: none;
 }
 
 .logo-guitar-notes svg {
   position: absolute;
-  width: clamp(15px, 2.35vw, 32px);
+  width: clamp(12px, 1.7vw, 22px);
   height: auto;
   opacity: 0;
   z-index: 2;
 }
 
 .logo-guitar-notes svg[data-string="0"],
-.logo-guitar-notes svg[data-string="3"] { --note-x: 50%; --note-tilt: -15deg; }
+.logo-guitar-notes svg[data-string="3"] { --note-x: -130%; --note-tilt: -20deg; }
 
 .logo-guitar-notes svg[data-string="2"],
-.logo-guitar-notes svg[data-string="5"] { --note-x: 160%; --note-tilt: 12deg; }
+.logo-guitar-notes svg[data-string="5"] { --note-x: -50%; --note-tilt: 12deg; }
 
 @media (prefers-reduced-motion: no-preference) {
   .logo-guitar-notes svg { animation: guitar-note 1.2s ease-out; }
 }
 
 @keyframes guitar-note {
-  0% { opacity: 1; transform: scale(.75); }
-  35% { opacity: 1; }
-  100% { opacity: 0; transform: translate(calc(var(--note-x, 100%) + 15px), -240%) rotate(var(--note-tilt, 3deg)); }
+  0% { opacity: .9; transform: scale(.65); }
+  35% { opacity: .85; }
+  100% { opacity: 0; transform: translate(var(--note-x, -90%), -225%) rotate(var(--note-tilt, 3deg)); }
 }
 
 .sidebar-portrait { display: none; }
@@ -866,6 +853,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 .landing-header .logo-guitar-callout {
+  top: 36%;
   font-size: clamp(.84rem, 1.5vw, 1.25rem);
 }
 
