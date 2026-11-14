@@ -20,6 +20,11 @@ export default function LogoGuitar() {
     }
   }, [])
 
+  function emitNote(index: number) {
+    const note = { id: ++sequence.current, string: index }
+    setNotes(previous => [...previous.slice(-7), note])
+  }
+
   function pluck(index: number, context: AudioContext) {
     if (context.state !== 'running') return
     const source = context.createBufferSource()
@@ -29,12 +34,10 @@ export default function LogoGuitar() {
     source.connect(context.destination)
     source.onended = () => source.disconnect()
     source.start()
-
-    const note = { id: ++sequence.current, string: index }
-    setNotes(previous => [...previous.slice(-7), note])
   }
 
   async function activate(index: number) {
+    emitNote(index)
     try {
       const context = audio.current ?? new AudioContext()
       audio.current = context
@@ -65,9 +68,9 @@ export default function LogoGuitar() {
               aria-label={`Pluck ${note}`}
               onClick={() => void activate(index)}
               onPointerEnter={event => {
-                if (event.pointerType !== 'touch' && audio.current?.state === 'running') {
-                  pluck(index, audio.current)
-                }
+                if (event.pointerType === 'touch') return
+                emitNote(index)
+                if (audio.current?.state === 'running') pluck(index, audio.current)
               }}
             >
               <span className="guitar-string" aria-hidden="true" />

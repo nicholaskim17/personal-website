@@ -37,7 +37,7 @@ export const hero = {
   portraitAlt: 'Nick with illustrated orange headphones',
 }
 
-type HighlightTone = 'gold' | 'blue' | 'violet' | 'green'
+type HighlightTone = 'gold' | 'orange' | 'teal' | 'blue' | 'violet' | 'green' | 'pink'
 
 export const about = {
   waterloo: {
@@ -94,7 +94,7 @@ export const work: WorkEntry[] = [
     current: true,
     organizationHref: 'https://hamming.ai/',
     logo: '/images/work/hamming.png',
-    highlight: 'gold',
+    highlight: 'orange',
     title: 'Software Engineer',
   },
   {
@@ -102,7 +102,7 @@ export const work: WorkEntry[] = [
     current: true,
     organizationHref: 'https://watai.ca/',
     logo: '/images/work/watai.png',
-    highlight: 'gold',
+    highlight: 'teal',
     title: 'Machine Learning Engineer',
     dates: 'Sept 2026 — Present',
     description:

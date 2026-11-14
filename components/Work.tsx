@@ -55,7 +55,7 @@ export default function Work() {
         <h2 id="previously">Previously</h2>
         <ul className="experience-list">
           <li id="research"><Research /></li>
-          <li>7× hackathon winner</li>
+          <li>7× Hackathon Winner</li>
           {previousRoles.map(entry => <WorkItem key={entry.organization} entry={entry} />)}
         </ul>
       </section>

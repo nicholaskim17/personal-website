@@ -17,10 +17,13 @@
   --color-guitar: #ffad59;
   --color-wordmark-shadow: #b65324;
   --color-accent-soft: #282d1f;
-  --highlight-gold: #3c3420;
-  --highlight-blue: #23364a;
-  --highlight-violet: #382c45;
-  --highlight-green: #263b31;
+  --highlight-gold: #594514;
+  --highlight-orange: #643824;
+  --highlight-teal: #194c52;
+  --highlight-pink: #612a47;
+  --highlight-blue: #263e69;
+  --highlight-violet: #4a3463;
+  --highlight-green: #315336;
 }
 
 .light {
@@ -38,6 +41,9 @@
   --color-wordmark-shadow: #d87938;
   --color-accent-soft: #e6ecd7;
   --highlight-gold: #fbefaf;
+  --highlight-orange: #f7d4bb;
+  --highlight-teal: #bde8e7;
+  --highlight-pink: #f2cce1;
   --highlight-blue: #d8e8fa;
   --highlight-violet: #eadef6;
   --highlight-green: #d9efdf;
@@ -222,8 +228,8 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-notes {
   position: absolute;
-  top: 71%;
-  left: 62%;
+  top: 67%;
+  left: 70%;
   pointer-events: none;
 }
 
@@ -232,6 +238,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   width: clamp(15px, 2.35vw, 32px);
   height: auto;
   opacity: 0;
+  z-index: 2;
 }
 
 .logo-guitar-notes svg[data-string="0"],
@@ -247,7 +254,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 @keyframes guitar-note {
   0% { opacity: 1; transform: scale(.75); }
   35% { opacity: 1; }
-  100% { opacity: 0; transform: translate(var(--note-x, 100%), -220%) rotate(var(--note-tilt, 3deg)); }
+  100% { opacity: 0; transform: translate(calc(var(--note-x, 100%) + 15px), -240%) rotate(var(--note-tilt, 3deg)); }
 }
 
 .sidebar-portrait { display: none; }
@@ -371,6 +378,9 @@ a.sidebar-name:is(:hover, :focus-visible) {
 }
 
 .org-highlight[data-tone="gold"] { --org-highlight: var(--highlight-gold); }
+.org-highlight[data-tone="orange"] { --org-highlight: var(--highlight-orange); }
+.org-highlight[data-tone="teal"] { --org-highlight: var(--highlight-teal); }
+.org-highlight[data-tone="pink"] { --org-highlight: var(--highlight-pink); }
 .org-highlight[data-tone="blue"] { --org-highlight: var(--highlight-blue); }
 .org-highlight[data-tone="violet"] { --org-highlight: var(--highlight-violet); }
 .org-highlight[data-tone="green"] { --org-highlight: var(--highlight-green); }
@@ -523,6 +533,50 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   display: block;
   font: 400 clamp(.83rem, 1.6vw, 1.02rem)/1.1 var(--font-pixel);
   white-space: nowrap;
+}
+
+.portrait-thought-link {
+  width: max(100%, 10rem);
+  min-width: 0;
+  border-radius: 5px;
+}
+
+.portrait-thought-link:hover .portrait-thought-text strong {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.portrait-thought-track {
+  display: block;
+  text-align: left;
+}
+
+.portrait-track-source {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: .45rem;
+  margin-bottom: .35rem;
+  color: var(--color-ink-muted);
+  font-size: .69rem;
+}
+
+.spotify-logo-light, .light .spotify-logo-dark { display: none; }
+
+.light .spotify-logo-light { display: block; }
+
+.portrait-thought-track .portrait-thought-text {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+
+.portrait-thought-track .portrait-thought-text > span {
+  display: block;
+  margin-top: .18rem;
+  color: var(--color-ink-muted);
 }
 
 .portrait-thought-trail {

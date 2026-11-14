@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { hero, navLinks, site, socialLinks } from '@/lib/data'
 import LogoGuitar from './LogoGuitar'
+import PortraitThought from './PortraitThought'
 import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
 
@@ -47,11 +48,7 @@ export default function Header({ landing = false }: { landing?: boolean }) {
         </nav>
       </div>
       <figure className="sidebar-portrait">
-        <figcaption className="portrait-thought">
-          <span className="portrait-thought-bubble">
-            <span className="portrait-thought-text">song stuck in my head…</span>
-          </span>
-        </figcaption>
+        <PortraitThought />
         <div className="portrait-frame">
           <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
           <svg className="portrait-thought-trail" viewBox="0 0 100 100" aria-hidden="true">

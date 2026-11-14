@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "spotify:connect": "node scripts/connect-spotify.mjs"
   },
   "dependencies": {
     "@fontsource-variable/bitcount-prop-single": "5.3.0",
