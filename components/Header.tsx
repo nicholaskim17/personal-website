@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Github, Guitar, Linkedin, Mail } from 'lucide-react'
+import { Github, Guitar, Linkedin, Mail, Music, Music2 } from 'lucide-react'
 import { hero, navLinks, site, socialLinks } from '@/lib/data'
 import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
@@ -18,6 +18,11 @@ export default function Header({ landing = false }: { landing?: boolean }) {
       {hero.name}
       <span className="name-mark-flourish">
         <Guitar className="name-mark-guitar" strokeWidth={1.5} />
+        <span className="name-mark-notes">
+          <Music2 strokeWidth={1.6} />
+          <Music strokeWidth={1.6} />
+          <Music2 strokeWidth={1.6} />
+        </span>
       </span>
     </span>
   )
