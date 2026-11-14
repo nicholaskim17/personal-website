@@ -31,8 +31,8 @@ export default function Header({ landing = false }: { landing?: boolean }) {
                   <span className="bench-press-rack" />
                   <span className="bench-press-bench" />
                   <span className="bench-press-lifter" />
-                  <span className="bench-press-arms" />
-                  <span className="bench-press-bar" />
+                  <span className="bench-press-arm" />
+                  <span className="bench-press-plate" />
                 </span>
                 {hero.name}
               </h1>
