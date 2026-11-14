@@ -216,7 +216,6 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-instrument {
   position: relative;
-  aspect-ratio: 100 / 221;
   transform: rotate(22deg);
   transform-origin: 50% 68%;
 }
@@ -232,15 +231,15 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-strings {
   position: absolute;
-  inset: 13.6% 39%;
+  inset: var(--guitar-nut) 39% var(--guitar-bridge-inset);
   display: flex;
 }
 
-.logo-guitar[data-capo="1"] .logo-guitar-strings { top: 19.46%; }
+.logo-guitar[data-capo="1"] .logo-guitar-strings { top: var(--guitar-first-fret); }
 
 .guitar-capo {
   position: absolute;
-  inset: 19.46% 35% auto;
+  inset: var(--guitar-first-fret) 35% auto;
   height: clamp(2px, .32vw, 4px);
   background: #dedfd9;
   border: 1px solid #454641;
