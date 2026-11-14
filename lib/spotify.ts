@@ -18,7 +18,10 @@ async function getAccessToken() {
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET?.trim()
   const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN?.trim()
 
-  if (!clientId || !refreshToken) return key
+  if (!clientId || !refreshToken) {
+    // Dashboard client IDs and secrets are not Spotify user access tokens.
+    return key && !/^[a-f0-9]{32}$/i.test(key) ? key : undefined
+  }
   if (access && access.expiresAt > Date.now()) return access.token
 
   const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
