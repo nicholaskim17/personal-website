@@ -14,10 +14,14 @@ export default function Work() {
             </div>
             <div className="work-entry">
               <div className="work-entry-heading">
-                <h3>{entry.title}{' '}<span>at</span>{' '}
+                <h3>{entry.title}{' '}<span className="work-entry-connector">at</span>{' '}
                   {entry.organizationHref
-                    ? <a className="inline-link" href={entry.organizationHref} target="_blank" rel="noreferrer">{entry.organization}</a>
-                    : entry.organization}
+                    ? (
+                      <a className="org-highlight" data-tone={entry.highlight} href={entry.organizationHref} target="_blank" rel="noreferrer">
+                        {entry.organization}
+                      </a>
+                    )
+                    : <span className="org-highlight" data-tone={entry.highlight}>{entry.organization}</span>}
                 </h3>
                 <p className="work-date">{entry.dates}</p>
               </div>

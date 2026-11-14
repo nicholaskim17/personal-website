@@ -1,4 +1,5 @@
 import { about, hero } from '@/lib/data'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import SectionHeading from './SectionHeading'
@@ -17,7 +18,12 @@ export default function About() {
             {paragraph.split(mentionPattern).map((segment, i) => {
               const mention = mentions.find(({ name }) => name === segment)
               return mention
-                ? <a key={i} className="inline-link" href={mention.href} target="_blank" rel="noreferrer">{segment}</a>
+                ? (
+                  <a key={i} className="org-highlight" data-tone={mention.highlight} href={mention.href} target="_blank" rel="noreferrer">
+                    <Image src={mention.logo} alt="" width={16} height={16} />
+                    {segment}
+                  </a>
+                )
                 : segment
             })}
             {index === about.paragraphs.length - 1 && (

@@ -14,6 +14,10 @@
   --color-dot: #2c2b28;
   --color-accent: #d9e5ae;
   --color-accent-soft: #282d1f;
+  --highlight-gold: #3c3420;
+  --highlight-blue: #23364a;
+  --highlight-violet: #382c45;
+  --highlight-green: #263b31;
 }
 
 .light {
@@ -28,6 +32,10 @@
   --color-dot: #d2cfc0;
   --color-accent: #435425;
   --color-accent-soft: #e6ecd7;
+  --highlight-gold: #fbefaf;
+  --highlight-blue: #d8e8fa;
+  --highlight-violet: #eadef6;
+  --highlight-green: #d9efdf;
 }
 
 html {
@@ -200,6 +208,35 @@ body { font-size: 1rem; }
 
 .inline-link:hover { color: var(--color-accent); text-decoration-color: currentColor; }
 
+.org-highlight {
+  padding: .12em .34em;
+  background: var(--org-highlight);
+  color: var(--color-ink);
+  font-weight: 500;
+  border-radius: .13em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.org-highlight[data-tone="gold"] { --org-highlight: var(--highlight-gold); }
+.org-highlight[data-tone="blue"] { --org-highlight: var(--highlight-blue); }
+.org-highlight[data-tone="violet"] { --org-highlight: var(--highlight-violet); }
+.org-highlight[data-tone="green"] { --org-highlight: var(--highlight-green); }
+
+.org-highlight img {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: .34em;
+  vertical-align: -.11em;
+  object-fit: contain;
+}
+
+a.org-highlight:hover, a.org-highlight:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: .16em;
+}
+
 .about-interests { margin-top: 1.2rem; }
 
 .about-interests h2 { font-size: .94rem; font-weight: 600; color: var(--color-ink); }
@@ -240,7 +277,7 @@ body { font-size: 1rem; }
 
 .work-entry h3, .research-paper h3, .project-title h3, .gallery-title { font-weight: 620; letter-spacing: -.022em; }
 
-.work-entry h3 span { font-weight: 400; color: var(--color-ink-muted); }
+.work-entry-connector { font-weight: 400; color: var(--color-ink-muted); }
 
 .work-date { flex-shrink: 0; color: var(--color-ink-faint); line-height: 1.4; }
 
@@ -395,8 +432,6 @@ body { font-size: 1rem; }
   }
 
   .sidebar-portrait { display: block; width: min(100%, 16rem); }
-
-
 }
 
 @media (max-width: 799px) {

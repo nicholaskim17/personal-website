@@ -43,16 +43,20 @@ export const hero = {
   hoverPortraitSrc: '/images/silversurfer.webp',
 }
 
+type HighlightTone = 'gold' | 'blue' | 'violet' | 'green'
+
 export const about = {
   waterloo: {
     name: 'University of Waterloo',
     href: 'https://uwaterloo.ca/engineering/',
     logo: '/images/work/waterloo-seal.svg',
+    highlight: 'gold',
   },
   watAI: {
     name: 'WAT.ai',
     href: 'https://watai.ca/',
     logo: '/images/work/watai.png',
+    highlight: 'gold',
   },
   paragraphs: [
     "Doctor, Lawyer, Engineer, Investment Banker... I couldn't find a passion. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
@@ -98,6 +102,7 @@ export interface WorkEntry {
   organizationHref?: string
   logo: string
   logoAlt: string
+  highlight: HighlightTone
   title: string
   dates: string
   description: string
@@ -109,6 +114,7 @@ export const work: WorkEntry[] = [
     organization: 'WAT.ai',
     organizationHref: 'https://watai.ca/',
     logo: '/images/work/watai.png',
+    highlight: 'gold',
     logoAlt: 'WAT.ai logo',
     title: 'Machine Learning Engineer',
     dates: 'Sept 2026 — Present',
@@ -120,6 +126,7 @@ export const work: WorkEntry[] = [
     organization: 'Appli AI',
     organizationHref: 'https://applisolutions.com',
     logo: '/images/work/appli-ai.png',
+    highlight: 'blue',
     logoAlt: 'Appli AI logo',
     title: 'Software Engineering Intern',
     dates: 'June 2026 — Sept 2026',
@@ -131,6 +138,7 @@ export const work: WorkEntry[] = [
     organization: 'Algoverse',
     organizationHref: 'https://algoverseairesearch.org',
     logo: '/images/work/algoverse.jpeg',
+    highlight: 'violet',
     logoAlt: 'Algoverse logo',
     title: 'Machine Learning Research Intern',
     dates: 'June 2026 — Sept 2026',
@@ -142,6 +150,7 @@ export const work: WorkEntry[] = [
     organization: 'One2One Tutoring',
     organizationHref: 'https://one2onetutoring.vercel.app/',
     logo: '/images/work/one2one.png',
+    highlight: 'green',
     logoAlt: 'One2One Tutoring logo',
     title: 'Founder & Lead Tutor',
     dates: 'Sept 2024 — June 2026',
