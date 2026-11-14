@@ -37,8 +37,6 @@ function WorkItem({ entry }: { entry: WorkEntry }) {
         </p>
         <p className="work-date">{entry.dates}</p>
       </div>
-      <p className="experience-detail">{entry.description}</p>
-      <p className="work-tags">{entry.tags.join(' · ')}</p>
     </li>
   )
 }
@@ -56,8 +54,8 @@ export default function Work() {
       <section className="experience-group" aria-labelledby="previously">
         <h2 id="previously">Previously</h2>
         <ul className="experience-list">
-          {previousRoles.map(entry => <WorkItem key={entry.organization} entry={entry} />)}
           <li id="research"><Research /></li>
+          {previousRoles.map(entry => <WorkItem key={entry.organization} entry={entry} />)}
         </ul>
       </section>
     </div>
