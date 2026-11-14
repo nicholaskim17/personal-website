@@ -32,8 +32,8 @@ export const site = {
 
 export const hero = {
   name: 'Nick Kim',
-  portraitSrc: '/images/portrait-retro-headphones.webp',
-  portraitAlt: 'Nick with illustrated orange headphones',
+  portraitSrc: '/images/portrait.jpg',
+  portraitAlt: 'Nick with orange pixel-art headphones',
 }
 
 export type HighlightTone = 'gold' | 'orange' | 'teal' | 'pink' | 'blue' | 'violet' | 'green'
@@ -294,7 +294,7 @@ export const research: ResearchEntry[] = [
   {
     title: 'Evaluating Context-Window Harnesses for CBRNE Safety',
     dateTime: '2026-08',
-    dateLabel: 'August 2026',
+    dateLabel: 'Aug 2026',
     authors: 'Nathan Nguyen, Nicholas Kim, Abhitha Vegi, Arko Samad, Suvajit Majumder',
     authorNote: 'Second author',
     venue: 'NewInML and Trustworthy AI for Good (AI4GOOD) workshops · Paris, France',

@@ -6,13 +6,12 @@ import { usePathname } from 'next/navigation'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { hero, navLinks, site, socialLinks } from '@/lib/data'
 import LogoGuitar from './LogoGuitar'
+import PortraitHeadphones from './PortraitHeadphones'
 import PortraitTrack from './PortraitTrack'
 import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
 
 const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
-const soundWavePath = 'M 8 -5 H 9.5 V -3 H 11 V -1.35 H 12.5 V 1.35 H 11 V 3 H 9.5 V 5 H 8'
-const earcupTransforms = ['translate(34 43) scale(-1 1)', 'translate(68 43)']
 
 export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
@@ -63,16 +62,8 @@ export default function Header({ landing = false }: { landing?: boolean }) {
       <figure className="sidebar-portrait">
         <PortraitTrack />
         <div className="portrait-frame">
-          <div className="portrait-photo-crop">
-            <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
-          </div>
-          <svg className="portrait-sound-waves" viewBox="0 0 100 100" aria-hidden="true">
-            {earcupTransforms.map(transform => (
-              <g key={transform} transform={transform}>
-                {[1, 2, 3].map(ripple => <path key={ripple} d={soundWavePath} />)}
-              </g>
-            ))}
-          </svg>
+          <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="object-cover" />
+          <PortraitHeadphones />
         </div>
       </figure>
     </header>

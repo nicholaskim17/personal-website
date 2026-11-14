@@ -18,7 +18,9 @@ export default function Hobbies() {
       <div className="gallery-grid">
         {about.gallery.map(photo => (
           <div className="gallery-photo" key={photo.src}>
-            <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1160px) 260px, (min-width: 620px) 31vw, 50vw" className="object-cover" />
+            <div className="gallery-photo-frame">
+              <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1160px) 325px, (min-width: 620px) 39vw, 62vw" className="object-cover" />
+            </div>
           </div>
         ))}
       </div>

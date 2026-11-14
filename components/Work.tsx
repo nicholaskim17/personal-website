@@ -16,7 +16,6 @@ function WorkItem({ entry }: { entry: WorkEntry }) {
             href={entry.organizationHref}
             logo={entry.logo}
             highlight={entry.highlight}
-            compact={!entry.current}
           />
         </p>
         {entry.dates && <p className="work-date">{entry.dates}</p>}

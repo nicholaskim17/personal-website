@@ -15,7 +15,7 @@ export default function Research() {
         {paper.highlight && (
           <p className="research-acceptance">
             {paper.highlight.label}{' '}
-            <Organization {...paper.highlight.venue} compact />
+            <Organization {...paper.highlight.venue} />
             {' in Paris, France'}
           </p>
         )}
