@@ -20,6 +20,10 @@
   --highlight-gold: #594514;
   --highlight-orange: #643824;
   --highlight-teal: #194c52;
+  --highlight-pink: #612a47;
+  --highlight-blue: #263e69;
+  --highlight-violet: #4a3463;
+  --highlight-green: #315336;
 }
 
 .light {
@@ -39,6 +43,10 @@
   --highlight-gold: #fbefaf;
   --highlight-orange: #f7d4bb;
   --highlight-teal: #bde8e7;
+  --highlight-pink: #f2cce1;
+  --highlight-blue: #d8e8fa;
+  --highlight-violet: #eadef6;
+  --highlight-green: #d9efdf;
 }
 
 html {
@@ -551,9 +559,13 @@ a.sidebar-name:is(:hover, :focus-visible) {
   box-decoration-break: clone;
 }
 
-.org-highlight[data-tone="gold"] { --org-highlight: var(--highlight-gold); }
-.org-highlight[data-tone="orange"] { --org-highlight: var(--highlight-orange); }
-.org-highlight[data-tone="teal"] { --org-highlight: var(--highlight-teal); }
+:is(.org-highlight, .org-button)[data-tone="gold"] { --org-highlight: var(--highlight-gold); }
+:is(.org-highlight, .org-button)[data-tone="orange"] { --org-highlight: var(--highlight-orange); }
+:is(.org-highlight, .org-button)[data-tone="teal"] { --org-highlight: var(--highlight-teal); }
+:is(.org-highlight, .org-button)[data-tone="pink"] { --org-highlight: var(--highlight-pink); }
+:is(.org-highlight, .org-button)[data-tone="blue"] { --org-highlight: var(--highlight-blue); }
+:is(.org-highlight, .org-button)[data-tone="violet"] { --org-highlight: var(--highlight-violet); }
+:is(.org-highlight, .org-button)[data-tone="green"] { --org-highlight: var(--highlight-green); }
 
 .org-highlight img {
   display: inline-block;
@@ -574,9 +586,9 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   align-items: center;
   gap: .4em;
   padding: .18em .55em;
-  border: 1px solid var(--color-border);
+  border: 1px solid color-mix(in srgb, var(--org-highlight) 80%, var(--color-ink) 20%);
   border-radius: .4em;
-  background: var(--color-surface-raised);
+  background: var(--org-highlight);
   color: var(--color-ink);
   font-size: .82em;
   font-weight: 550;
@@ -586,8 +598,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 .org-button img { width: 1em; height: 1em; object-fit: contain; }
 
 a.org-button:is(:hover, :focus-visible) {
-  color: var(--color-guitar);
-  border-color: currentColor;
+  border-color: var(--color-ink-faint);
 }
 
 .experience-group {

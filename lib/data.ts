@@ -36,7 +36,7 @@ export const hero = {
   portraitAlt: 'Nick with illustrated orange headphones',
 }
 
-type HighlightTone = 'gold' | 'orange' | 'teal'
+export type HighlightTone = 'gold' | 'orange' | 'teal' | 'pink' | 'blue' | 'violet' | 'green'
 
 export const about = {
   waterloo: {
@@ -80,7 +80,7 @@ export interface WorkEntry {
   organizationHref?: string
   logo: string
   current?: boolean
-  highlight?: HighlightTone
+  highlight: HighlightTone
   title: string
   dates?: string
   description?: string
@@ -111,6 +111,7 @@ export const work: WorkEntry[] = [
     organization: 'Appli AI',
     organizationHref: 'https://applisolutions.com',
     logo: '/images/work/appli-ai.png',
+    highlight: 'blue',
     title: 'Software Engineering Intern',
     dates: 'June 2026 — Sept 2026',
     description:
@@ -121,6 +122,7 @@ export const work: WorkEntry[] = [
     organization: 'Algoverse',
     organizationHref: 'https://algoverseairesearch.org',
     logo: '/images/work/algoverse.jpeg',
+    highlight: 'violet',
     title: 'Machine Learning Research Intern',
     dates: 'June 2026 — Sept 2026',
     description:
@@ -131,6 +133,7 @@ export const work: WorkEntry[] = [
     organization: 'One2One Tutoring',
     organizationHref: 'https://one2onetutoring.vercel.app/',
     logo: '/images/work/one2one.png',
+    highlight: 'green',
     title: 'Founder & Lead Tutor',
     dates: 'Sept 2024 — June 2026',
     description:
@@ -283,7 +286,7 @@ export interface ResearchEntry {
   href: string
   highlight?: {
     label: string
-    venue: { name: string; href: string; logo: string }
+    venue: { name: string; href: string; logo: string; highlight: HighlightTone }
   }
 }
 
@@ -300,7 +303,12 @@ export const research: ResearchEntry[] = [
     href: 'https://openreview.net/forum?id=H6U4KapPog',
     highlight: {
       label: 'Accepted at two workshops at',
-      venue: { name: 'NeurIPS 2026', href: 'https://neurips.cc/', logo: '/images/work/neurips.png' },
+      venue: {
+        name: 'NeurIPS 2026',
+        href: 'https://neurips.cc/',
+        logo: '/images/work/neurips.png',
+        highlight: 'pink',
+      },
     },
   },
 ]

@@ -1,13 +1,14 @@
 import Image from 'next/image'
-import type { WorkEntry } from '@/lib/data'
+import type { HighlightTone } from '@/lib/data'
 
-export default function Organization({ name, href, logo, highlight }: {
+export default function Organization({ name, href, logo, highlight, compact = false }: {
   name: string
   href?: string
   logo: string
-  highlight?: WorkEntry['highlight']
+  highlight: HighlightTone
+  compact?: boolean
 }) {
-  const className = highlight ? 'org-highlight' : 'org-button'
+  const className = compact ? 'org-button' : 'org-highlight'
   const label = (
     <>
       <Image src={logo} alt="" width={16} height={16} />
