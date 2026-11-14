@@ -9,16 +9,16 @@ import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
 
 const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
-const [firstName, ...surname] = hero.name.split(' ')
 
 export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
   const portraitSizes = landing ? "(max-width: 479px) 180px, 288px" : "(min-width: 800px) 256px, 1px"
   const name = (
     <span className="name-mark" aria-hidden="true">
-      <span>{firstName}</span>{' '}
-      <span className="name-mark-surname">{surname.join(' ')}</span>
-      <Guitar className="name-mark-guitar" aria-hidden="true" strokeWidth={1.65} />
+      {hero.name}
+      <span className="name-mark-flourish">
+        <Guitar className="name-mark-guitar" strokeWidth={1.5} />
+      </span>
     </span>
   )
 

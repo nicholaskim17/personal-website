@@ -84,46 +84,51 @@ body { font-size: 1rem; }
   display: block;
   width: fit-content;
   color: var(--color-ink);
-  font-size: 1.65rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 2.2rem;
+  font-style: italic;
   line-height: 1;
 }
 
 .name-mark {
   position: relative;
-  z-index: 0;
-  display: inline-block;
-  padding: .12em .38em .17em .04em;
-  transform: skewX(-9deg);
-  font-weight: 900;
-  letter-spacing: -.085em;
-  text-transform: uppercase;
+  display: block;
+  padding: .015em .11em .19em .055em;
+  letter-spacing: -.055em;
   white-space: nowrap;
 }
 
-.name-mark-surname {
+.name-mark-flourish {
+  position: absolute;
+  inset: auto .04em .025em 18%;
+  height: .28em;
   color: var(--color-accent);
+  pointer-events: none;
 }
 
-@supports (-webkit-text-stroke: 1px currentColor) {
-  .name-mark-surname {
-    -webkit-text-stroke: max(1px, .015em) var(--color-accent);
-    color: transparent;
-    transition: color 180ms ease;
-  }
-
-  a.sidebar-name:is(:hover, :focus-visible) .name-mark-surname {
-    color: var(--color-accent);
-  }
+.name-mark-flourish::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: .29em;
+  bottom: .06em;
+  height: .18em;
+  border-bottom: max(1px, .011em) solid currentColor;
+  border-radius: 0 0 52% 60%;
+  transform: rotate(-4deg);
 }
 
 .name-mark-guitar {
   position: absolute;
-  top: -.07em;
-  right: -.035em;
-  width: .53em;
-  height: .53em;
+  right: -.03em;
+  bottom: -.055em;
+  width: .42em;
+  height: .42em;
+  transform: rotate(27deg);
+}
+
+a.sidebar-name:is(:hover, :focus-visible) {
   color: var(--color-accent);
-  transform: skewX(9deg) rotate(-8deg);
 }
 
 .sidebar-caption, .sidebar-portrait { display: none; }
@@ -405,7 +410,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
   .sidebar-name {
     margin-inline: auto;
-    font-size: clamp(2.45rem, 4.15vw, 4.6rem);
+    font-size: clamp(3rem, 5.25vw, 5.8rem);
   }
 
   .sidebar-caption { display: block; margin-top: .62rem; color: var(--color-ink-faint); }
@@ -469,28 +474,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
 .landing-header .sidebar-name {
   margin-inline: auto;
-  font-size: clamp(3.1rem, 9vw, 7rem);
-}
-
-.landing-header .name-mark::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: -.1em -.25em -.1em -.25em;
-  background: radial-gradient(circle, var(--color-dot) 1px, transparent 1.5px) 0 0 / 11px 11px;
-  mask-image: radial-gradient(ellipse, #000 16%, transparent 72%);
-}
-
-.landing-header .name-mark::after {
-  content: '';
-  position: absolute;
-  right: .14em;
-  bottom: .025em;
-  width: 38%;
-  height: max(1px, .016em);
-  transform: rotate(-4deg);
-  transform-origin: right;
-  background: var(--color-accent);
+  font-size: clamp(4.5rem, 11.5vw, 9.5rem);
 }
 
 .landing-header .sidebar-caption {
