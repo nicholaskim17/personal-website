@@ -1,10 +1,10 @@
 export const guitarStrings = [
-  { note: 'E2', capoNote: 'F2', frequency: 82.41 },
-  { note: 'A2', capoNote: 'B♭2', frequency: 110 },
-  { note: 'D3', capoNote: 'E♭3', frequency: 146.83 },
-  { note: 'G3', capoNote: 'A♭3', frequency: 196 },
-  { note: 'B3', capoNote: 'C4', frequency: 246.94 },
-  { note: 'E4', capoNote: 'F4', frequency: 329.63 },
+  { note: 'E2', frequency: 82.41 },
+  { note: 'A2', frequency: 110 },
+  { note: 'D3', frequency: 146.83 },
+  { note: 'G3', frequency: 196 },
+  { note: 'B3', frequency: 246.94 },
+  { note: 'E4', frequency: 329.63 },
 ]
 
 export function guitarFrequency(string: number, fret = 0, capo = 0) {

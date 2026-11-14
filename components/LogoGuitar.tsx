@@ -59,8 +59,8 @@ export default function LogoGuitar() {
   const sequence = useRef(0)
   const [sound, setSound] = useState<'off' | 'on' | 'unavailable'>('off')
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
-  const [lessonOpen, setLessonOpen] = useState(false)
   const [selectedChord, setSelectedChord] = useState<GuitarChord | null>(null)
+  const capo = selectedChord ? 1 : 0
   const hintId = useId()
   const spruceId = `${hintId}-spruce`
 
@@ -104,7 +104,7 @@ export default function LogoGuitar() {
     // Fast Refresh may preserve the array used by the previous cache.
     if (!(buffers.current instanceof Map)) buffers.current = new Map()
     const source = context.createBufferSource()
-    const frequency = guitarFrequency(string, fret, lessonOpen ? 1 : 0)
+    const frequency = guitarFrequency(string, fret, capo)
     const buffer = buffers.current.get(frequency) ?? createPluck(context, frequency)
     buffers.current.set(frequency, buffer)
     source.buffer = buffer
@@ -146,7 +146,7 @@ export default function LogoGuitar() {
     const transform = shape.current?.getScreenCTM()
     if (!transform) return
     const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(transform.inverse())
-    const crossed = getStrummedStrings(previousPointer.current, point, lessonOpen ? firstFretY : nutY)
+    const crossed = getStrummedStrings(previousPointer.current, point, capo ? firstFretY : nutY)
     previousPointer.current = point
     void playStrings(crossed)
   }
@@ -154,9 +154,9 @@ export default function LogoGuitar() {
   return (
     <div
       className="logo-guitar"
-      data-capo={lessonOpen ? 1 : undefined}
+      data-capo={capo || undefined}
       role="group"
-      aria-label={lessonOpen ? 'Playable guitar, capo on the first fret' : 'Playable guitar'}
+      aria-label={capo ? 'Playable guitar, capo on the first fret' : 'Playable guitar'}
       aria-describedby={hintId}
     >
       <div
@@ -207,15 +207,14 @@ export default function LogoGuitar() {
           <path d={`M38.5 ${stringBottom}h23`} stroke="#ebe0c9" strokeWidth="1.5" />
         </svg>
         <div className="logo-guitar-strings">
-          {guitarStrings.map(({ note, capoNote }, index) => {
+          {guitarStrings.map(({ note }, index) => {
             const muted = selectedChord?.frets[index] === null
-            const stringLabel = lessonOpen ? capoNote : note
             return (
               <button
                 key={note}
                 type="button"
                 disabled={muted}
-                aria-label={muted ? `${note} string muted` : selectedChord ? `Pluck ${note} string in ${selectedChord.name}` : `Pluck ${stringLabel}`}
+                aria-label={muted ? `${note} string muted` : selectedChord ? `Pluck ${note} string in ${selectedChord.name}` : `Pluck ${note}`}
                 onClick={() => void playStrings([index], true)}
               >
                 <span className="guitar-string" aria-hidden="true" />
@@ -223,7 +222,7 @@ export default function LogoGuitar() {
             )
           })}
         </div>
-        {lessonOpen && <span className="guitar-capo" aria-hidden="true" />}
+        {capo === 1 && <span className="guitar-capo" aria-hidden="true" />}
         <span className="logo-guitar-notes" aria-hidden="true">
           {notes.map(({ id, string }) => {
             const Icon = string % 2 === 0 ? Music2 : Music
@@ -238,9 +237,7 @@ export default function LogoGuitar() {
         </svg>
       </div>
       <details className="logo-guitar-lesson" onToggle={event => {
-        const open = event.currentTarget.open
-        setLessonOpen(open)
-        if (!open) setSelectedChord(null)
+        if (!event.currentTarget.open) setSelectedChord(null)
         previousPointer.current = null
       }}>
         <summary>wanna play your first song?</summary>
