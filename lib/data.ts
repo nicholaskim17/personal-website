@@ -9,7 +9,6 @@ export const navLinks: NavLink[] = [
   { href: '/about', label: 'About' },
   { href: '/work', label: 'Coding Projects' },
   { href: '/misc', label: 'Life Outside of Coding' },
-  { href: '/contact', label: 'Contact' },
 ]
 
 export interface SocialLink {
