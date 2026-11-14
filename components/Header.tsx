@@ -6,11 +6,16 @@ import { usePathname } from 'next/navigation'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { hero, navLinks, site, socialLinks } from '@/lib/data'
 import LogoGuitar from './LogoGuitar'
-import PortraitThought from './PortraitThought'
+import PortraitTrack from './PortraitTrack'
 import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
 
 const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
+const soundWavePaths = [
+  'M 3 -3 Q 6 0 3 3',
+  'M 6.5 -5.5 Q 11.5 0 6.5 5.5',
+  'M 10 -8 Q 17 0 10 8',
+]
 
 export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
@@ -48,15 +53,16 @@ export default function Header({ landing = false }: { landing?: boolean }) {
         </nav>
       </div>
       <figure className="sidebar-portrait">
-        <PortraitThought />
+        <PortraitTrack />
         <div className="portrait-frame">
           <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
-          <svg className="portrait-thought-trail" viewBox="0 0 100 100" aria-hidden="true">
-            <rect x="67.5" y="41.5" width="1.6" height="1.6" />
-            <rect x="71.5" y="34.5" width="2" height="2" />
-            <rect x="77" y="26" width="2.4" height="2.4" />
-            <rect x="81" y="16" width="2.8" height="2.8" />
-            <rect x="84" y="4.4" width="3.2" height="3.2" />
+          <svg className="portrait-sound-waves" viewBox="0 0 100 100" aria-hidden="true">
+            <g transform="translate(34 43) scale(-1 1)">
+              {soundWavePaths.map(path => <path key={path} d={path} />)}
+            </g>
+            <g transform="translate(68 43)">
+              {soundWavePaths.map(path => <path key={path} d={path} />)}
+            </g>
           </svg>
         </div>
       </figure>

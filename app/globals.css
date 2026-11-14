@@ -502,63 +502,32 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   border-top: 1px solid var(--color-border);
 }
 
-.portrait-thought {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  justify-items: end;
-  margin-bottom: .45rem;
+.portrait-track {
+  margin-bottom: .65rem;
   color: var(--color-guitar);
   text-align: center;
 }
 
-.portrait-thought-bubble {
-  --pixel-corners: polygon(0 5px, 5px 5px, 5px 0, calc(100% - 5px) 0, calc(100% - 5px) 5px, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 5px calc(100% - 5px), 0 calc(100% - 5px));
-  position: relative;
-  padding: .5rem .68rem .46rem;
-  background: color-mix(in srgb, currentColor 54%, var(--color-sidebar));
-  clip-path: var(--pixel-corners);
-}
-
-.portrait-thought-bubble::before {
-  content: '';
-  position: absolute;
-  inset: 1px;
-  background: var(--color-surface-raised);
-  clip-path: var(--pixel-corners);
-}
-
-.portrait-thought-text {
-  position: relative;
+.portrait-track-text {
   display: block;
-  font: 400 clamp(.83rem, 1.6vw, 1.02rem)/1.1 var(--font-pixel);
-  white-space: nowrap;
+  font: 400 clamp(.83rem, 1.6vw, 1.02rem)/1.25 var(--font-pixel);
+  overflow-wrap: anywhere;
 }
 
-.portrait-thought-link {
-  width: max(100%, 10rem);
-  min-width: 0;
-  border-radius: 5px;
-}
+.portrait-track-link { display: block; }
 
-.portrait-thought-link:hover .portrait-thought-text strong {
+.portrait-track-link:hover .portrait-track-text strong {
   text-decoration: underline;
   text-underline-offset: .2em;
 }
 
-.portrait-thought-track {
-  display: block;
-  text-align: left;
-}
-
 .portrait-track-source {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  column-gap: .45rem;
-  margin-bottom: .35rem;
+  justify-content: center;
+  gap: .2rem .5rem;
+  margin-bottom: .25rem;
   color: var(--color-ink-muted);
   font-size: .69rem;
 }
@@ -567,51 +536,50 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
 .light .spotify-logo-light { display: block; }
 
-.portrait-thought-track .portrait-thought-text {
-  white-space: normal;
-  overflow-wrap: anywhere;
-  line-height: 1.25;
-}
-
-.portrait-thought-track .portrait-thought-text > span {
+.portrait-track-text > span {
   display: block;
-  margin-top: .18rem;
+  margin-top: .1rem;
   color: var(--color-ink-muted);
 }
 
-.portrait-thought-trail {
+.portrait-sound-waves {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  fill: var(--color-guitar);
-  stroke: var(--color-sidebar);
-  stroke-width: .45;
+  fill: none;
+  stroke: #ffad59;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 1px #241207);
 }
+
+.portrait-sound-waves path { opacity: .85; }
+.portrait-sound-waves path:nth-child(2) { opacity: .7; }
+.portrait-sound-waves path:nth-child(3) { opacity: .55; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .portrait-thought-text {
-    animation: thought-reveal .85s steps(18, end) both;
+  .portrait-track-text {
+    animation: portrait-track-reveal .85s steps(18, end) both;
   }
 
-  .portrait-thought-trail rect {
-    animation: thought-drift 2.8s ease-in-out infinite;
+  .portrait-sound-waves path {
+    animation: portrait-wave-pulse 1.8s ease-in-out infinite;
   }
 
-  .portrait-thought-trail rect:nth-child(2) { animation-delay: .15s; }
-  .portrait-thought-trail rect:nth-child(3) { animation-delay: .3s; }
-  .portrait-thought-trail rect:nth-child(4) { animation-delay: .45s; }
-  .portrait-thought-trail rect:nth-child(5) { animation-delay: .6s; }
+  .portrait-sound-waves path:nth-child(2) { animation-delay: .18s; }
+  .portrait-sound-waves path:nth-child(3) { animation-delay: .36s; }
 }
 
-@keyframes thought-reveal {
+@keyframes portrait-track-reveal {
   from { clip-path: inset(0 100% 0 0); }
   to { clip-path: inset(0); }
 }
 
-@keyframes thought-drift {
-  50% { opacity: .45; }
+@keyframes portrait-wave-pulse {
+  0%, 60%, 100% { opacity: .32; }
+  24% { opacity: 1; }
 }
 
 .portrait-frame {
