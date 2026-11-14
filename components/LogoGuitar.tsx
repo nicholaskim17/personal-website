@@ -2,14 +2,15 @@
 
 import { useCallback, useEffect, useId, useRef, useState, type PointerEvent } from 'react'
 import { Music, Music2 } from 'lucide-react'
-import { createPluck, guitarChords, guitarStrings } from '@/lib/guitarAudio'
+import { createPluck, guitarChords, guitarFrequency, guitarStrings } from '@/lib/guitarAudio'
 
 type GuitarPoint = { x: number; y: number }
 type GuitarNote = { string: number; fret?: number }
 
 const stringLeft = 39
 const stringRight = 61
-const stringTop = 30
+const nutY = 30
+const firstFretY = 35
 const stringBottom = 191
 const stringSpacing = (stringRight - stringLeft) / guitarStrings.length
 
@@ -17,7 +18,7 @@ function stringAt(x: number) {
   return Math.max(-1, Math.min(guitarStrings.length, Math.floor((x - stringLeft) / stringSpacing)))
 }
 
-function getStrummedStrings(previous: GuitarPoint | null, current: GuitarPoint) {
+function getStrummedStrings(previous: GuitarPoint | null, current: GuitarPoint, stringTop: number) {
   const from = previous ?? current
   if (Math.min(from.y, current.y) > stringBottom || Math.max(from.y, current.y) < stringTop) return []
 
@@ -48,6 +49,7 @@ export default function LogoGuitar() {
   const sequence = useRef(0)
   const [sound, setSound] = useState<'off' | 'on' | 'unavailable'>('off')
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
+  const [lessonOpen, setLessonOpen] = useState(false)
   const hintId = useId()
 
   const resumeAudio = useCallback((context: AudioContext, fromGesture = false) => {
@@ -86,11 +88,11 @@ export default function LogoGuitar() {
     }
   }, [resumeAudio])
 
-  function pluck({ string, fret = 0 }: GuitarNote, context: AudioContext, when: number) {
+  function pluck({ string, fret }: GuitarNote, context: AudioContext, when: number) {
     // Fast Refresh may preserve the array used by the previous cache.
     if (!(buffers.current instanceof Map)) buffers.current = new Map()
     const source = context.createBufferSource()
-    const frequency = guitarStrings[string].frequency * 2 ** (fret / 12)
+    const frequency = guitarFrequency(string, fret, lessonOpen ? 1 : 0)
     const buffer = buffers.current.get(frequency) ?? createPluck(context, frequency)
     buffers.current.set(frequency, buffer)
     source.buffer = buffer
@@ -126,13 +128,19 @@ export default function LogoGuitar() {
     const transform = shape.current?.getScreenCTM()
     if (!transform) return
     const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(transform.inverse())
-    const crossed = getStrummedStrings(previousPointer.current, point)
+    const crossed = getStrummedStrings(previousPointer.current, point, lessonOpen ? firstFretY : nutY)
     previousPointer.current = point
     void playStrings(crossed.map(string => ({ string })))
   }
 
   return (
-    <div className="logo-guitar" role="group" aria-label="Playable guitar" aria-describedby={hintId}>
+    <div
+      className="logo-guitar"
+      data-capo={lessonOpen ? 1 : undefined}
+      role="group"
+      aria-label={lessonOpen ? 'Playable guitar, capo on the first fret' : 'Playable guitar'}
+      aria-describedby={hintId}
+    >
       <div
         className="logo-guitar-instrument"
         onPointerEnter={strum}
@@ -150,17 +158,18 @@ export default function LogoGuitar() {
           <rect className="guitar-bridge" x="31" y="189" width="38" height="6" rx="2" />
         </svg>
         <div className="logo-guitar-strings">
-          {guitarStrings.map(({ note }, index) => (
+          {guitarStrings.map(({ note, capoNote }, index) => (
             <button
               key={note}
               type="button"
-              aria-label={`Pluck ${note}`}
+              aria-label={`Pluck ${lessonOpen ? capoNote : note}`}
               onClick={() => void playStrings([{ string: index }], true)}
             >
               <span className="guitar-string" aria-hidden="true" />
             </button>
           ))}
         </div>
+        {lessonOpen && <span className="guitar-capo" aria-hidden="true" />}
         <span className="logo-guitar-notes" aria-hidden="true">
           {notes.map(({ id, string }) => {
             const Icon = string % 2 === 0 ? Music2 : Music
@@ -174,7 +183,10 @@ export default function LogoGuitar() {
           <path d="M36 3C29 15 18 19 4 16m0 0 8-7m-8 7 10 5" />
         </svg>
       </div>
-      <details className="logo-guitar-lesson">
+      <details className="logo-guitar-lesson" onToggle={event => {
+        setLessonOpen(event.currentTarget.open)
+        previousPointer.current = null
+      }}>
         <summary>learn your first song?</summary>
         <div className="logo-guitar-lesson-panel">
           <p>Play Riptide</p>
