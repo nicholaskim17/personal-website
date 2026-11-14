@@ -228,7 +228,7 @@ export default function LogoGuitar() {
         setLessonOpen(event.currentTarget.open)
         previousPointer.current = null
       }}>
-        <summary>learn your first song?</summary>
+        <summary>wanna play your first song?</summary>
         <div className="logo-guitar-lesson-panel">
           <p>Play Riptide</p>
           <p className="logo-guitar-lesson-hint">Hint&#58; {guitarChords.map(({ name }) => name).join(' · ')}</p>
