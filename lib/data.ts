@@ -33,7 +33,7 @@ export const site = {
 export const hero = {
   name: 'Nick Kim',
   portraitSrc: '/images/portrait.jpg',
-  portraitAlt: 'Nick with orange pixel-art headphones',
+  portraitAlt: 'Nick wearing illustrated orange headphones',
 }
 
 export type HighlightTone = 'gold' | 'orange' | 'teal' | 'pink' | 'blue' | 'violet' | 'green'

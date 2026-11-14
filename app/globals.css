@@ -12,7 +12,7 @@
   --color-ink-muted: #b8b5af;
   --color-ink-faint: #93918c;
   --color-border: #302f2d;
-  --color-dot: #2c2b28;
+  --color-content-tint: #191510;
   --color-accent: #d9e5ae;
   --color-guitar: #ffad59;
   --color-wordmark-shadow: #b65324;
@@ -35,7 +35,7 @@
   --color-ink-muted: #494b43;
   --color-ink-faint: #5f6156;
   --color-border: #d4c2a7;
-  --color-dot: #d6c8af;
+  --color-content-tint: #f8eedb;
   --color-accent: #435425;
   --color-guitar: #aa4b10;
   --color-wordmark-shadow: #d87938;
@@ -277,6 +277,9 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-strings button:nth-child(-n+2) .guitar-string { width: .95px; }
 
+.logo-guitar-strings button:disabled { pointer-events: none; }
+.logo-guitar-strings button:disabled .guitar-string { opacity: .3; }
+
 .logo-guitar-strings button:is(:hover, :focus-visible) .guitar-string {
   background: #fff8e6;
   box-shadow: 0 0 3px #f1ddaa80;
@@ -371,12 +374,17 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .logo-guitar-chords button {
   width: 1.8rem;
   border-radius: .2rem;
+  color: var(--color-ink);
   pointer-events: auto;
 }
 
 .logo-guitar-chords button:is(:hover, :focus-visible, :active) {
-  color: var(--color-ink);
-  background: color-mix(in srgb, var(--color-guitar) 14%, transparent);
+  background: color-mix(in srgb, var(--color-ink) 10%, transparent);
+}
+
+.logo-guitar-chords button[aria-pressed="true"] {
+  color: var(--color-guitar);
+  background: color-mix(in srgb, var(--color-guitar) 16%, transparent);
 }
 
 .logo-guitar-notes {
@@ -482,8 +490,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
-  background-image: radial-gradient(circle, var(--color-dot) .7px, transparent 1px);
-  background-size: 17px 17px;
+  background: linear-gradient(155deg, var(--color-content-tint), var(--color-surface) 36rem);
 }
 
 .site-content main, .site-footer {
@@ -497,7 +504,6 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .folio-section {
   margin-bottom: clamp(1.25rem, 2.7vw, 2.2rem);
   padding: clamp(1.05rem, 1.8vw, 1.9rem);
-  background: var(--color-surface);
 }
 
 .section-heading { margin-bottom: 1.25rem; }
@@ -719,7 +725,6 @@ a.org-button:is(:hover, :focus-visible) {
   justify-content: space-between;
   gap: .9rem 1.2rem;
   padding: 1rem 1.1rem 1.7rem;
-  background: var(--color-surface);
   color: var(--color-ink-faint);
   font-size: .79rem;
   border-top: 1px solid var(--color-border);
@@ -777,8 +782,8 @@ a.org-button:is(:hover, :focus-visible) {
 .portrait-sound-waves {
   fill: none;
   stroke: #ffbd8c;
-  stroke-width: 2.25px;
-  stroke-linecap: square;
+  stroke-width: 1.75px;
+  stroke-linecap: round;
   filter: drop-shadow(0 1px 1px #34201380);
 }
 

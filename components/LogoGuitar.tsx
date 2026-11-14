@@ -6,6 +6,7 @@ import { createPluck, guitarChords, guitarFrequency, guitarStrings } from '@/lib
 
 type GuitarPoint = { x: number; y: number }
 type GuitarNote = { string: number; fret?: number }
+type GuitarChord = (typeof guitarChords)[number]
 
 const viewBoxTop = -26
 const viewBoxHeight = 259
@@ -59,6 +60,7 @@ export default function LogoGuitar() {
   const [sound, setSound] = useState<'off' | 'on' | 'unavailable'>('off')
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
   const [lessonOpen, setLessonOpen] = useState(false)
+  const [selectedChord, setSelectedChord] = useState<GuitarChord | null>(null)
   const hintId = useId()
   const spruceId = `${hintId}-spruce`
 
@@ -111,10 +113,16 @@ export default function LogoGuitar() {
     source.start(when)
   }
 
-  async function playStrings(strings: GuitarNote[], canEnableSound = false) {
-    if (!strings.length || document.hidden) return
-    const newNotes = strings.map(({ string }) => ({ id: ++sequence.current, string }))
-    setNotes(previous => [...previous, ...newNotes].slice(-8))
+  async function playStrings(stringIndexes: number[], canEnableSound = false) {
+    const notesToPlay = stringIndexes.flatMap(string => {
+      const fret = selectedChord?.frets[string]
+      return fret === null ? [] : [{ string, fret }]
+    })
+    if (document.hidden || (!notesToPlay.length && !canEnableSound)) return
+    if (notesToPlay.length) {
+      const newNotes = notesToPlay.map(({ string }) => ({ id: ++sequence.current, string }))
+      setNotes(previous => [...previous, ...newNotes].slice(-8))
+    }
 
     try {
       const visit = tabVisit.current
@@ -127,7 +135,7 @@ export default function LogoGuitar() {
       if (audio.current !== context || context.state !== 'running' || visit !== tabVisit.current || document.hidden) return
       setSound('on')
       const start = context.currentTime + .01
-      strings.forEach((note, offset) => pluck(note, context, start + offset * .012))
+      notesToPlay.forEach((note, offset) => pluck(note, context, start + offset * .012))
     } catch {
       setSound('unavailable')
     }
@@ -140,7 +148,7 @@ export default function LogoGuitar() {
     const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(transform.inverse())
     const crossed = getStrummedStrings(previousPointer.current, point, lessonOpen ? firstFretY : nutY)
     previousPointer.current = point
-    void playStrings(crossed.map(string => ({ string })))
+    void playStrings(crossed)
   }
 
   return (
@@ -199,16 +207,21 @@ export default function LogoGuitar() {
           <path d={`M38.5 ${stringBottom}h23`} stroke="#ebe0c9" strokeWidth="1.5" />
         </svg>
         <div className="logo-guitar-strings">
-          {guitarStrings.map(({ note, capoNote }, index) => (
-            <button
-              key={note}
-              type="button"
-              aria-label={`Pluck ${lessonOpen ? capoNote : note}`}
-              onClick={() => void playStrings([{ string: index }], true)}
-            >
-              <span className="guitar-string" aria-hidden="true" />
-            </button>
-          ))}
+          {guitarStrings.map(({ note, capoNote }, index) => {
+            const muted = selectedChord?.frets[index] === null
+            const stringLabel = lessonOpen ? capoNote : note
+            return (
+              <button
+                key={note}
+                type="button"
+                disabled={muted}
+                aria-label={muted ? `${note} string muted` : selectedChord ? `Pluck ${note} string in ${selectedChord.name}` : `Pluck ${stringLabel}`}
+                onClick={() => void playStrings([index], true)}
+              >
+                <span className="guitar-string" aria-hidden="true" />
+              </button>
+            )
+          })}
         </div>
         {lessonOpen && <span className="guitar-capo" aria-hidden="true" />}
         <span className="logo-guitar-notes" aria-hidden="true">
@@ -225,7 +238,9 @@ export default function LogoGuitar() {
         </svg>
       </div>
       <details className="logo-guitar-lesson" onToggle={event => {
-        setLessonOpen(event.currentTarget.open)
+        const open = event.currentTarget.open
+        setLessonOpen(open)
+        if (!open) setSelectedChord(null)
         previousPointer.current = null
       }}>
         <summary>wanna play your first song?</summary>
@@ -234,14 +249,19 @@ export default function LogoGuitar() {
           <p className="logo-guitar-lesson-hint">Hint&#58; {guitarChords.map(({ name }) => name).join(' · ')}</p>
         </div>
         <div className="logo-guitar-chords" role="group" aria-label="Riptide chords">
-          {guitarChords.map(({ name, frets }) => (
+          {guitarChords.map(chord => (
             <button
-              key={name}
+              key={chord.name}
               type="button"
-              aria-label={`Play ${name} chord`}
-              onClick={() => void playStrings(frets.flatMap((fret, string) => fret === null ? [] : [{ string, fret }]), true)}
+              aria-label={`Select ${chord.name} chord`}
+              aria-pressed={selectedChord === chord}
+              onClick={() => {
+                setSelectedChord(previous => previous === chord ? null : chord)
+                previousPointer.current = null
+                void playStrings([], true)
+              }}
             >
-              {name}
+              {chord.name}
             </button>
           ))}
         </div>

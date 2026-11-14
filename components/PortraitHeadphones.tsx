@@ -1,9 +1,25 @@
-const soundWavePath = 'M 8 -5 H 9.5 V -3 H 11 V -1.35 H 12.5 V 1.35 H 11 V 3 H 9.5 V 5 H 8'
-const earcupTransforms = ['translate(33 44) scale(-1 1)', 'translate(69 44)']
+import { useId } from 'react'
+
+const soundWavePath = 'M8 -4.6 Q13 0 8 4.6'
+const earcupTransforms = ['translate(34.5 43.5) scale(-1 1)', 'translate(67.5 43.5)']
 
 export default function PortraitHeadphones() {
+  const cushionId = useId()
+  const bandId = useId()
+
   return (
     <svg className="portrait-accessories" viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <linearGradient id={bandId} x1="0" x2="0" y1="0" y2="1">
+          <stop stopColor="#a8a5a0" />
+          <stop offset="1" stopColor="#494643" />
+        </linearGradient>
+        <radialGradient id={cushionId} cx=".38" cy=".34" r=".74">
+          <stop stopColor="#e89750" />
+          <stop offset=".65" stopColor="#ce783b" />
+          <stop offset="1" stopColor="#944820" />
+        </radialGradient>
+      </defs>
       <g className="portrait-sound-waves">
         {earcupTransforms.map(transform => (
           <g key={transform} transform={transform}>
@@ -11,16 +27,15 @@ export default function PortraitHeadphones() {
           </g>
         ))}
       </g>
-      <g transform="scale(1.5625)" shapeRendering="crispEdges">
-        <path fill="#211a18" d="M41 31H42V35H41V38H40V41H39V44H38V47H37V50H36V53H35V56H34V60H33V64H32V59H33V55H34V52H35V49H36V46H37V43H38V40H39V37H40V34H41Z" />
-        <path fill="#1b1a1c" d="M29 13H37V14H39V15H41V17H42V19H43V21H44V26H42V22H41V20H40V18H39V17H38V16H36V15H30V16H28V17H26V18H25V20H24V22H23V26H21V21H22V19H23V17H24V16H25V15H27V14H29Z" />
-        <path fill="#b0a9a5" d="M29 14H37V15H39V16H40V17H41V19H42V21H43V23H42V21H41V19H40V18H39V17H38V16H36V15H30V16H28V17H26V18H25V20H24V22H23V23H22V21H23V19H24V17H25V16H27V15H29Z" />
-        <path fill="#49454a" d="M22 22H23V27H22Z M42 22H43V27H42Z" />
-        <path fill="#281d19" d="M22 24H25V25H26V30H25V32H22V31H21V30H20V26H21V25H22Z M41 24H44V25H45V26H46V30H45V31H44V32H41V31H40V30H39V26H40V25H41Z" />
-        <path fill="#b74911" d="M22 25H24V26H25V30H24V31H22V30H21V27H22Z M41 25H44V26H45V30H44V31H41V30H40V27H41Z" />
-        <path fill="#f78420" d="M22 25H24V26H25V29H24V30H22V29H21V27H22Z M41 25H44V26H45V28H44V30H41V29H40V27H41Z" />
-        <path fill="#ffbb61" d="M22 26H24V28H23V29H22Z M41 26H43V28H42V29H41Z" />
+      <g fill="none" strokeLinecap="round">
+        <path d="M66 47.3C64 52 66 55 62 62C58 70 54 81 51.9 100" stroke="#272320" strokeWidth=".53" />
+        <path d="M35.5 42V36C36 31 41 23 47 22.3C55 21.5 60.5 22.7 64.7 31C66.9 35.2 67 38 67 42" stroke="#292625" strokeWidth="1.65" />
+        <path d="M35.5 36C36 31 41 23 47 22.3C55 21.5 60.5 22.7 64.7 31C66.9 35.2 67 38 67 42" stroke={`url(#${bandId})`} strokeWidth=".85" />
       </g>
+      <ellipse cx="35.4" cy="43.5" rx="1.52" ry="3.7" fill="#34302e" transform="rotate(-8 35.4 43.5)" />
+      <ellipse cx="67.5" cy="43.5" rx="1.52" ry="3.7" fill="#34302e" transform="rotate(8 67.5 43.5)" />
+      <ellipse cx="37.15" cy="43.8" rx="1.95" ry="4.25" fill={`url(#${cushionId})`} stroke="#844823" strokeWidth=".45" transform="rotate(-7 37.15 43.8)" />
+      <ellipse cx="65.75" cy="43.8" rx="1.95" ry="4.25" fill={`url(#${cushionId})`} stroke="#844823" strokeWidth=".45" transform="rotate(7 65.75 43.8)" />
     </svg>
   )
 }
