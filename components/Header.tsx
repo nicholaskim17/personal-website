@@ -10,15 +10,20 @@ import XBrandIcon from './XBrandIcon'
 
 const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
 
-export default function Header() {
+export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
-  const activePath = pathname === '/' ? '/about' : pathname
+  const portraitSizes = landing ? "(max-width: 479px) 180px, 288px" : "(min-width: 800px) 256px, 1px"
+  const name = <>{hero.name.toLowerCase()}<span>.</span></>
 
   return (
-    <header className="site-sidebar">
+    <header className={landing ? "site-sidebar landing-header" : "site-sidebar"}>
       <div className="sidebar-tools"><ThemeToggle /></div>
       <div className="sidebar-identity">
-        <Link href="/about" className="sidebar-name">{hero.name.toLowerCase()}<span>.</span></Link>
+        {landing ? (
+          <h1 className="sidebar-name">{name}</h1>
+        ) : (
+          <Link href="/" className="sidebar-name">{name}<span className="sr-only"> Home</span></Link>
+        )}
         <p className="sidebar-caption">engineering @ waterloo</p>
         <div className="sidebar-socials" aria-label="Social links">
           <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>
@@ -31,7 +36,7 @@ export default function Header() {
           <ul>
             {navLinks.map(({ href, label }) => (
               <li key={href}>
-                <Link href={href} aria-current={href === activePath ? 'page' : undefined}>{label}</Link>
+                <Link href={href} aria-current={href === pathname ? 'page' : undefined}>{label}</Link>
               </li>
             ))}
           </ul>
@@ -39,8 +44,8 @@ export default function Header() {
       </div>
       <figure className="sidebar-portrait">
         <div className="portrait-frame">
-          <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes="(min-width: 800px) 256px, 1px" priority className="portrait-photo" />
-          <Image src={hero.hoverPortraitSrc} alt="" fill sizes="(min-width: 800px) 256px, 1px" className="portrait-alt" />
+          <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority className="portrait-photo" />
+          <Image src={hero.hoverPortraitSrc} alt="" fill sizes={portraitSizes} className="portrait-alt" />
         </div>
       </figure>
     </header>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Nick Kim\'s Portfolio',
   description: site.description,
   alternates: {
-    canonical: '/about',
+    canonical: '/',
   },
   icons: {
     icon: [{ url: '/images/silversurfer.webp', type: 'image/webp', sizes: '640x640' }],

@@ -4,6 +4,10 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 const movedSections = new Map([
+  ['#about', '/about'],
+  ['#experience', '/about#experience'],
+  ['#work', '/about#work'],
+  ['#research', '/about#research'],
   ['#projects', '/work'],
   ['#hobbies', '/misc'],
   ['#contact', '/contact'],
