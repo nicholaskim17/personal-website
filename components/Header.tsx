@@ -11,7 +11,7 @@ import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
 
 const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
-const soundWavePath = 'M 8 -6 Q 13 0 8 6'
+const soundWavePath = 'M 8 -5 H 9.5 V -3 H 11 V -1.35 H 12.5 V 1.35 H 11 V 3 H 9.5 V 5 H 8'
 const earcupTransforms = ['translate(34 43) scale(-1 1)', 'translate(68 43)']
 
 export default function Header({ landing = false }: { landing?: boolean }) {
