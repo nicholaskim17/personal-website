@@ -17,37 +17,37 @@ const earcupTransforms = ['translate(34 43) scale(-1 1)', 'translate(68 43)']
 export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
   const portraitSizes = landing ? "(max-width: 479px) 180px, 288px" : "(min-width: 800px) 256px, 1px"
+  const wordmark = (
+    <>
+      <span className="name-bench-press" aria-hidden="true">
+        <span className="bench-press-floor" />
+        <span className="bench-press-rack" />
+        <span className="bench-press-bench" />
+        <span className="bench-press-lifter" />
+        <span className="bench-press-arm" />
+        <span className="bench-press-plate" />
+      </span>
+      {hero.name}
+    </>
+  )
 
   return (
     <header className={landing ? "site-sidebar landing-header" : "site-sidebar"}>
       <div className="sidebar-tools"><ThemeToggle /></div>
       <div className="sidebar-identity">
-        <div className="sidebar-brand">
-          <div className="sidebar-brand-name">
-            {landing ? (
-              <h1 className="sidebar-name">
-                <span className="name-bench-press" aria-hidden="true">
-                  <span className="bench-press-floor" />
-                  <span className="bench-press-rack" />
-                  <span className="bench-press-bench" />
-                  <span className="bench-press-lifter" />
-                  <span className="bench-press-arm" />
-                  <span className="bench-press-plate" />
-                </span>
-                {hero.name}
-              </h1>
-            ) : (
-              <Link href="/" className="sidebar-name" aria-label={`${hero.name}, home`}>{hero.name}</Link>
-            )}
-            <div className="sidebar-socials" aria-label="Social links">
-              <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>
-              {socialLinks.map(({ label, href, icon }) => {
-                const Icon = iconFor[icon]
-                return <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}><Icon size={17} aria-hidden="true" /></a>
-              })}
-            </div>
+        <div className="sidebar-brand-name">
+          {landing ? (
+            <h1 className="sidebar-name">{wordmark}</h1>
+          ) : (
+            <Link href="/" className="sidebar-name" aria-label={`${hero.name}, home`}>{wordmark}</Link>
+          )}
+          <div className="sidebar-socials" aria-label="Social links">
+            <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>
+            {socialLinks.map(({ label, href, icon }) => {
+              const Icon = iconFor[icon]
+              return <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}><Icon size={17} aria-hidden="true" /></a>
+            })}
           </div>
-          {!landing && <LogoGuitar />}
         </div>
         <nav aria-label="Primary navigation" className="sidebar-nav">
           <ul>
@@ -59,7 +59,7 @@ export default function Header({ landing = false }: { landing?: boolean }) {
           </ul>
         </nav>
       </div>
-      {landing && <LogoGuitar />}
+      <LogoGuitar />
       <figure className="sidebar-portrait">
         <PortraitTrack />
         <div className="portrait-frame">
