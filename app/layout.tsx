@@ -3,7 +3,6 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import ThemeProvider from '@/components/ThemeProvider'
 import { site } from '@/lib/data'
-import '@fontsource/instrument-serif/latin-400-italic.css'
 import '@fontsource-variable/bitcount-prop-single/full.css'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"

@@ -203,7 +203,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font: italic 1.15rem/.95 "Instrument Serif", Georgia, serif;
+  font: 400 .82rem/1.05 var(--font-pixel);
   white-space: nowrap;
   transform: rotate(-9deg);
   pointer-events: none;
@@ -672,7 +672,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 .landing-header .logo-guitar-callout {
-  font-size: clamp(1.1rem, 2.35vw, 2rem);
+  font-size: clamp(.84rem, 1.5vw, 1.25rem);
 }
 
 .landing-header .sidebar-brand-name {
