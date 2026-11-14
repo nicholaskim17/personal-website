@@ -542,7 +542,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: clamp(1.6rem, 5svh, 4rem);
-  padding: clamp(3.3rem, 13svh, 9rem) 1rem .5rem;
+  padding: clamp(3.3rem, 11.5svh, 8rem) 1rem .5rem;
   border: 0;
   overflow: visible;
   text-align: center;
@@ -567,7 +567,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
 .landing-header .logo-guitar {
   width: clamp(68px, 7.5vw, 98px);
-  margin-inline-start: clamp(-1.55rem, -1.65vw, -.8rem);
+  margin-inline-start: clamp(-2.2rem, -2.55vw, -.95rem);
 }
 
 .landing-header .logo-guitar-hint {
