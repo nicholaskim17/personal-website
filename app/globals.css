@@ -439,7 +439,9 @@ a.sidebar-name:is(:hover, :focus-visible) {
   display: flex;
   align-items: center;
   padding: .5rem var(--nav-inline-padding);
-  font: 460 .96rem/1.2 var(--font-pixel);
+  font: 590 .96rem/1.2 var(--font-pixel);
+  font-variation-settings: "ELSH" 50;
+  text-transform: uppercase;
   color: var(--color-ink-muted);
 }
 

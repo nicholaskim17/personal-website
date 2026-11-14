@@ -96,7 +96,6 @@ export const work: WorkEntry[] = [
     logo: '/images/work/hamming.png',
     highlight: 'orange',
     title: 'Software Engineer',
-    dates: 'Nov 2026 — Present',
   },
   {
     organization: 'WAT.ai',
@@ -105,7 +104,6 @@ export const work: WorkEntry[] = [
     logo: '/images/work/watai.png',
     highlight: 'teal',
     title: 'Machine Learning Engineer',
-    dates: 'Sept 2026 — Present',
     description:
       'Adaptive-Compute Inference for Real-Time Text to Speech',
     tags: ['Python', 'PyTorch', 'dots.tts', ],
