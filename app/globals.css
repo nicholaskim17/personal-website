@@ -228,11 +228,18 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-lesson {
   position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  font: 400 .78rem/1.15 var(--font-pixel);
+}
+
+.logo-guitar-lesson :is(summary, .logo-guitar-lesson-panel) {
+  position: absolute;
   top: 100%;
   right: -.25rem;
-  z-index: 2;
   width: max-content;
-  font: 400 .78rem/1.15 var(--font-pixel);
+  pointer-events: auto;
 }
 
 .logo-guitar-lesson summary {
@@ -255,8 +262,8 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .logo-guitar-lesson-panel {
   display: grid;
   gap: .22rem;
-  margin-top: .28rem;
-  padding: .44rem .45rem .22rem;
+  margin-top: 1.6rem;
+  padding: .38rem .45rem;
   border: 1px solid var(--color-border);
   background: var(--color-surface-raised);
 }
@@ -264,15 +271,17 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .logo-guitar-lesson-hint { color: var(--color-ink-muted); }
 
 .logo-guitar-chords {
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  inset: 54% auto 0 104%;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
   font: 400 clamp(.85rem, 1.45vw, 1.12rem)/1 var(--font-pixel);
 }
 
 .logo-guitar-chords button {
   width: 1.8rem;
-  height: 1.7rem;
   border-radius: .2rem;
+  pointer-events: auto;
 }
 
 .logo-guitar-chords button:is(:hover, :focus-visible, :active) {
@@ -760,7 +769,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   font-size: clamp(.84rem, 1.5vw, 1.25rem);
 }
 
-.landing-header .logo-guitar-lesson {
+.landing-header .logo-guitar-lesson :is(summary, .logo-guitar-lesson-panel) {
   right: auto;
   left: 50%;
   transform: translateX(calc(-50% + .55rem));

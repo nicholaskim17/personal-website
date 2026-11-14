@@ -179,18 +179,18 @@ export default function LogoGuitar() {
         <div className="logo-guitar-lesson-panel">
           <p>Play Riptide</p>
           <p className="logo-guitar-lesson-hint">Hint&#58; ({guitarChords.map(({ name }) => name).join(' · ')}) ×2</p>
-          <div className="logo-guitar-chords" role="group" aria-label="Riptide chords">
-            {guitarChords.map(({ name, frets }) => (
-              <button
-                key={name}
-                type="button"
-                aria-label={`Play ${name} chord`}
-                onClick={() => void playStrings(frets.flatMap((fret, string) => fret === null ? [] : [{ string, fret }]), true)}
-              >
-                {name}
-              </button>
-            ))}
-          </div>
+        </div>
+        <div className="logo-guitar-chords" role="group" aria-label="Riptide chords">
+          {guitarChords.map(({ name, frets }) => (
+            <button
+              key={name}
+              type="button"
+              aria-label={`Play ${name} chord`}
+              onClick={() => void playStrings(frets.flatMap((fret, string) => fret === null ? [] : [{ string, fret }]), true)}
+            >
+              {name}
+            </button>
+          ))}
         </div>
       </details>
       <span id={hintId} className="sr-only" aria-live="polite">
