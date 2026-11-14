@@ -293,7 +293,7 @@ export const research: ResearchEntry[] = [
       'Compares 15 inference-time safety harnesses across nine open-weight language models for CBRNE risks, finding that clear boundary clauses improve safety discrimination.',
     href: 'https://openreview.net/forum?id=H6U4KapPog',
     highlight: {
-      label: 'Accepted ×2 at',
+      label: 'Accepted at two workshops at',
       venue: { name: 'NeurIPS 2026', href: 'https://neurips.cc/', logo: '/images/work/neurips.png' },
     },
   },

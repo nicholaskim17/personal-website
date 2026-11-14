@@ -9,20 +9,27 @@ import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
 
 const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
+const [firstName, ...surname] = hero.name.split(' ')
 
 export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
   const portraitSizes = landing ? "(max-width: 479px) 180px, 288px" : "(min-width: 800px) 256px, 1px"
-  const name = <>{hero.name.toLowerCase()}<span>.</span></>
+  const name = (
+    <span className="name-mark" aria-hidden="true">
+      <span>{firstName}</span>{' '}
+      <span className="name-mark-surname">{surname.join(' ')}</span>
+      <span className="name-mark-diamond" />
+    </span>
+  )
 
   return (
     <header className={landing ? "site-sidebar landing-header" : "site-sidebar"}>
       <div className="sidebar-tools"><ThemeToggle /></div>
       <div className="sidebar-identity">
         {landing ? (
-          <h1 className="sidebar-name">{name}</h1>
+          <h1 className="sidebar-name"><span className="sr-only">{hero.name}</span>{name}</h1>
         ) : (
-          <Link href="/" className="sidebar-name">{name}<span className="sr-only"> Home</span></Link>
+          <Link href="/" className="sidebar-name" aria-label={`${hero.name}, home`}>{name}</Link>
         )}
         <p className="sidebar-caption">engineering @ waterloo</p>
         <div className="sidebar-socials" aria-label="Social links">
