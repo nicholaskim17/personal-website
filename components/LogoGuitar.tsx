@@ -168,24 +168,31 @@ export default function LogoGuitar() {
           })}
         </span>
       </div>
-      <div className="logo-guitar-chords" role="group" aria-label="Guitar chords">
-        {guitarChords.map(({ name, frets }) => (
-          <button
-            key={name}
-            type="button"
-            aria-label={`Play ${name} major chord`}
-            onClick={() => void playStrings(frets.flatMap((fret, string) => fret === null ? [] : [{ string, fret }]), true)}
-          >
-            {name}
-          </button>
-        ))}
-      </div>
       <div className="logo-guitar-callout" aria-hidden="true">
         <span>strum :)</span>
         <svg viewBox="0 0 39 24" fill="none">
           <path d="M3 3C10 15 21 19 35 16m0 0-8-7m8 7-10 5" />
         </svg>
       </div>
+      <details className="logo-guitar-lesson">
+        <summary>learn your first song?</summary>
+        <div className="logo-guitar-lesson-panel">
+          <p>Play Riptide</p>
+          <p className="logo-guitar-lesson-hint">Hint&#58; (Am · C · G) ×2</p>
+          <div className="logo-guitar-chords" role="group" aria-label="Riptide chords">
+            {guitarChords.map(({ name, frets }) => (
+              <button
+                key={name}
+                type="button"
+                aria-label={`Play ${name} chord`}
+                onClick={() => void playStrings(frets.flatMap((fret, string) => fret === null ? [] : [{ string, fret }]), true)}
+              >
+                {name}
+              </button>
+            ))}
+          </div>
+        </div>
+      </details>
       <span id={hintId} className="sr-only" aria-live="polite">
         {sound === 'on'
           ? 'Move across the strings or tap to play.'

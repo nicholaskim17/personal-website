@@ -225,18 +225,49 @@ a.sidebar-name:is(:hover, :focus-visible) {
   stroke-linejoin: round;
 }
 
-.logo-guitar-chords {
-  position: absolute;
-  top: 10%;
-  left: 100%;
+.logo-guitar-lesson {
+  position: relative;
+  left: 50%;
   z-index: 1;
+  width: max-content;
+  transform: translateX(-50%);
+  font: 400 .78rem/1.15 var(--font-pixel);
+}
+
+.logo-guitar-lesson summary {
+  list-style: none;
+  cursor: pointer;
+  padding-block: .2rem;
+  color: var(--color-ink-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: .2em;
+}
+
+.logo-guitar-lesson summary::-webkit-details-marker { display: none; }
+
+.logo-guitar-lesson summary:is(:hover, :focus-visible) {
+  color: var(--color-guitar);
+  text-decoration-color: currentColor;
+}
+
+.logo-guitar-lesson-panel {
   display: grid;
+  gap: .22rem;
+  padding-block-start: .28rem;
+}
+
+.logo-guitar-lesson-hint { color: var(--color-ink-muted); }
+
+.logo-guitar-chords {
+  display: flex;
+  justify-content: center;
   font: 400 clamp(.85rem, 1.45vw, 1.12rem)/1 var(--font-pixel);
 }
 
 .logo-guitar-chords button {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.7rem;
   border-radius: .2rem;
 }
 
