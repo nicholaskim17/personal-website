@@ -177,19 +177,7 @@ body { font-size: 1rem; }
 
 .section-rule span { font-size: 1.03rem; line-height: 1; }
 
-.intro-line {
-  max-width: 49ch;
-  margin-bottom: 1.1rem;
-  color: var(--color-ink);
-  font-size: clamp(1.04rem, 1.45vw, 1.275rem);
-  font-weight: 460;
-  line-height: 1.45;
-  letter-spacing: -.018em;
-}
-
-.about-copy { display: grid; gap: .72rem; }
-
-.about-copy p, .contact-invitation, .work-description, .research-paper > p, .project-card > p {
+.contact-invitation, .project-card > p {
   max-width: 71ch;
   color: var(--color-ink-muted);
   line-height: 1.62;
@@ -237,85 +225,67 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   text-underline-offset: .16em;
 }
 
-.about-interests { margin-top: 1.2rem; }
-
-.about-interests h2 { font-size: .94rem; font-weight: 600; color: var(--color-ink); }
-
-.about-interests ul { display: flex; flex-wrap: wrap; gap: .3rem 1.15rem; margin-top: .37rem; color: var(--color-ink-muted); font-size: .9rem; }
-
-.about-interests li::before { content: '↳'; color: var(--color-accent); margin-right: .42rem; }
-
-.about-actions, .project-links { display: flex; flex-wrap: wrap; gap: .55rem 1.25rem; margin-top: 1.1rem; font-size: .9rem; }
-
-.work-timeline { position: relative; }
-
-.work-timeline::before {
-  content: '';
-  position: absolute;
-  left: 19px;
-  inset-block: 18px 2.1rem;
-  border-left: 1px solid var(--color-border);
+.experience-group {
+  margin-top: 1.55rem;
 }
 
-.work-timeline li { position: relative; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: .88rem; }
-
-.work-timeline li + li { margin-top: 1.18rem; }
-
-.work-mark {
-  position: relative;
-  width: 38px;
-  height: 38px;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background: #faf9f6;
+.experience-group h2 {
+  margin-bottom: .55rem;
+  font-size: 1.08rem;
+  font-weight: 620;
+  letter-spacing: -.02em;
 }
 
-.work-mark img { object-fit: contain; padding: 4px; }
+.experience-list {
+  display: grid;
+  gap: .7rem;
+  padding-inline-start: 1.2rem;
+  list-style: disc;
+  color: var(--color-ink-muted);
+  line-height: 1.6;
+}
 
-.work-entry-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem 1rem; justify-content: space-between; }
+.experience-list li::marker {
+  color: var(--color-ink-faint);
+  font-size: .84em;
+}
 
-.work-entry h3, .research-paper h3, .project-title h3, .gallery-title { font-weight: 620; letter-spacing: -.022em; }
+.experience-item-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .15rem 1rem;
+}
 
-.work-entry-connector { font-weight: 400; color: var(--color-ink-muted); }
+.experience-detail {
+  max-width: 71ch;
+  margin-top: .12rem;
+  font-size: .92rem;
+}
 
 .work-date { flex-shrink: 0; color: var(--color-ink-faint); line-height: 1.4; }
 
-.work-description { margin-top: .22rem; font-size: .94rem; }
-
-.work-tags, .project-card > .work-tags, .research-paper > .work-tags {
-  margin-top: .25rem;
+.work-tags, .project-card > .work-tags {
+  margin-top: .2rem;
   color: var(--color-ink-faint);
   font-size: .78rem;
   line-height: 1.55;
 }
 
-.research-list { display: grid; gap: 1rem; }
-
-.research-paper { border: 1px solid var(--color-border); padding: clamp(1rem, 3vw, 1.6rem); background: var(--color-surface-raised); }
-
-.research-meta { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: .35rem .7rem; }
-
-.research-venue {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: .35rem;
-  padding: .3rem .58rem;
-  background: var(--color-accent-soft);
-  color: var(--color-ink);
-  font-size: .77rem;
+.research-entry .org-highlight img {
+  padding: 1px;
+  background: #faf9f6;
+  border-radius: 2px;
 }
 
-.research-venue img { background: #faf9f6; border-radius: 2px; padding: 2px; }
+.research-entry strong { color: var(--color-ink); }
 
-.research-paper h3 { margin-top: .6rem; font-size: clamp(1rem, 2vw, 1.3rem); }
+.author-note { margin-left: .6rem; color: var(--color-accent); white-space: nowrap; }
 
-.research-paper > p { margin-top: .45rem; font-size: .94rem; }
+.project-title h3, .gallery-title { font-weight: 620; letter-spacing: -.022em; }
 
-.paper-authors strong { color: var(--color-ink); }
-
-.author-note { margin-left: .6rem; font-size: .75rem; color: var(--color-accent); white-space: nowrap; }
+.project-links { display: flex; flex-wrap: wrap; }
 
 .project-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.6rem 1.35rem; }
 

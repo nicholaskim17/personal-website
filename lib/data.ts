@@ -34,10 +34,6 @@ export const site = {
 export const hero = {
   greeting: "Hi, I'm",
   name: 'Nick Kim',
-  tagline:
-    'Building software, exploring AI, and learning a little more every day.',
-  primaryCta: { label: 'View My Work', href: '/work' },
-  secondaryCta: { label: "Let's Talk", href: '/contact' },
   portraitSrc: '/images/portrait.jpg',
   portraitAlt: 'Portrait photo of Nick',
   hoverPortraitSrc: '/images/silversurfer.webp',
@@ -51,21 +47,6 @@ export const about = {
     href: 'https://uwaterloo.ca/engineering/',
     logo: '/images/work/waterloo-seal.svg',
     highlight: 'gold',
-  },
-  watAI: {
-    name: 'WAT.ai',
-    href: 'https://watai.ca/',
-    logo: '/images/work/watai.png',
-    highlight: 'gold',
-  },
-  paragraphs: [
-    "Doctor, Lawyer, Engineer, Investment Banker... I couldn't find a passion. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
-    "I study Engineering at the University of Waterloo and work as a Machine Learning Engineer at WAT.ai. Outside of tech: gym, guitar, golf, hockey.",
-  ],
-  hobbiesCta: { label: 'See my hobbies', href: '/misc' },
-  exploring: {
-    heading: "What I'm exploring",
-    items: ['AI Safety', 'AI agents and automation', 'Building useful full-stack products'],
   },
   gallery: [
     { src: '/images/gallery/golf.jpeg', alt: 'Lining up a putt on the green with a friend' },
@@ -101,7 +82,7 @@ export interface WorkEntry {
   organization: string
   organizationHref?: string
   logo: string
-  logoAlt: string
+  current?: boolean
   highlight: HighlightTone
   title: string
   dates: string
@@ -112,10 +93,10 @@ export interface WorkEntry {
 export const work: WorkEntry[] = [
   {
     organization: 'WAT.ai',
+    current: true,
     organizationHref: 'https://watai.ca/',
     logo: '/images/work/watai.png',
     highlight: 'gold',
-    logoAlt: 'WAT.ai logo',
     title: 'Machine Learning Engineer',
     dates: 'Sept 2026 — Present',
     description:
@@ -127,7 +108,6 @@ export const work: WorkEntry[] = [
     organizationHref: 'https://applisolutions.com',
     logo: '/images/work/appli-ai.png',
     highlight: 'blue',
-    logoAlt: 'Appli AI logo',
     title: 'Software Engineering Intern',
     dates: 'June 2026 — Sept 2026',
     description:
@@ -139,7 +119,6 @@ export const work: WorkEntry[] = [
     organizationHref: 'https://algoverseairesearch.org',
     logo: '/images/work/algoverse.jpeg',
     highlight: 'violet',
-    logoAlt: 'Algoverse logo',
     title: 'Machine Learning Research Intern',
     dates: 'June 2026 — Sept 2026',
     description:
@@ -151,7 +130,6 @@ export const work: WorkEntry[] = [
     organizationHref: 'https://one2onetutoring.vercel.app/',
     logo: '/images/work/one2one.png',
     highlight: 'green',
-    logoAlt: 'One2One Tutoring logo',
     title: 'Founder & Lead Tutor',
     dates: 'Sept 2024 — June 2026',
     description:

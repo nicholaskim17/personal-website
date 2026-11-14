@@ -1,15 +1,14 @@
-import About from './About'
-import Research from './Research'
+import { hero } from '@/lib/data'
+import SectionHeading from './SectionHeading'
 import Work from './Work'
 
 export default function AboutPage() {
   return (
-    <>
-      <About />
+    <section id="about" className="folio-section">
+      <SectionHeading level={1}>{`${hero.greeting} ${hero.name}.`}</SectionHeading>
       <div id="experience">
         <Work />
-        <Research />
       </div>
-    </>
+    </section>
   )
 }

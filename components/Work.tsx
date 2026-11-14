@@ -1,36 +1,65 @@
 import Image from 'next/image'
-import { work } from '@/lib/data'
-import SectionHeading from './SectionHeading'
+import { about, work, type WorkEntry } from '@/lib/data'
+import Research from './Research'
+
+const currentRoles = work.filter(entry => entry.current)
+const previousRoles = work.filter(entry => !entry.current)
+
+function Organization({ name, href, logo, highlight }: {
+  name: string
+  href?: string
+  logo: string
+  highlight: WorkEntry['highlight']
+}) {
+  const label = (
+    <>
+      <Image src={logo} alt="" width={16} height={16} />
+      {name}
+    </>
+  )
+
+  return href ? (
+    <a className="org-highlight" data-tone={highlight} href={href} target="_blank" rel="noreferrer">
+      {label}
+    </a>
+  ) : (
+    <span className="org-highlight" data-tone={highlight}>{label}</span>
+  )
+}
+
+function WorkItem({ entry }: { entry: WorkEntry }) {
+  return (
+    <li>
+      <div className="experience-item-heading">
+        <p>
+          {entry.title} at{' '}
+          <Organization name={entry.organization} href={entry.organizationHref} logo={entry.logo} highlight={entry.highlight} />
+        </p>
+        <p className="work-date">{entry.dates}</p>
+      </div>
+      <p className="experience-detail">{entry.description}</p>
+      <p className="work-tags">{entry.tags.join(' · ')}</p>
+    </li>
+  )
+}
 
 export default function Work() {
   return (
-    <section id="work" className="folio-section">
-      <SectionHeading>Past and present</SectionHeading>
-      <ol className="work-timeline">
-        {work.map(entry => (
-          <li key={entry.organization}>
-            <div className="work-mark">
-              <Image src={entry.logo} alt="" fill sizes="38px" />
-            </div>
-            <div className="work-entry">
-              <div className="work-entry-heading">
-                <h3>{entry.title}{' '}<span className="work-entry-connector">at</span>{' '}
-                  {entry.organizationHref
-                    ? (
-                      <a className="org-highlight" data-tone={entry.highlight} href={entry.organizationHref} target="_blank" rel="noreferrer">
-                        {entry.organization}
-                      </a>
-                    )
-                    : <span className="org-highlight" data-tone={entry.highlight}>{entry.organization}</span>}
-                </h3>
-                <p className="work-date">{entry.dates}</p>
-              </div>
-              <p className="work-description">{entry.description}</p>
-              <p className="work-tags">{entry.tags.join(' · ')}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </section>
+    <div id="work">
+      <section className="experience-group" aria-labelledby="currently">
+        <h2 id="currently">Currently</h2>
+        <ul className="experience-list">
+          <li>Studying Engineering at the <Organization {...about.waterloo} /></li>
+          {currentRoles.map(entry => <WorkItem key={entry.organization} entry={entry} />)}
+        </ul>
+      </section>
+      <section className="experience-group" aria-labelledby="previously">
+        <h2 id="previously">Previously</h2>
+        <ul className="experience-list">
+          {previousRoles.map(entry => <WorkItem key={entry.organization} entry={entry} />)}
+          <li id="research"><Research /></li>
+        </ul>
+      </section>
+    </div>
   )
 }
