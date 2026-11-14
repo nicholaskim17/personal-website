@@ -171,14 +171,14 @@ export default function LogoGuitar() {
       <div className="logo-guitar-callout" aria-hidden="true">
         <span>strum :)</span>
         <svg viewBox="0 0 39 24" fill="none">
-          <path d="M3 3C10 15 21 19 35 16m0 0-8-7m8 7-10 5" />
+          <path d="M36 3C29 15 18 19 4 16m0 0 8-7m-8 7 10 5" />
         </svg>
       </div>
       <details className="logo-guitar-lesson">
         <summary>learn your first song?</summary>
         <div className="logo-guitar-lesson-panel">
           <p>Play Riptide</p>
-          <p className="logo-guitar-lesson-hint">Hint&#58; (Am · C · G) ×2</p>
+          <p className="logo-guitar-lesson-hint">Hint&#58; ({guitarChords.map(({ name }) => name).join(' · ')}) ×2</p>
           <div className="logo-guitar-chords" role="group" aria-label="Riptide chords">
             {guitarChords.map(({ name, frets }) => (
               <button

@@ -205,20 +205,23 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .logo-guitar-callout {
   position: absolute;
   top: 0;
-  right: 15%;
+  left: 96%;
+  /* Match the callout to 36% of the guitar's 100 / 221 aspect ratio. */
+  margin-top: 79.56%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   font: 400 .82rem/1.05 var(--font-pixel);
   white-space: nowrap;
-  transform: rotate(7deg);
+  transform: rotate(-9deg);
   pointer-events: none;
 }
 
 .logo-guitar-callout svg {
+  align-self: flex-start;
   width: 1.65em;
   height: auto;
-  margin: .05em -.5em 0 0;
+  margin: .05em 0 0 -.43em;
   stroke: currentColor;
   stroke-width: 1.4;
   stroke-linecap: round;
@@ -226,15 +229,15 @@ a.sidebar-name:is(:hover, :focus-visible) {
 }
 
 .logo-guitar-lesson {
-  position: relative;
-  left: 50%;
-  z-index: 1;
-  width: max-content;
-  transform: translateX(-50%);
   font: 400 .78rem/1.15 var(--font-pixel);
 }
 
 .logo-guitar-lesson summary {
+  position: absolute;
+  top: 0;
+  right: 15%;
+  z-index: 2;
+  width: max-content;
   list-style: none;
   cursor: pointer;
   padding-block: .2rem;
@@ -242,6 +245,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   text-decoration: underline;
   text-decoration-color: var(--color-border);
   text-underline-offset: .2em;
+  transform: rotate(7deg);
 }
 
 .logo-guitar-lesson summary::-webkit-details-marker { display: none; }
@@ -252,9 +256,13 @@ a.sidebar-name:is(:hover, :focus-visible) {
 }
 
 .logo-guitar-lesson-panel {
+  position: relative;
+  left: 50%;
   display: grid;
+  width: max-content;
   gap: .22rem;
   padding-block-start: .28rem;
+  transform: translateX(-50%);
 }
 
 .logo-guitar-lesson-hint { color: var(--color-ink-muted); }

@@ -10,8 +10,8 @@ export const guitarStrings = [
 // Frets are ordered from the low E string to the high E string.
 export const guitarChords = [
   { name: 'Am', frets: [null, 0, 2, 2, 1, 0] },
-  { name: 'C', frets: [null, 3, 2, 0, 1, 0] },
   { name: 'G', frets: [3, 2, 0, 0, 0, 3] },
+  { name: 'C', frets: [null, 3, 2, 0, 1, 0] },
 ]
 
 // A short burst of noise fed through a damped delay models a plucked string.
