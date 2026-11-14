@@ -104,6 +104,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 }
 
 .logo-guitar {
+  position: relative;
   flex: 0 0 auto;
   width: clamp(42px, 5vw, 64px);
   margin-block-start: clamp(-20px, -1.6vw, -13px);
@@ -180,13 +181,28 @@ a.sidebar-name:is(:hover, :focus-visible) {
   outline-offset: 1px;
 }
 
-.logo-guitar-hint {
-  display: block;
-  margin-top: .15rem;
-  margin-inline: -.45rem;
-  color: var(--color-ink-faint);
-  font-size: .65rem;
-  line-height: 1.25;
+.logo-guitar-callout {
+  position: absolute;
+  top: 36%;
+  left: 96%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font: italic 1.15rem/.95 "Instrument Serif", Georgia, serif;
+  white-space: nowrap;
+  transform: rotate(-9deg);
+  pointer-events: none;
+}
+
+.logo-guitar-callout svg {
+  align-self: flex-start;
+  width: 1.65em;
+  height: auto;
+  margin: .05em 0 0 -.43em;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .logo-guitar-notes {
@@ -461,6 +477,69 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   border-top: 1px solid var(--color-border);
 }
 
+.portrait-thought {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  margin-bottom: .85rem;
+  color: var(--color-guitar);
+  text-align: center;
+}
+
+.portrait-thought-bubble {
+  --pixel-corners: polygon(0 5px, 5px 5px, 5px 0, calc(100% - 5px) 0, calc(100% - 5px) 5px, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 5px calc(100% - 5px), 0 calc(100% - 5px));
+  position: relative;
+  padding: .5rem .68rem .46rem;
+  background: color-mix(in srgb, currentColor 54%, var(--color-sidebar));
+  clip-path: var(--pixel-corners);
+}
+
+.portrait-thought-bubble::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--color-surface-raised);
+  clip-path: var(--pixel-corners);
+}
+
+.portrait-thought-text {
+  position: relative;
+  display: block;
+  font: 400 clamp(.83rem, 1.6vw, 1.02rem)/1.1 "Bitcount Prop Single", monospace;
+  white-space: nowrap;
+}
+
+.portrait-thought-tail {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 48%;
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+  box-shadow: 5px 5px 0 -1px currentColor;
+  opacity: .69;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .portrait-thought-text {
+    animation: thought-reveal .85s steps(18, end) both;
+  }
+
+  .portrait-thought-tail {
+    animation: thought-drift 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes thought-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes thought-drift {
+  50% { opacity: .38; transform: translateY(2px); }
+}
+
 .portrait-frame {
   position: relative;
   aspect-ratio: 1;
@@ -560,6 +639,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
 .landing-header .sidebar-brand {
   justify-content: center;
+  padding-inline-end: clamp(.85rem, 4vw, 3.3rem);
 }
 
 .landing-header .sidebar-name {
@@ -572,9 +652,10 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   margin-inline-start: clamp(-2.2rem, -2.55vw, -.95rem);
 }
 
-.landing-header .logo-guitar-hint {
-  font-size: .72rem;
+.landing-header .logo-guitar-callout {
+  font-size: clamp(1.1rem, 2.35vw, 2rem);
 }
+
 
 .landing-header .sidebar-caption {
   display: block;
@@ -611,8 +692,8 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
 .landing-header .sidebar-portrait {
   display: block;
-  width: clamp(9rem, 25svh, 18rem);
-  max-width: 60%;
+  width: clamp(9rem, 24svh, 18rem);
+  max-width: 70%;
 }
 
 .landing-footer {

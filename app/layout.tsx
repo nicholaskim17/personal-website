@@ -4,6 +4,7 @@ import { GeistMono } from 'geist/font/mono'
 import ThemeProvider from '@/components/ThemeProvider'
 import { site } from '@/lib/data'
 import '@fontsource/instrument-serif/latin-400-italic.css'
+import '@fontsource/bitcount-prop-single/latin-400.css'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
 

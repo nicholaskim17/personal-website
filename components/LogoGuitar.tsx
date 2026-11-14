@@ -81,8 +81,18 @@ export default function LogoGuitar() {
           })}
         </span>
       </div>
-      <span id={hintId} className="logo-guitar-hint" aria-live="polite">
-        {sound === 'on' ? 'Strum' : sound === 'unavailable' ? 'Sound unavailable' : 'Pluck a string'}
+      <div className="logo-guitar-callout" aria-hidden="true">
+        <span>strum :)</span>
+        <svg viewBox="0 0 39 24" fill="none">
+          <path d="M36 3C29 15 18 19 4 16m0 0 8-7m-8 7 10 5" />
+        </svg>
+      </div>
+      <span id={hintId} className="sr-only" aria-live="polite">
+        {sound === 'on'
+          ? 'Move across the strings or tap to play.'
+          : sound === 'unavailable'
+            ? 'Sound unavailable.'
+            : 'Click or tap a string to start playing.'}
       </span>
     </div>
   )

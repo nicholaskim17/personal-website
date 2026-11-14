@@ -46,6 +46,12 @@ export default function Header({ landing = false }: { landing?: boolean }) {
         </nav>
       </div>
       <figure className="sidebar-portrait">
+        <figcaption className="portrait-thought">
+          <span className="portrait-thought-bubble">
+            <span className="portrait-thought-text">song stuck in my head…</span>
+          </span>
+          <span className="portrait-thought-tail" aria-hidden="true" />
+        </figcaption>
         <div className="portrait-frame">
           <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
         </div>
