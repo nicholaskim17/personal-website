@@ -8,7 +8,7 @@ import GuitarCard from './hobbies/GuitarCard'
 export default function Hobbies() {
   return (
     <section id="hobbies" className="folio-section">
-      <SectionHeading level={1}>Life outside of coding</SectionHeading>
+      <SectionHeading level={1}>Touching Grass</SectionHeading>
       <div className="hobbies-grid">
         <TrainingCard />
         <LastWorkoutCard />
