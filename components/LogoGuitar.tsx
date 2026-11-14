@@ -2,9 +2,10 @@
 
 import { useCallback, useEffect, useId, useRef, useState, type PointerEvent } from 'react'
 import { Music, Music2 } from 'lucide-react'
-import { createPluck, guitarStrings } from '@/lib/guitarAudio'
+import { createPluck, guitarChords, guitarStrings } from '@/lib/guitarAudio'
 
 type GuitarPoint = { x: number; y: number }
+type GuitarNote = { string: number; fret?: number }
 
 const stringLeft = 39
 const stringRight = 61
@@ -43,7 +44,7 @@ export default function LogoGuitar() {
   const audio = useRef<AudioContext | null>(null)
   const resumingAudio = useRef<Promise<void> | null>(null)
   const tabVisit = useRef(0)
-  const buffers = useRef<AudioBuffer[]>([])
+  const buffers = useRef(new Map<number, AudioBuffer>())
   const sequence = useRef(0)
   const [sound, setSound] = useState<'off' | 'on' | 'unavailable'>('off')
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
@@ -80,24 +81,25 @@ export default function LogoGuitar() {
       const context = audio.current
       audio.current = null
       resumingAudio.current = null
-      buffers.current = []
+      buffers.current.clear()
       if (context && context.state !== 'closed') void context.close().catch(() => {})
     }
   }, [resumeAudio])
 
-  function pluck(index: number, context: AudioContext, when: number) {
+  function pluck({ string, fret = 0 }: GuitarNote, context: AudioContext, when: number) {
     const source = context.createBufferSource()
-    const buffer = buffers.current[index] ?? createPluck(context, guitarStrings[index].frequency)
-    buffers.current[index] = buffer
+    const frequency = guitarStrings[string].frequency * 2 ** (fret / 12)
+    const buffer = buffers.current.get(frequency) ?? createPluck(context, frequency)
+    buffers.current.set(frequency, buffer)
     source.buffer = buffer
     source.connect(context.destination)
     source.onended = () => source.disconnect()
     source.start(when)
   }
 
-  async function playStrings(indices: number[], canEnableSound = false) {
-    if (!indices.length || document.hidden) return
-    const newNotes = indices.map(string => ({ id: ++sequence.current, string }))
+  async function playStrings(strings: GuitarNote[], canEnableSound = false) {
+    if (!strings.length || document.hidden) return
+    const newNotes = strings.map(({ string }) => ({ id: ++sequence.current, string }))
     setNotes(previous => [...previous, ...newNotes].slice(-8))
 
     try {
@@ -110,8 +112,8 @@ export default function LogoGuitar() {
       if (resumed) await resumed
       if (audio.current !== context || context.state !== 'running' || visit !== tabVisit.current || document.hidden) return
       setSound('on')
-      const start = context.currentTime
-      indices.forEach((index, offset) => pluck(index, context, start + offset * .012))
+      const start = context.currentTime + .01
+      strings.forEach((note, offset) => pluck(note, context, start + offset * .012))
     } catch {
       setSound('unavailable')
     }
@@ -124,7 +126,7 @@ export default function LogoGuitar() {
     const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(transform.inverse())
     const crossed = getStrummedStrings(previousPointer.current, point)
     previousPointer.current = point
-    void playStrings(crossed)
+    void playStrings(crossed.map(string => ({ string })))
   }
 
   return (
@@ -151,7 +153,7 @@ export default function LogoGuitar() {
               key={note}
               type="button"
               aria-label={`Pluck ${note}`}
-              onClick={() => void playStrings([index], true)}
+              onClick={() => void playStrings([{ string: index }], true)}
             >
               <span className="guitar-string" aria-hidden="true" />
             </button>
@@ -163,6 +165,18 @@ export default function LogoGuitar() {
             return <Icon key={id} data-string={string} strokeWidth={2.1} />
           })}
         </span>
+      </div>
+      <div className="logo-guitar-chords" role="group" aria-label="Guitar chords">
+        {guitarChords.map(({ name, frets }) => (
+          <button
+            key={name}
+            type="button"
+            aria-label={`Play ${name} major chord`}
+            onClick={() => void playStrings(frets.flatMap((fret, string) => fret === null ? [] : [{ string, fret }]), true)}
+          >
+            {name}
+          </button>
+        ))}
       </div>
       <div className="logo-guitar-callout" aria-hidden="true">
         <span>strum :)</span>

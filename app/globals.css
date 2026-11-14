@@ -225,6 +225,26 @@ a.sidebar-name:is(:hover, :focus-visible) {
   stroke-linejoin: round;
 }
 
+.logo-guitar-chords {
+  position: absolute;
+  top: 10%;
+  left: 100%;
+  z-index: 1;
+  display: grid;
+  font: 400 clamp(.85rem, 1.45vw, 1.12rem)/1 var(--font-pixel);
+}
+
+.logo-guitar-chords button {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: .2rem;
+}
+
+.logo-guitar-chords button:is(:hover, :focus-visible, :active) {
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-guitar) 14%, transparent);
+}
+
 .logo-guitar-notes {
   position: absolute;
   top: 67%;

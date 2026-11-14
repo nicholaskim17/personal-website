@@ -7,6 +7,15 @@ export const guitarStrings = [
   { note: 'E4', frequency: 329.63 },
 ]
 
+// Frets are ordered from the low E string to the high E string.
+export const guitarChords = [
+  { name: 'C', frets: [null, 3, 2, 0, 1, 0] },
+  { name: 'G', frets: [3, 2, 0, 0, 0, 3] },
+  { name: 'A', frets: [null, 0, 2, 2, 2, 0] },
+  { name: 'D', frets: [null, null, 0, 2, 3, 2] },
+  { name: 'F', frets: [1, 3, 3, 2, 1, 1] },
+]
+
 // A short burst of noise fed through a damped delay models a plucked string.
 export function createPluck(context: AudioContext, frequency: number): AudioBuffer {
   const sampleRate = context.sampleRate
