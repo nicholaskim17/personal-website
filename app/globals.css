@@ -258,12 +258,6 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   gap: .15rem 1rem;
 }
 
-.experience-detail {
-  max-width: 71ch;
-  margin-top: .12rem;
-  font-size: .92rem;
-}
-
 .work-date { flex-shrink: 0; color: var(--color-ink-faint); line-height: 1.4; }
 
 .work-tags, .project-card > .work-tags {
@@ -278,10 +272,6 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   background: #faf9f6;
   border-radius: 2px;
 }
-
-.research-entry strong { color: var(--color-ink); }
-
-.author-note { margin-left: .6rem; color: var(--color-accent); white-space: nowrap; }
 
 .project-title h3, .gallery-title { font-weight: 620; letter-spacing: -.022em; }
 
