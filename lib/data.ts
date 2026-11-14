@@ -83,12 +83,20 @@ export interface WorkEntry {
   current?: boolean
   highlight: HighlightTone
   title: string
-  dates: string
-  description: string
-  tags: string[]
+  dates?: string
+  description?: string
+  tags?: string[]
 }
 
 export const work: WorkEntry[] = [
+  {
+    organization: 'Hamming AI (YC S24)',
+    current: true,
+    organizationHref: 'https://hamming.ai/',
+    logo: '/images/work/hamming.png',
+    highlight: 'gold',
+    title: 'Software Engineer',
+  },
   {
     organization: 'WAT.ai',
     current: true,

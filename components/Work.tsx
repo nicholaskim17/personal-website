@@ -35,7 +35,7 @@ function WorkItem({ entry }: { entry: WorkEntry }) {
           {entry.title} at{' '}
           <Organization name={entry.organization} href={entry.organizationHref} logo={entry.logo} highlight={entry.highlight} />
         </p>
-        <p className="work-date">{entry.dates}</p>
+        {entry.dates && <p className="work-date">{entry.dates}</p>}
       </div>
     </li>
   )
