@@ -63,7 +63,9 @@ export default function Header({ landing = false }: { landing?: boolean }) {
       <figure className="sidebar-portrait">
         <PortraitTrack />
         <div className="portrait-frame">
-          <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
+          <div className="portrait-photo-crop">
+            <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
+          </div>
           <svg className="portrait-sound-waves" viewBox="0 0 100 100" aria-hidden="true">
             {earcupTransforms.map(transform => (
               <g key={transform} transform={transform}>

@@ -28,14 +28,14 @@
 
 .light {
   color-scheme: light;
-  --color-surface: #f9f8f4;
-  --color-surface-raised: #ffffff;
-  --color-sidebar: #f2f0e9;
+  --color-surface: #efe4d1;
+  --color-surface-raised: #f6eddd;
+  --color-sidebar: #e9dcc5;
   --color-ink: #20211d;
   --color-ink-muted: #494b43;
   --color-ink-faint: #5f6156;
-  --color-border: #d7d5cb;
-  --color-dot: #d2cfc0;
+  --color-border: #d4c2a7;
+  --color-dot: #d6c8af;
   --color-accent: #435425;
   --color-guitar: #aa4b10;
   --color-wordmark-shadow: #d87938;
@@ -106,7 +106,7 @@ body { font-size: 1rem; }
   padding: 0 .08em .065em 0;
   color: var(--color-ink);
   font-family: var(--font-pixel);
-  font-size: 1.9rem;
+  font-size: 2.375rem;
   font-weight: 430;
   font-variation-settings: "ELSH" 50;
   line-height: 1;
@@ -793,7 +793,25 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   background: var(--color-surface-raised);
 }
 
+.portrait-photo-crop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
 .portrait-photo { object-fit: cover; }
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :is(.project-media, .gallery-photo, .guitar-cover-photo) > img,
+  .portrait-frame :is(.portrait-photo, .portrait-sound-waves) {
+    transition: scale .32s ease-out;
+  }
+
+  :is(.project-media, .gallery-photo, .guitar-cover-photo):hover > img,
+  .portrait-frame:hover :is(.portrait-photo, .portrait-sound-waves) {
+    scale: 1.075;
+  }
+}
 
 @media (min-width: 620px) {
   .project-grid, .hobbies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -819,7 +837,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   .sidebar-identity { width: min(100%, 22rem); padding: 0; text-align: center; }
 
   .sidebar-name {
-    font-size: clamp(2.05rem, 3.2vw, 3.4rem);
+    font-size: clamp(2.5625rem, 4vw, 4.25rem);
   }
 
   .sidebar-socials { gap: .8rem; }
@@ -839,7 +857,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 @media (max-width: 799px) {
-  html { scroll-padding-top: 15rem; }
+  html { scroll-padding-top: 19rem; }
   .site-content { min-height: calc(100svh - 8rem); }
 }
 
@@ -882,7 +900,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 .landing-header .sidebar-name {
-  font-size: clamp(2.25rem, 7.35vw, 6.25rem);
+  font-size: clamp(2.8125rem, 9.1875vw, 7.8125rem);
 }
 
 .landing-header .logo-guitar {
@@ -945,6 +963,23 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   padding: .45rem clamp(.85rem, 2vw, 1.5rem) .9rem;
   border: 0;
   background: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-header :is(.sidebar-brand-name, .sidebar-nav li, .logo-guitar, .sidebar-portrait) {
+    animation: landing-entrance .45s cubic-bezier(.2, .65, .3, 1) backwards;
+  }
+
+  .landing-header .sidebar-nav li { animation-delay: .08s; }
+  .landing-header .sidebar-nav li:nth-child(2) { animation-delay: .13s; }
+  .landing-header .sidebar-nav li:nth-child(3) { animation-delay: .18s; }
+  .landing-header .logo-guitar { animation-delay: .22s; }
+  .landing-header .sidebar-portrait { animation-delay: .28s; }
+}
+
+@keyframes landing-entrance {
+  from { opacity: .15; translate: 0 .6rem; }
+  to { opacity: 1; translate: 0 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

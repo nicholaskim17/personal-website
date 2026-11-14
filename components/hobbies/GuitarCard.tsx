@@ -21,7 +21,7 @@ export default function GuitarCard() {
         </a>
       </div>
 
-      <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-sm">
+      <div className="guitar-cover-photo relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-sm">
         <Image src={hobbies.guitar.image} alt={hobbies.guitar.imageAlt} fill sizes="200px" className="object-cover" />
       </div>
 
