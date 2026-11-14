@@ -201,12 +201,12 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 @keyframes bench-press-arm {
   44%, 54% {
-    clip-path: polygon(32% 62%, 44.5% 70%, 45% 51%, 49% 51%, 49.5% 78%, 32% 68%);
+    clip-path: polygon(31% 62%, 35% 71%, 33% 51%, 38% 51%, 40% 77%, 30% 70%);
   }
 }
 
 @keyframes bench-press-plate {
-  44%, 54% { transform: translate(.039em, .1344em); }
+  44%, 54% { transform: translate(-.036em, .1344em); }
 }
 
 .logo-guitar {
