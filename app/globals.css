@@ -106,6 +106,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .logo-guitar {
   flex: 0 0 auto;
   width: clamp(42px, 5vw, 64px);
+  margin-block-start: clamp(-20px, -1.6vw, -13px);
   margin-inline-start: -.48rem;
   color: var(--color-guitar);
   text-align: center;
@@ -113,9 +114,9 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-instrument {
   position: relative;
-  aspect-ratio: 100 / 180;
+  aspect-ratio: 100 / 212;
   transform: rotate(22deg);
-  transform-origin: 50% 62%;
+  transform-origin: 50% 68%;
 }
 
 .logo-guitar-shape {
@@ -146,7 +147,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-strings {
   position: absolute;
-  inset: 17% 34% 16%;
+  inset: 14% 34%;
   display: flex;
 }
 
@@ -190,7 +191,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-notes {
   position: absolute;
-  top: 63%;
+  top: 71%;
   left: 62%;
   pointer-events: none;
 }
@@ -567,6 +568,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 
 .landing-header .logo-guitar {
   width: clamp(68px, 7.5vw, 98px);
+  margin-block-start: clamp(-31px, -2.4vw, -21px);
   margin-inline-start: clamp(-2.2rem, -2.55vw, -.95rem);
 }
 
