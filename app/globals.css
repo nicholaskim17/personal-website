@@ -502,7 +502,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   z-index: -1;
   pointer-events: none;
   background: color-mix(in srgb, var(--color-ink) 13%, transparent);
-  mask: url('/images/hockey-stick-pattern.svg') repeat;
+  mask: url('/images/star-pattern.svg') repeat;
 }
 
 .site-content main, .site-footer {
