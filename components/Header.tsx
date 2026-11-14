@@ -50,10 +50,16 @@ export default function Header({ landing = false }: { landing?: boolean }) {
           <span className="portrait-thought-bubble">
             <span className="portrait-thought-text">song stuck in my head…</span>
           </span>
-          <span className="portrait-thought-tail" aria-hidden="true" />
         </figcaption>
         <div className="portrait-frame">
           <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="portrait-photo" />
+          <svg className="portrait-thought-trail" viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="67.5" y="41.5" width="1.6" height="1.6" />
+            <rect x="71.5" y="34.5" width="2" height="2" />
+            <rect x="77" y="26" width="2.4" height="2.4" />
+            <rect x="81" y="16" width="2.8" height="2.8" />
+            <rect x="84" y="4.4" width="3.2" height="3.2" />
+          </svg>
         </div>
       </figure>
     </header>

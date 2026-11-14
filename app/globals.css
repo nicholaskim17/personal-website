@@ -481,8 +481,8 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   position: relative;
   z-index: 1;
   display: grid;
-  justify-items: center;
-  margin-bottom: .85rem;
+  justify-items: end;
+  margin-bottom: .45rem;
   color: var(--color-guitar);
   text-align: center;
 }
@@ -510,15 +510,15 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   white-space: nowrap;
 }
 
-.portrait-thought-tail {
+.portrait-thought-trail {
   position: absolute;
-  top: calc(100% + 2px);
-  left: 48%;
-  width: 5px;
-  height: 5px;
-  background: currentColor;
-  box-shadow: 5px 5px 0 -1px currentColor;
-  opacity: .69;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  fill: var(--color-guitar);
+  stroke: var(--color-sidebar);
+  stroke-width: .45;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -526,9 +526,14 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
     animation: thought-reveal .85s steps(18, end) both;
   }
 
-  .portrait-thought-tail {
+  .portrait-thought-trail rect {
     animation: thought-drift 2.8s ease-in-out infinite;
   }
+
+  .portrait-thought-trail rect:nth-child(2) { animation-delay: .15s; }
+  .portrait-thought-trail rect:nth-child(3) { animation-delay: .3s; }
+  .portrait-thought-trail rect:nth-child(4) { animation-delay: .45s; }
+  .portrait-thought-trail rect:nth-child(5) { animation-delay: .6s; }
 }
 
 @keyframes thought-reveal {
@@ -537,7 +542,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 @keyframes thought-drift {
-  50% { opacity: .38; transform: translateY(2px); }
+  50% { opacity: .45; }
 }
 
 .portrait-frame {
