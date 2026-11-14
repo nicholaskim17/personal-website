@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useRef, useState, type PointerEvent } from 'react'
+import { useCallback, useEffect, useId, useRef, useState, type PointerEvent } from 'react'
 import { Music, Music2 } from 'lucide-react'
 import { createPluck, guitarStrings } from '@/lib/guitarAudio'
 
@@ -42,21 +42,48 @@ export default function LogoGuitar() {
   const previousPointer = useRef<GuitarPoint | null>(null)
   const audio = useRef<AudioContext | null>(null)
   const resumingAudio = useRef<Promise<void> | null>(null)
+  const tabVisit = useRef(0)
   const buffers = useRef<AudioBuffer[]>([])
   const sequence = useRef(0)
   const [sound, setSound] = useState<'off' | 'on' | 'unavailable'>('off')
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
   const hintId = useId()
 
+  const resumeAudio = useCallback((context: AudioContext, fromGesture = false) => {
+    if (context.state === 'running') return
+    // A click must be able to resume audio even if an earlier hover tried to.
+    if (!fromGesture && resumingAudio.current) return resumingAudio.current
+    const resumed = context.resume().finally(() => {
+      if (resumingAudio.current === resumed) resumingAudio.current = null
+    })
+    resumingAudio.current = resumed
+    return resumed
+  }, [])
+
   useEffect(() => {
+    function restoreAudio() {
+      previousPointer.current = null
+      if (document.hidden) {
+        tabVisit.current++
+        resumingAudio.current = null
+        return
+      }
+      const context = audio.current
+      if (context && context.state !== 'closed') void resumeAudio(context)?.catch(() => {})
+    }
+
+    document.addEventListener('visibilitychange', restoreAudio)
+    window.addEventListener('focus', restoreAudio)
     return () => {
+      document.removeEventListener('visibilitychange', restoreAudio)
+      window.removeEventListener('focus', restoreAudio)
       const context = audio.current
       audio.current = null
       resumingAudio.current = null
       buffers.current = []
       if (context && context.state !== 'closed') void context.close().catch(() => {})
     }
-  }, [])
+  }, [resumeAudio])
 
   function pluck(index: number, context: AudioContext, when: number) {
     const source = context.createBufferSource()
@@ -69,23 +96,19 @@ export default function LogoGuitar() {
   }
 
   async function playStrings(indices: number[], canEnableSound = false) {
-    if (!indices.length) return
+    if (!indices.length || document.hidden) return
     const newNotes = indices.map(string => ({ id: ++sequence.current, string }))
     setNotes(previous => [...previous, ...newNotes].slice(-8))
 
     try {
-      const context = audio.current ?? (canEnableSound ? new AudioContext() : null)
+      const visit = tabVisit.current
+      const canStart = canEnableSound || navigator.userActivation?.hasBeenActive
+      const context = audio.current ?? (canStart ? new AudioContext() : null)
       if (!context) return
       audio.current = context
-      if (context.state !== 'running') {
-        const resumed = resumingAudio.current ??= context.resume()
-        try {
-          await resumed
-        } finally {
-          if (resumingAudio.current === resumed) resumingAudio.current = null
-        }
-      }
-      if (audio.current !== context || context.state !== 'running') return
+      const resumed = resumeAudio(context, canEnableSound)
+      if (resumed) await resumed
+      if (audio.current !== context || context.state !== 'running' || visit !== tabVisit.current || document.hidden) return
       setSound('on')
       const start = context.currentTime
       indices.forEach((index, offset) => pluck(index, context, start + offset * .012))
@@ -144,7 +167,7 @@ export default function LogoGuitar() {
       <div className="logo-guitar-callout" aria-hidden="true">
         <span>strum :)</span>
         <svg viewBox="0 0 39 24" fill="none">
-          <path d="M36 3C29 15 18 19 4 16m0 0 8-7m-8 7 10 5" />
+          <path d="M3 3C10 15 21 19 35 16m0 0-8-7m8 7-10 5" />
         </svg>
       </div>
       <span id={hintId} className="sr-only" aria-live="polite">
