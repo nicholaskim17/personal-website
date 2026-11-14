@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: dark;
+  --font-site: "Bitcount Prop Single", var(--font-geist-mono), monospace;
   --color-surface: #0b0b0c;
   --color-surface-raised: #141415;
   --color-sidebar: #080809;
@@ -45,7 +46,10 @@ html {
   scroll-padding-top: 1.25rem;
 }
 
-body { font-size: 1rem; }
+body {
+  font-family: var(--font-site);
+  font-size: 1rem;
+}
 
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -88,14 +92,21 @@ body { font-size: 1rem; }
   gap: .2rem;
 }
 
+.sidebar-brand-name {
+  display: grid;
+  justify-items: center;
+  gap: .32rem;
+}
+
 .sidebar-name {
   position: relative;
   z-index: 1;
   display: block;
   padding-inline: .04em .1em;
   color: var(--color-ink);
-  font: italic 2.2rem/1 "Instrument Serif", Georgia, serif;
-  letter-spacing: -.055em;
+  font-size: 2.05rem;
+  line-height: 1;
+  letter-spacing: -.04em;
   white-space: nowrap;
 }
 
@@ -188,7 +199,8 @@ a.sidebar-name:is(:hover, :focus-visible) {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font: italic 1.15rem/.95 "Instrument Serif", Georgia, serif;
+  font-size: 1.15rem;
+  line-height: .95;
   white-space: nowrap;
   transform: rotate(-9deg);
   pointer-events: none;
@@ -299,7 +311,6 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .section-heading { margin-bottom: 1.25rem; }
 
 .work-date {
-  font-family: var(--font-geist-mono), monospace;
   font-size: .68rem;
   font-weight: 500;
   letter-spacing: .065em;
@@ -506,7 +517,8 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 .portrait-thought-text {
   position: relative;
   display: block;
-  font: 400 clamp(.83rem, 1.6vw, 1.02rem)/1.1 "Bitcount Prop Single", monospace;
+  font-size: clamp(.83rem, 1.6vw, 1.02rem);
+  line-height: 1.1;
   white-space: nowrap;
 }
 
@@ -580,10 +592,10 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   .sidebar-brand { justify-content: center; }
 
   .sidebar-name {
-    font-size: clamp(2.7rem, 4.8vw, 4.9rem);
+    font-size: clamp(2.2rem, 3.55vw, 3.75rem);
   }
 
-  .sidebar-socials { margin-top: 1.15rem; justify-content: center; gap: .8rem; }
+  .sidebar-socials { gap: .8rem; }
   .sidebar-nav { margin-top: 1rem; }
   .sidebar-nav ul { display: grid; justify-items: center; }
 
@@ -647,7 +659,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 .landing-header .sidebar-name {
-  font-size: clamp(3.5rem, 10.5vw, 9rem);
+  font-size: clamp(2.45rem, 8vw, 7.15rem);
 }
 
 .landing-header .logo-guitar {
@@ -660,11 +672,12 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   font-size: clamp(1.1rem, 2.35vw, 2rem);
 }
 
+.landing-header .sidebar-brand-name {
+  gap: clamp(.4rem, 1vw, .85rem);
+}
 
 .landing-header .sidebar-socials {
-  justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
 }
 
 .landing-header .sidebar-socials svg {

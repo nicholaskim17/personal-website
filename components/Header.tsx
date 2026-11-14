@@ -20,19 +20,21 @@ export default function Header({ landing = false }: { landing?: boolean }) {
       <div className="sidebar-tools"><ThemeToggle /></div>
       <div className="sidebar-identity">
         <div className="sidebar-brand">
-          {landing ? (
-            <h1 className="sidebar-name">{hero.name}</h1>
-          ) : (
-            <Link href="/" className="sidebar-name" aria-label={`${hero.name}, home`}>{hero.name}</Link>
-          )}
+          <div className="sidebar-brand-name">
+            {landing ? (
+              <h1 className="sidebar-name">{hero.name}</h1>
+            ) : (
+              <Link href="/" className="sidebar-name" aria-label={`${hero.name}, home`}>{hero.name}</Link>
+            )}
+            <div className="sidebar-socials" aria-label="Social links">
+              <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>
+              {socialLinks.map(({ label, href, icon }) => {
+                const Icon = iconFor[icon]
+                return <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}><Icon size={17} aria-hidden="true" /></a>
+              })}
+            </div>
+          </div>
           <LogoGuitar />
-        </div>
-        <div className="sidebar-socials" aria-label="Social links">
-          <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>
-          {socialLinks.map(({ label, href, icon }) => {
-            const Icon = iconFor[icon]
-            return <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}><Icon size={17} aria-hidden="true" /></a>
-          })}
         </div>
         <nav aria-label="Primary navigation" className="sidebar-nav">
           <ul>
