@@ -27,6 +27,8 @@ export default function Header({ landing = false }: { landing?: boolean }) {
             {landing ? (
               <h1 className="sidebar-name">
                 <span className="name-bench-press" aria-hidden="true">
+                  <span className="bench-press-floor" />
+                  <span className="bench-press-rack" />
                   <span className="bench-press-bench" />
                   <span className="bench-press-lifter" />
                   <span className="bench-press-arms" />

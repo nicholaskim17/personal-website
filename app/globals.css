@@ -134,14 +134,38 @@ a.sidebar-name:is(:hover, :focus-visible) {
 }
 
 .name-bench-press > span,
+.bench-press-rack::before,
+.bench-press-rack::after,
 .bench-press-lifter::before,
 .bench-press-lifter::after,
 .bench-press-arms::before,
-.bench-press-arms::after {
+.bench-press-arms::after,
+.bench-press-bar::before,
+.bench-press-bar::after {
   position: absolute;
 }
 
 .name-bench-press > span { inset: 0; }
+
+.name-bench-press > .bench-press-floor {
+  inset: auto -3% 0;
+  height: max(1px, 7%);
+  background: var(--color-ink-faint);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bench-press-rack::before, .bench-press-rack::after {
+  content: '';
+  inset: 0;
+  background: var(--color-ink-muted);
+  clip-path: polygon(3% 30%, 8% 30%, 8% 38%, 18% 38%, 18% 44%, 8% 44%, 8% 93%,
+    14% 93%, 14% 98%, 0 98%, 0 93%, 3% 93%);
+}
+
+.bench-press-rack::after {
+  transform: translateX(27%);
+  opacity: .65;
+}
 
 .bench-press-bench {
   background: var(--color-guitar);
@@ -157,6 +181,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   aspect-ratio: 1;
   border: 1px solid currentColor;
   border-radius: 50%;
+  background: var(--color-sidebar);
 }
 
 .bench-press-lifter::after {
@@ -177,10 +202,24 @@ a.sidebar-name:is(:hover, :focus-visible) {
 .bench-press-arms::after { transform: translateX(11%); }
 
 .bench-press-bar {
+  background: linear-gradient(var(--color-guitar), var(--color-guitar)) 46% 16% / 52% 1px no-repeat;
+  rotate: -18deg;
+  transform-origin: 47% 16%;
+}
+
+.bench-press-bar::before, .bench-press-bar::after {
+  content: '';
+  top: 2%;
+  left: 24%;
+  width: max(2px, 9%);
+  height: max(4px, 30%);
   background: var(--color-guitar);
-  clip-path: polygon(17% 12%, 23% 12%, 23% 2%, 29% 2%, 29% 12%, 66% 12%, 66% 2%,
-    72% 2%, 72% 12%, 78% 12%, 78% 18%, 72% 18%, 72% 28%, 66% 28%,
-    66% 18%, 29% 18%, 29% 28%, 23% 28%, 23% 18%, 17% 18%);
+  box-shadow: 1px 0 var(--color-wordmark-shadow);
+  border-radius: 1px;
+}
+
+.bench-press-bar::after {
+  left: 65%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
