@@ -13,6 +13,7 @@
   --color-border: #302f2d;
   --color-dot: #2c2b28;
   --color-accent: #d9e5ae;
+  --color-guitar: #ffad59;
   --color-accent-soft: #282d1f;
   --highlight-gold: #3c3420;
   --highlight-blue: #23364a;
@@ -31,6 +32,7 @@
   --color-border: #d7d5cb;
   --color-dot: #d2cfc0;
   --color-accent: #435425;
+  --color-guitar: #aa4b10;
   --color-accent-soft: #e6ecd7;
   --highlight-gold: #fbefaf;
   --highlight-blue: #d8e8fa;
@@ -102,7 +104,7 @@ body { font-size: 1rem; }
   position: absolute;
   inset: auto .04em .025em 18%;
   height: .28em;
-  color: var(--color-accent);
+  color: var(--color-guitar);
   pointer-events: none;
 }
 
@@ -129,34 +131,36 @@ body { font-size: 1rem; }
 
 .name-mark-notes {
   position: absolute;
-  right: .17em;
-  bottom: .07em;
+  right: .09em;
+  bottom: .16em;
 }
 
 .name-mark-notes svg {
   position: absolute;
-  width: clamp(10px, .18em, 24px);
-  height: clamp(10px, .18em, 24px);
+  left: 0;
+  bottom: 0;
+  width: clamp(13px, .26em, 38px);
+  height: clamp(13px, .26em, 38px);
   opacity: 0;
 }
 
 .name-mark-notes svg:nth-child(1) {
   --note-drift: .42em;
-  --note-rise: -.62em;
+  --note-rise: -.78em;
   --note-tilt: -14deg;
   --note-delay: 0ms;
 }
 
 .name-mark-notes svg:nth-child(2) {
-  --note-drift: .65em;
-  --note-rise: -.54em;
+  --note-drift: .57em;
+  --note-rise: -.63em;
   --note-tilt: 12deg;
   --note-delay: 230ms;
 }
 
 .name-mark-notes svg:nth-child(3) {
   --note-drift: .27em;
-  --note-rise: -.76em;
+  --note-rise: -.96em;
   --note-tilt: -8deg;
   --note-delay: 460ms;
 }
@@ -174,22 +178,18 @@ body { font-size: 1rem; }
     transform: translate(0, 0) scale(.55);
   }
 
-  12% {
-    opacity: .95;
+  12%, 47% {
+    opacity: 1;
   }
 
-  37% {
-    opacity: .78;
-  }
-
-  64%, 100% {
+  76%, 100% {
     opacity: 0;
     transform: translate(var(--note-drift), var(--note-rise)) rotate(var(--note-tilt));
   }
 }
 
 a.sidebar-name:is(:hover, :focus-visible) {
-  color: var(--color-accent);
+  color: var(--color-guitar);
 }
 
 .sidebar-caption, .sidebar-portrait { display: none; }

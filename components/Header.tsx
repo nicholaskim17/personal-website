@@ -19,9 +19,9 @@ export default function Header({ landing = false }: { landing?: boolean }) {
       <span className="name-mark-flourish">
         <Guitar className="name-mark-guitar" strokeWidth={1.5} />
         <span className="name-mark-notes">
-          <Music2 strokeWidth={1.6} />
-          <Music strokeWidth={1.6} />
-          <Music2 strokeWidth={1.6} />
+          <Music2 strokeWidth={2.1} />
+          <Music strokeWidth={2.1} />
+          <Music2 strokeWidth={2.1} />
         </span>
       </span>
     </span>
