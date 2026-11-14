@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Guitar, Linkedin, Mail } from 'lucide-react'
 import { hero, navLinks, site, socialLinks } from '@/lib/data'
 import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
@@ -18,7 +18,7 @@ export default function Header({ landing = false }: { landing?: boolean }) {
     <span className="name-mark" aria-hidden="true">
       <span>{firstName}</span>{' '}
       <span className="name-mark-surname">{surname.join(' ')}</span>
-      <span className="name-mark-diamond" />
+      <Guitar className="name-mark-guitar" aria-hidden="true" strokeWidth={1.65} />
     </span>
   )
 

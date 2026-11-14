@@ -20,9 +20,10 @@ export default function ProjectCard({ project }: { project: Project }) {
               poster={project.poster}
               aria-label={`${project.title} project video`}
               className="h-full w-full object-contain"
-              controls
+              autoPlay
+              muted
+              loop
               playsInline
-              preload="metadata"
             />
           ) : project.image && (
             <Image

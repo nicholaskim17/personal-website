@@ -92,7 +92,7 @@ body { font-size: 1rem; }
   position: relative;
   z-index: 0;
   display: inline-block;
-  padding: .12em .16em .17em .04em;
+  padding: .12em .38em .17em .04em;
   transform: skewX(-9deg);
   font-weight: 900;
   letter-spacing: -.085em;
@@ -116,14 +116,14 @@ body { font-size: 1rem; }
   }
 }
 
-.name-mark-diamond {
+.name-mark-guitar {
   position: absolute;
-  top: .16em;
-  right: 0;
-  width: .09em;
-  aspect-ratio: 1;
-  transform: rotate(45deg);
-  background: var(--color-accent);
+  top: -.07em;
+  right: -.035em;
+  width: .53em;
+  height: .53em;
+  color: var(--color-accent);
+  transform: skewX(9deg) rotate(-8deg);
 }
 
 .sidebar-caption, .sidebar-portrait { display: none; }

@@ -173,7 +173,7 @@ export const projects: Project[] = [
     year: 2026,
     description:
       'A master agent sabotages a web task as four browser agents compete to finish it, while spectators watch, place virtual YES or NO bets, and generate training data from their recoveries and failures.',
-    result: '1st Place, Battle of the Schools (UofT vs. Waterloo).',
+    result: '1st Place, Waterloo vs UofT Hackathon.',
     video: '/images/polybot.mp4',
     poster: '/images/polybot.png',
     tags: ['AI Agents', 'Playwright', 'Prediction Markets', 'TypeScript'],
