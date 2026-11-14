@@ -1,31 +1,9 @@
-import Image from 'next/image'
 import { about, work, type WorkEntry } from '@/lib/data'
+import Organization from './Organization'
 import Research from './Research'
 
 const currentRoles = work.filter(entry => entry.current)
 const previousRoles = work.filter(entry => !entry.current)
-
-function Organization({ name, href, logo, highlight }: {
-  name: string
-  href?: string
-  logo: string
-  highlight: WorkEntry['highlight']
-}) {
-  const label = (
-    <>
-      <Image src={logo} alt="" width={16} height={16} />
-      {name}
-    </>
-  )
-
-  return href ? (
-    <a className="org-highlight" data-tone={highlight} href={href} target="_blank" rel="noreferrer">
-      {label}
-    </a>
-  ) : (
-    <span className="org-highlight" data-tone={highlight}>{label}</span>
-  )
-}
 
 function WorkItem({ entry }: { entry: WorkEntry }) {
   return (

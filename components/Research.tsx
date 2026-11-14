@@ -1,25 +1,26 @@
-import Image from 'next/image'
+import { ArrowUpRight } from 'lucide-react'
 import { research } from '@/lib/data'
+import Organization from './Organization'
 
 export default function Research() {
   return research.map(paper => (
-    <article key={paper.href} className="research-entry">
-      <p>
-        {paper.authorNote} on{' '}
-        <a className="inline-link" href={paper.href} target="_blank" rel="noreferrer">
-          {paper.title}
-        </a>
-      </p>
-      {paper.highlight && (
-        <p className="research-acceptance">
-          {paper.highlight.label}{' '}
-          <a className="org-highlight" data-tone="pink" href={paper.highlight.venue.href} target="_blank" rel="noreferrer">
-            <Image src={paper.highlight.venue.logo} alt="" width={16} height={16} />
-            {paper.highlight.venue.name}
+    <article key={paper.href} className="experience-item-heading research-entry">
+      <div>
+        <p>
+          {paper.authorNote} on{' '}
+          <a className="research-paper-link" href={paper.href} target="_blank" rel="noreferrer">
+            “{paper.title}”{'\u00a0'}<ArrowUpRight size={15} aria-hidden="true" />
           </a>
-          {' in Paris, France'}
         </p>
-      )}
+        {paper.highlight && (
+          <p className="research-acceptance">
+            {paper.highlight.label}{' '}
+            <Organization {...paper.highlight.venue} />
+            {' in Paris, France'}
+          </p>
+        )}
+      </div>
+      <time className="work-date" dateTime={paper.dateTime}>{paper.dateLabel}</time>
     </article>
   ))
 }

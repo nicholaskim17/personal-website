@@ -31,13 +31,12 @@ export const site = {
 }
 
 export const hero = {
-  greeting: "Hi, I'm",
   name: 'Nick Kim',
   portraitSrc: '/images/portrait-retro-headphones.webp',
   portraitAlt: 'Nick with illustrated orange headphones',
 }
 
-type HighlightTone = 'gold' | 'orange' | 'teal' | 'blue' | 'violet' | 'green' | 'pink'
+type HighlightTone = 'gold' | 'orange' | 'teal'
 
 export const about = {
   waterloo: {
@@ -81,7 +80,7 @@ export interface WorkEntry {
   organizationHref?: string
   logo: string
   current?: boolean
-  highlight: HighlightTone
+  highlight?: HighlightTone
   title: string
   dates?: string
   description?: string
@@ -112,7 +111,6 @@ export const work: WorkEntry[] = [
     organization: 'Appli AI',
     organizationHref: 'https://applisolutions.com',
     logo: '/images/work/appli-ai.png',
-    highlight: 'blue',
     title: 'Software Engineering Intern',
     dates: 'June 2026 — Sept 2026',
     description:
@@ -123,7 +121,6 @@ export const work: WorkEntry[] = [
     organization: 'Algoverse',
     organizationHref: 'https://algoverseairesearch.org',
     logo: '/images/work/algoverse.jpeg',
-    highlight: 'violet',
     title: 'Machine Learning Research Intern',
     dates: 'June 2026 — Sept 2026',
     description:
@@ -134,7 +131,6 @@ export const work: WorkEntry[] = [
     organization: 'One2One Tutoring',
     organizationHref: 'https://one2onetutoring.vercel.app/',
     logo: '/images/work/one2one.png',
-    highlight: 'green',
     title: 'Founder & Lead Tutor',
     dates: 'Sept 2024 — June 2026',
     description:
@@ -278,7 +274,8 @@ export const projects: Project[] = [
 
 export interface ResearchEntry {
   title: string
-  year: number
+  dateTime: string
+  dateLabel: string
   authors: string
   authorNote: string
   venue: string
@@ -293,7 +290,8 @@ export interface ResearchEntry {
 export const research: ResearchEntry[] = [
   {
     title: 'Evaluating Context-Window Harnesses for CBRNE Safety',
-    year: 2026,
+    dateTime: '2026-08',
+    dateLabel: 'August 2026',
     authors: 'Nathan Nguyen, Nicholas Kim, Abhitha Vegi, Arko Samad, Suvajit Majumder',
     authorNote: 'Second author',
     venue: 'NewInML and Trustworthy AI for Good (AI4GOOD) workshops · Paris, France',
