@@ -136,7 +136,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-instrument {
   position: relative;
-  aspect-ratio: 100 / 248;
+  aspect-ratio: 100 / 234;
   transform: rotate(22deg);
   transform-origin: 50% 68%;
 }
@@ -169,7 +169,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-strings {
   position: absolute;
-  inset: 12% 39% 13%;
+  inset: 12.8% 39% 12.4%;
   display: flex;
 }
 
