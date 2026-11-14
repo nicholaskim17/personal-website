@@ -190,7 +190,7 @@ export default function LogoGuitar() {
         <summary>learn your first song?</summary>
         <div className="logo-guitar-lesson-panel">
           <p>Play Riptide</p>
-          <p className="logo-guitar-lesson-hint">Hint&#58; ({guitarChords.map(({ name }) => name).join(' · ')}) ×2</p>
+          <p className="logo-guitar-lesson-hint">Hint&#58; {guitarChords.map(({ name }) => name).join(' · ')}</p>
         </div>
         <div className="logo-guitar-chords" role="group" aria-label="Riptide chords">
           {guitarChords.map(({ name, frets }) => (
