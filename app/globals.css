@@ -780,18 +780,26 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 .landing-header .logo-guitar {
+  --guitar-lift: clamp(.75rem, 2.5svh, 1.5rem);
   width: clamp(68px, 7.5vw, 98px);
-  margin: 0 0 1.75rem;
+  margin: calc(-1 * var(--guitar-lift)) 0 calc(1.75rem + var(--guitar-lift));
 }
 
 .landing-header .logo-guitar-callout {
   font-size: clamp(.84rem, 1.5vw, 1.25rem);
 }
 
-.landing-header .logo-guitar-lesson :is(summary, .logo-guitar-lesson-panel) {
+.landing-header .logo-guitar-lesson summary {
   right: auto;
   left: 50%;
   transform: translateX(calc(-50% + .55rem));
+}
+
+.landing-header .logo-guitar-lesson-panel {
+  top: 57%;
+  right: calc(100% + .6rem);
+  margin-top: 0;
+  transform: translateY(-50%);
 }
 
 .landing-header .sidebar-brand-name {
