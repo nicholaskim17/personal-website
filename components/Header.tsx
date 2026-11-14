@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Github, Linkedin, Mail } from 'lucide-react'
 import { hero, navLinks, site, socialLinks } from '@/lib/data'
 import LogoGuitar from './LogoGuitar'
-import PortraitHeadphones from './PortraitHeadphones'
+import PortraitSoundWaves from './PortraitSoundWaves'
 import PortraitTrack from './PortraitTrack'
 import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
@@ -63,7 +63,7 @@ export default function Header({ landing = false }: { landing?: boolean }) {
         <PortraitTrack />
         <div className="portrait-frame">
           <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="object-cover" />
-          <PortraitHeadphones />
+          <PortraitSoundWaves />
         </div>
       </figure>
     </header>
