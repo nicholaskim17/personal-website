@@ -1,30 +1,17 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 import ThemeProvider from '@/components/ThemeProvider'
 import { site } from '@/lib/data'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-  weight: ['400', '700', '900'],
-  style: ['normal', 'italic'],
-})
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nickkim.dev'),
   title: 'Nick Kim\'s Portfolio',
   description: site.description,
   alternates: {
-    canonical: 'https://nickkim.dev',
+    canonical: '/about',
   },
   icons: {
     icon: [{ url: '/images/silversurfer.webp', type: 'image/webp', sizes: '640x640' }],
@@ -32,7 +19,7 @@ export const metadata: Metadata = {
     apple: '/images/silversurfer.webp',
   },
   openGraph: {
-    title: 'Nick Kim\' Portfolio',
+    title: 'Nick Kim\'s Portfolio',
     description: site.description,
     url: 'https://nickkim.dev',
     type: 'website',
@@ -40,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nick Kim\' Portfolio',
+    title: 'Nick Kim\'s Portfolio',
     description: site.description,
     images: ['/images/og-image.png'],
   },
@@ -48,8 +35,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen bg-surface font-inter text-ink antialiased transition-colors duration-300">
+    <html lang="en" data-scroll-behavior="smooth" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen bg-surface font-sans text-ink antialiased">
         <ThemeProvider>
           <a
             href="#main"

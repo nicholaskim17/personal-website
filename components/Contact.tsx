@@ -1,10 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Github, Linkedin, Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
-import { contact, socialLinks } from '@/lib/data'
-import Reveal from './Reveal'
-import XBrandIcon from './XBrandIcon'
+import { ArrowUpRight, Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
+import { contact, site } from '@/lib/data'
+import SectionHeading from './SectionHeading'
 
 const fieldClassName =
   'mt-2 w-full rounded-md border border-border bg-surface-raised px-4 py-3 text-base text-ink outline-none transition placeholder:text-ink-faint hover:border-ink-faint focus:border-accent focus:ring-2 focus:ring-accent/20'
@@ -12,7 +11,6 @@ const fieldClassName =
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 export default function Contact() {
-  const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
   const [status, setStatus] = useState<Status>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [loadedAt] = useState(() => Date.now())
@@ -48,122 +46,98 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="border-t border-border px-6 py-20 md:px-10 md:py-24">
-      <div className="mx-auto max-w-content">
-        <Reveal>
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-5">
-              <h2 className="font-playfair text-2xl font-semibold text-ink">Contact</h2>
-              <div className="flex items-center gap-4 text-ink-muted">
-                {socialLinks.map(link => {
-                  const Icon = iconFor[link.icon]
-                  return (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={link.label}
-                      className="transition-colors duration-150 hover:text-accent"
-                    >
-                      <Icon size={20} />
-                    </a>
-                  )
-                })}
-              </div>
-            </div>
-            <p className="mt-5 text-lg leading-8 text-ink-muted md:text-xl md:leading-9">
-              {contact.invitation}
+    <section id="contact" className="folio-section contact-section">
+      <SectionHeading level={1}>Let's talk</SectionHeading>
+      <p className="contact-invitation">{contact.invitation}</p>
+      <a className="inline-link" href={`mailto:${site.email}`}>
+        {site.email} <ArrowUpRight size={14} aria-hidden="true" />
+      </a>
+
+      <form onSubmit={handleSubmit} className="mt-8 max-w-xl space-y-5">
+        {/* Honeypot — hidden from real visitors, catches bots that auto-fill every field */}
+        <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
+          <label htmlFor="contact-company">Company</label>
+          <input id="contact-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+        </div>
+
+        <div>
+          <label htmlFor="contact-name" className="text-sm font-medium text-ink">
+            Full Name
+          </label>
+          <input
+            id="contact-name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+            placeholder="Full name"
+            className={fieldClassName}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="contact-email" className="text-sm font-medium text-ink">
+            Email Address
+          </label>
+          <input
+            id="contact-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            placeholder="you@example.com"
+            className={fieldClassName}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="contact-message" className="text-sm font-medium text-ink">
+            Message
+          </label>
+          <textarea
+            id="contact-message"
+            name="message"
+            required
+            rows={7}
+            placeholder="Type your message"
+            className={`${fieldClassName} resize-y`}
+          />
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4">
+          <button
+            type="submit"
+            disabled={status === 'submitting'}
+            className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-medium text-surface transition-transform duration-150 hover:scale-[1.03] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
+          >
+            {status === 'submitting' ? (
+              <>
+                Sending
+                <Loader2 size={16} className="animate-spin" aria-hidden="true" />
+              </>
+            ) : (
+              <>
+                {contact.submitLabel}
+                <Send size={16} aria-hidden="true" />
+              </>
+            )}
+          </button>
+
+          {status === 'success' && (
+            <p className="flex items-center gap-1.5 text-sm font-medium text-ink" role="status">
+              <CheckCircle2 size={16} className="text-accent" aria-hidden="true" />
+              Message sent — I&apos;ll get back to you soon.
             </p>
-          </div>
+          )}
 
-          <form onSubmit={handleSubmit} className="mt-10 max-w-2xl space-y-5">
-            {/* Honeypot — hidden from real visitors, catches bots that auto-fill every field */}
-            <div className="absolute left-[-9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden="true">
-              <label htmlFor="contact-company">Company</label>
-              <input id="contact-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
-            </div>
-
-            <div>
-              <label htmlFor="contact-name" className="text-sm font-medium text-ink">
-                Full Name
-              </label>
-              <input
-                id="contact-name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                required
-                placeholder="Full name"
-                className={fieldClassName}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="contact-email" className="text-sm font-medium text-ink">
-                Email Address
-              </label>
-              <input
-                id="contact-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                placeholder="you@example.com"
-                className={fieldClassName}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="contact-message" className="text-sm font-medium text-ink">
-                Message
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                required
-                rows={7}
-                placeholder="Type your message"
-                className={`${fieldClassName} resize-y`}
-              />
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <button
-                type="submit"
-                disabled={status === 'submitting'}
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-medium text-surface transition-transform duration-150 hover:scale-[1.03] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
-              >
-                {status === 'submitting' ? (
-                  <>
-                    Sending
-                    <Loader2 size={16} className="animate-spin" aria-hidden="true" />
-                  </>
-                ) : (
-                  <>
-                    {contact.submitLabel}
-                    <Send size={16} aria-hidden="true" />
-                  </>
-                )}
-              </button>
-
-              {status === 'success' && (
-                <p className="flex items-center gap-1.5 text-sm font-medium text-ink" role="status">
-                  <CheckCircle2 size={16} className="text-accent" aria-hidden="true" />
-                  Message sent — I&apos;ll get back to you soon.
-                </p>
-              )}
-
-              {status === 'error' && (
-                <p className="flex items-center gap-1.5 text-sm font-medium text-ink" role="alert">
-                  <AlertCircle size={16} className="text-red-500" aria-hidden="true" />
-                  {errorMessage}
-                </p>
-              )}
-            </div>
-          </form>
-        </Reveal>
-      </div>
+          {status === 'error' && (
+            <p className="flex items-center gap-1.5 text-sm font-medium text-ink" role="alert">
+              <AlertCircle size={16} className="text-red-500" aria-hidden="true" />
+              {errorMessage}
+            </p>
+          )}
+        </div>
+      </form>
     </section>
   )
 }

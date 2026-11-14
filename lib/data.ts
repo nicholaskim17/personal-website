@@ -6,10 +6,10 @@ export interface NavLink {
 }
 
 export const navLinks: NavLink[] = [
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#hobbies', label: 'Hobbies' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/about', label: 'About' },
+  { href: '/work', label: 'Coding Projects' },
+  { href: '/misc', label: 'Life Outside of Coding' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export interface SocialLink {
@@ -26,7 +26,6 @@ export const socialLinks: SocialLink[] = [
 
 export const site = {
   name: 'Nick',
-  fullName: 'Nicholas [Kim]',
   description:
     'Engineering student at the University of Waterloo exploring AI systems, software engineering, and useful products.',
   email: 'nicholaskimto@gmail.com',
@@ -37,15 +36,14 @@ export const hero = {
   name: 'Nick Kim',
   tagline:
     'Building software, exploring AI, and learning a little more every day.',
-  primaryCta: { label: 'View My Work', href: '#projects' },
-  secondaryCta: { label: "Let's Talk", href: '#contact' },
+  primaryCta: { label: 'View My Work', href: '/work' },
+  secondaryCta: { label: "Let's Talk", href: '/contact' },
   portraitSrc: '/images/portrait.jpg',
   portraitAlt: 'Portrait photo of Nick',
   hoverPortraitSrc: '/images/silversurfer.webp',
 }
 
 export const about = {
-  heading: 'About',
   waterloo: {
     name: 'University of Waterloo',
     href: 'https://uwaterloo.ca/engineering/',
@@ -60,7 +58,7 @@ export const about = {
     "Doctor, Lawyer, Engineer, Investment Banker... I couldn't find a passion. Hackathons did it: take an idea, ship it over a weekend, watch someone actually use it. That's still the part I chase.",
     "I study Engineering at the University of Waterloo and work as a Machine Learning Engineer at WAT.ai. Outside of tech: gym, guitar, golf, hockey.",
   ],
-  hobbiesCta: { label: 'See my hobbies', href: '#hobbies' },
+  hobbiesCta: { label: 'See my hobbies', href: '/misc' },
   exploring: {
     heading: "What I'm exploring",
     items: ['AI Safety', 'AI agents and automation', 'Building useful full-stack products'],
@@ -161,6 +159,7 @@ export interface Project {
   image?: string
   imageAlt?: string
   video?: string
+  poster?: string
   imageHref?: string
   tags: string[]
   demoHref?: string
@@ -177,6 +176,7 @@ export const projects: Project[] = [
     description:
       'A low-cost tabletop wet lab where two SO-101 arms and a load-cell scale precisely weigh, dose, and mix chemicals, with a MuJoCo digital twin verifying every move in simulation.',
     video: '/images/autochem.mp4',
+    poster: '/images/autochem-preview.jpg',
     tags: ['MuJoCo', 'Robotics', 'SO-101', 'Arduino'],
     sourceHref: 'https://github.com/nicholaskim17/autochem',
     sourceLabel: 'Repo',
@@ -189,6 +189,7 @@ export const projects: Project[] = [
       'A master agent sabotages a web task as four browser agents compete to finish it, while spectators watch, place virtual YES or NO bets, and generate training data from their recoveries and failures.',
     result: '1st Place, Battle of the Schools (UofT vs. Waterloo).',
     video: '/images/polybot.mp4',
+    poster: '/images/polybot.png',
     tags: ['AI Agents', 'Playwright', 'Prediction Markets', 'TypeScript'],
     demoHref: 'https://polybot-inky.vercel.app/',
     demoLabel: 'Live demo',
@@ -203,6 +204,7 @@ export const projects: Project[] = [
       'An AI-powered sensor arbitration system that detects conflicting spacecraft telemetry and selects the safest data source in real time.',
     result: 'Third Overall, Google DeepMind Hackathon.',
     video: '/images/sensorarbitor.mp4',
+    poster: '/images/janus.png',
     imageHref:
       'https://www.linkedin.com/posts/waterloo-dev_waterloodev-hackathon-spacetech-activity-7490785925065777152-JRbC?utm_source=share&utm_medium=member_ios&rcm=ACoAAF1Q234B3sUEOFlSCz-3_OZYdZjECt_oVv0',
     tags: ['Gemma', 'AI', 'Sensor Fusion'],
@@ -216,6 +218,7 @@ export const projects: Project[] = [
       'A two-player table tennis game uses webcam pose tracking to turn each player’s hand into a virtual racket and synchronize the ball, score, and match state across laptops.',
     result: '1st Place, General Catalyst Hackathon.',
     video: '/images/rally.mp4',
+    poster: '/images/rally-preview.jpg',
     tags: ['React', 'Three.js', 'MediaPipe', 'Socket.IO'],
     demoHref: 'https://rally-sharon-browser.azurewebsites.net/',
     demoLabel: 'Play demo',
@@ -228,6 +231,7 @@ export const projects: Project[] = [
     description:
       'A spatial memory platform that turns ordinary walkthrough videos into photorealistic 3D places you can revisit, organize, and share.',
     video: '/images/atlas.mp4',
+    poster: '/images/atlas.png',
     imageHref: 'https://devpost.com/software/a-p87n0x',
     tags: ['Next.js', 'Gaussian Splatting', 'Firebase'],
     sourceHref: 'https://github.com/nicholaskim17/atlas',

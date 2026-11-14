@@ -25,7 +25,7 @@ export default function CalendarGrid({ days }: CalendarGridProps) {
 
   return (
     <div>
-      <p className="font-playfair text-base font-semibold text-ink">{monthLabel}</p>
+      <p className="text-base font-semibold text-ink">{monthLabel}</p>
 
       <div
         role="group"
@@ -56,7 +56,7 @@ export default function CalendarGrid({ days }: CalendarGridProps) {
                   day.didWorkout
                     ? 'bg-accent text-surface'
                     : isToday
-                      ? 'text-accent-strong'
+                      ? 'text-accent underline underline-offset-2'
                       : 'text-ink-muted'
                 }`}
               >

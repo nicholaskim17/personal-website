@@ -1,105 +1,56 @@
 import Image from 'next/image'
-import { ExternalLink, Github } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import type { Project } from '@/lib/data'
 
-interface ProjectCardProps {
-  project: Project
-}
-
-export default function ProjectCard({ project }: ProjectCardProps) {
-  const imageSizes = '(min-width: 1248px) 560px, (min-width: 768px) 45vw, 100vw'
-  const imageActionHref =
-    project.imageHref &&
-    ![project.sourceHref, project.demoHref, project.devpostHref].includes(project.imageHref)
-      ? project.imageHref
-      : undefined
-  const media = (
-    <div className="relative aspect-video overflow-hidden border border-border bg-surface-raised">
-      {project.video ? (
-        <video
-          src={project.video}
-          aria-label={`${project.title} project video`}
-          className="h-full w-full object-contain"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-        />
-      ) : project.image ? (
-        <Image
-          src={project.image}
-          alt={project.imageAlt ?? `${project.title} project preview`}
-          fill
-          sizes={imageSizes}
-          className="object-contain"
-        />
-      ) : null}
-    </div>
-  )
+export default function ProjectCard({ project }: { project: Project }) {
+  const links = [
+    { href: project.sourceHref, label: project.sourceLabel ?? 'Source' },
+    { href: project.demoHref, label: project.demoLabel ?? 'Demo' },
+    { href: project.devpostHref, label: 'Devpost' },
+    { href: project.imageHref, label: 'Project link' },
+  ].filter((link, index, all) => link.href && index === all.findIndex(other => other.href === link.href))
 
   return (
-    <article className="min-w-0">
-      {media}
-
-      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-        <div className="flex items-center gap-3">
-          <h3 className="font-sans text-2xl font-bold tracking-tight text-ink">{project.title}</h3>
-          {project.year != null && <span className="text-sm text-ink-faint">{project.year}</span>}
-        </div>
-
-        <div className="ml-auto flex items-center gap-4 text-ink-muted">
-          {project.sourceHref && (
-            <a
-              href={project.sourceHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} ${project.sourceLabel ?? 'source'}`}
-              className="transition-colors hover:text-accent"
-            >
-              <Github size={22} aria-hidden="true" />
-            </a>
-          )}
-          {project.demoHref && (
-            <a
-              href={project.demoHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} ${project.demoLabel ?? 'live demo'}`}
-              className="transition-colors hover:text-accent"
-            >
-              <ExternalLink size={22} aria-hidden="true" />
-            </a>
-          )}
-          {project.devpostHref && (
-            <a
-              href={project.devpostHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} on Devpost`}
-              className="transition-colors hover:text-accent"
-            >
-              <ExternalLink size={22} aria-hidden="true" />
-            </a>
-          )}
-          {imageActionHref && (
-            <a
-              href={imageActionHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${project.title} project link`}
-              className="transition-colors hover:text-accent"
-            >
-              <ExternalLink size={22} aria-hidden="true" />
-            </a>
+    <article className="project-card">
+      {(project.image || project.video) && (
+        <div className="project-media">
+          {project.video ? (
+            <video
+              src={project.video}
+              poster={project.poster}
+              aria-label={`${project.title} project video`}
+              className="h-full w-full object-contain"
+              controls
+              playsInline
+              preload="metadata"
+            />
+          ) : project.image && (
+            <Image
+              src={project.image}
+              alt={project.imageAlt ?? `${project.title} project preview`}
+              fill
+              sizes="(min-width: 1160px) 400px, (min-width: 620px) 46vw, 100vw"
+              className="object-contain"
+            />
           )}
         </div>
+      )}
+      <div className="project-title">
+        <h3>{project.title}</h3>
+        {project.year != null && <span className="work-date">{project.year}</span>}
       </div>
-
-      <div className="mt-3 text-base leading-7 text-ink-muted md:text-lg">
-        <p>{project.description}</p>
-        {project.result && <p className="mt-1">{project.result}</p>}
-      </div>
+      <p>{project.description}</p>
+      {project.result && <p className="project-result">{project.result}</p>}
+      <p className="work-tags">{project.tags.join(' · ')}</p>
+      {links.length > 0 && (
+        <div className="project-links">
+          {links.map(({ href, label }) => (
+            <a className="inline-link" key={href} href={href} target="_blank" rel="noreferrer" aria-label={`${project.title}: ${label}`}>
+              {label} <ArrowUpRight size={13} aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      )}
     </article>
   )
 }

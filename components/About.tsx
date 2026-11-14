@@ -1,90 +1,41 @@
-import { about } from '@/lib/data'
-import Image from 'next/image'
-import { ArrowDownRight } from 'lucide-react'
-import Reveal from './Reveal'
-import PhotoStack from './PhotoStack'
+import { about, hero } from '@/lib/data'
+import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
+import SectionHeading from './SectionHeading'
 
-const taggedMentions = [about.waterloo, about.watAI]
-const mentionPattern = new RegExp(`(${taggedMentions.map(m => m.name).join('|')})`, 'g')
-
-function AboutParagraph({ text, showHobbiesLink = false }: { text: string; showHobbiesLink?: boolean }) {
-  const segments = text.split(mentionPattern)
-
-  return (
-    <>
-      {segments.map((segment, i) => {
-        const mention = taggedMentions.find(m => m.name === segment)
-        if (!mention) return <span key={i}>{segment}</span>
-
-        return (
-          <a
-            key={i}
-            href={mention.href}
-            target="_blank"
-            rel="noreferrer"
-            className="group mx-1 whitespace-nowrap font-medium text-ink underline decoration-border underline-offset-4 transition-colors hover:text-accent hover:decoration-accent focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            <span className="relative mr-1.5 inline-block h-6 w-6 align-middle">
-              <Image src={mention.logo} alt="" fill sizes="24px" className="object-contain" />
-            </span>
-            {mention.name}
-          </a>
-        )
-      })}
-      {showHobbiesLink && (
-        <a
-          href={about.hobbiesCta.href}
-          className="group ml-2 inline-flex items-center gap-1 whitespace-nowrap font-medium leading-6 text-ink underline decoration-border underline-offset-4 transition-colors hover:text-accent hover:decoration-accent focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-        >
-          {about.hobbiesCta.label}
-          <ArrowDownRight
-            size={15}
-            aria-hidden="true"
-            className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:translate-y-0.5 motion-reduce:transition-none"
-          />
-        </a>
-      )}
-    </>
-  )
-}
+const mentions = [about.waterloo, about.watAI]
+const mentionPattern = new RegExp(`(${mentions.map(({ name }) => name.replaceAll('.', '\\.')).join('|')})`, 'g')
 
 export default function About() {
   return (
-    <section id="about" className="px-6 py-20 md:px-10 md:py-24">
-      <div className="mx-auto max-w-content">
-        <Reveal>
-          <h2 className="font-playfair text-2xl font-semibold text-ink">{about.heading}</h2>
-        </Reveal>
-
-        <div className="mt-8 flex flex-col gap-12 md:flex-row md:items-start md:justify-between md:gap-10">
-          <div className="max-w-2xl">
-            {about.paragraphs.map((paragraph, i) => (
-              <Reveal key={paragraph}>
-                <p className={`${i === 0 ? '' : 'mt-6'} text-lg leading-8 text-ink-muted md:text-xl`}>
-                  <AboutParagraph text={paragraph} showHobbiesLink={i === about.paragraphs.length - 1} />
-                </p>
-              </Reveal>
-            ))}
-
-            <Reveal>
-              <div className="mt-10">
-                <h3 className="font-playfair text-lg font-semibold text-ink">{about.exploring.heading}</h3>
-                <ul className="mt-3 space-y-2 text-sm text-ink-muted">
-                  {about.exploring.items.map(item => (
-                    <li key={item} className="flex items-center gap-2">
-                      <span className="h-1 w-1 rounded-full bg-accent" aria-hidden="true" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
-
-          <Reveal className="self-center md:shrink-0 md:self-start">
-            <PhotoStack />
-          </Reveal>
-        </div>
+    <section id="about" className="folio-section about-section">
+      <SectionHeading level={1}>{`${hero.greeting} ${hero.name}.`}</SectionHeading>
+      <p className="intro-line">{hero.tagline}</p>
+      <div className="about-copy">
+        {about.paragraphs.map((paragraph, index) => (
+          <p key={paragraph}>
+            {paragraph.split(mentionPattern).map((segment, i) => {
+              const mention = mentions.find(({ name }) => name === segment)
+              return mention
+                ? <a key={i} className="inline-link" href={mention.href} target="_blank" rel="noreferrer">{segment}</a>
+                : segment
+            })}
+            {index === about.paragraphs.length - 1 && (
+              <> <Link className="inline-link" href={about.hobbiesCta.href}>{about.hobbiesCta.label}<ArrowUpRight size={13} aria-hidden="true" /></Link></>
+            )}
+          </p>
+        ))}
+      </div>
+      <div className="about-interests">
+        <h2>{about.exploring.heading}</h2>
+        <ul>
+          {about.exploring.items.map(item => <li key={item}>{item}</li>)}
+        </ul>
+      </div>
+      <div className="about-actions">
+        {[hero.primaryCta, hero.secondaryCta].map(({ href, label }) => (
+          <Link className="inline-link" key={href} href={href}>{label}<ArrowUpRight size={14} aria-hidden="true" /></Link>
+        ))}
       </div>
     </section>
   )

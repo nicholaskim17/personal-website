@@ -14,7 +14,7 @@ export default function TrainingCard() {
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <div className="flex items-center gap-2">
           <Dumbbell size={16} className="text-accent" aria-hidden="true" />
-          <h3 className="font-playfair text-base font-semibold text-ink">{hobbies.training.heading}</h3>
+          <h3 className="text-base font-semibold text-ink">{hobbies.training.heading}</h3>
         </div>
         <a
           href={hobbies.training.hevyProfileHref}
@@ -42,19 +42,19 @@ function TrainingContent({ data }: { data: HevyDashboardData }) {
       <dl className="mt-4 grid w-full grid-cols-3 gap-3 border-t border-border pt-3 text-center">
         <div>
           <dt className="text-xs text-ink-faint">Streak</dt>
-          <dd className="mt-1 font-playfair text-lg font-semibold leading-7 text-ink">
+          <dd className="mt-1 text-lg font-semibold leading-7 text-ink">
             {data.streakDays}d <span className="inline-block leading-none" aria-hidden="true">🔥</span>
           </dd>
         </div>
         <div>
           <dt className="text-xs text-ink-faint">Week</dt>
-          <dd className="mt-1 font-playfair text-lg font-semibold leading-7 text-ink">
+          <dd className="mt-1 text-lg font-semibold leading-7 text-ink">
             {data.workoutsThisWeek}x
           </dd>
         </div>
         <div>
           <dt className="text-xs text-ink-faint">Month</dt>
-          <dd className="mt-1 font-playfair text-lg font-semibold leading-7 text-ink">
+          <dd className="mt-1 text-lg font-semibold leading-7 text-ink">
             {data.workoutsThisMonth}x
           </dd>
         </div>

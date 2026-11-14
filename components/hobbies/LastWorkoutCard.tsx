@@ -13,7 +13,7 @@ export default function LastWorkoutCard() {
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <div className="flex items-center gap-2">
           <ListChecks size={16} className="text-accent" aria-hidden="true" />
-          <h3 className="font-playfair text-base font-semibold text-ink">Last workout</h3>
+          <h3 className="text-base font-semibold text-ink">Last workout</h3>
         </div>
         <a
           href={hobbies.training.hevyProfileHref}

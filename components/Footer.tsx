@@ -1,15 +1,13 @@
+import { ArrowUpRight } from 'lucide-react'
 import { footer } from '@/lib/data'
 import Webring from '@/components/Webring'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border px-6 py-10 md:px-10">
-      <div className="mx-auto flex max-w-content flex-col items-center gap-6 text-center">
-        <Webring />
-        <div className="flex flex-col items-center gap-1 text-xs text-ink-faint">
-          <p>{footer.attribution}</p>
-        </div>
-      </div>
+    <footer className="site-footer">
+      <p>{footer.attribution}</p>
+      <Webring />
+      <a className="inline-link" href="#top">Back to top<ArrowUpRight size={13} aria-hidden="true" /></a>
     </footer>
   )
 }
