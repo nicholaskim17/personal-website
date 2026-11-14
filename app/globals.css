@@ -966,7 +966,7 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .landing-header :is(.sidebar-brand-name, .sidebar-nav li, .logo-guitar, .sidebar-portrait) {
+  .landing-header :where(.sidebar-brand-name, .sidebar-nav li, .logo-guitar, .sidebar-portrait) {
     animation: landing-entrance .45s cubic-bezier(.2, .65, .3, 1) backwards;
   }
 
