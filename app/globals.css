@@ -235,7 +235,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   100% { opacity: 0; transform: translate(var(--note-x, 100%), -220%) rotate(var(--note-tilt, 3deg)); }
 }
 
-.sidebar-caption, .sidebar-portrait { display: none; }
+.sidebar-portrait { display: none; }
 
 .sidebar-socials {
   display: flex;
@@ -298,7 +298,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .section-heading { margin-bottom: 1.25rem; }
 
-.sidebar-caption, .work-date {
+.work-date {
   font-family: var(--font-geist-mono), monospace;
   font-size: .68rem;
   font-weight: 500;
@@ -583,7 +583,6 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
     font-size: clamp(2.7rem, 4.8vw, 4.9rem);
   }
 
-  .sidebar-caption { display: block; margin-top: .62rem; color: var(--color-ink-faint); }
   .sidebar-socials { margin-top: 1.15rem; justify-content: center; gap: .8rem; }
   .sidebar-nav { margin-top: 1rem; }
   .sidebar-nav ul { display: grid; justify-items: center; }
@@ -661,12 +660,6 @@ a.org-highlight:hover, a.org-highlight:focus-visible {
   font-size: clamp(1.1rem, 2.35vw, 2rem);
 }
 
-
-.landing-header .sidebar-caption {
-  display: block;
-  margin-top: .7rem;
-  color: var(--color-ink-faint);
-}
 
 .landing-header .sidebar-socials {
   justify-content: center;

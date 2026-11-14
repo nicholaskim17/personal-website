@@ -27,7 +27,6 @@ export default function Header({ landing = false }: { landing?: boolean }) {
           )}
           <LogoGuitar />
         </div>
-        <p className="sidebar-caption">engineering @ waterloo</p>
         <div className="sidebar-socials" aria-label="Social links">
           <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>
           {socialLinks.map(({ label, href, icon }) => {
