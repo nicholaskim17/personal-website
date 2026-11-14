@@ -7,8 +7,8 @@ import { createPluck, guitarChords, guitarFrequency, guitarStrings } from '@/lib
 type GuitarPoint = { x: number; y: number }
 type GuitarNote = { string: number; fret?: number }
 
-const viewBoxTop = -8
-const viewBoxHeight = 241
+const viewBoxTop = -26
+const viewBoxHeight = 259
 const stringLeft = 39
 const stringRight = 61
 const nutY = 30
@@ -179,14 +179,14 @@ export default function LogoGuitar() {
           <circle cx="50" cy="165" r="15" fill="#383027" stroke="#211a14" />
           <circle cx="50" cy="165" r="12.8" stroke="#c5ac7c" strokeWidth="1.25" />
           <circle cx="50" cy="165" r="10.9" fill="#201b17" />
-          <path d="M35 2H30m5 10H30m5 10H30M65 2h5m-5 10h5m-5 10h5" stroke="#b5b7b4" />
-          <path d="M35-1q0-3 3-3h24q3 0 3 3v23l-6 8H41l-6-8Z"
+          <path d="M37-15h-6M37-2h-6M37 11h-6M63-15h6M63-2h6M63 11h6" stroke="#b5b7b4" />
+          <path d="M37-17Q37-20 41-20Q50-23 59-20Q63-20 63-17L62 19Q62 24 59 30H41Q38 24 38 19Z"
             fill="#5b4131" stroke="#c4ab85" />
-          <path d="M41.5 30 39 2M45 30l-6-18M48 30l-9-8M52 30l9-8M55 30l6-18M58.5 30 61 2"
+          <path d="M41.5 30 40-15M45 30 40-2M48 30 40 11M52 30 60 11M55 30 60-2M58.5 30 60-15"
             stroke="#ac9c87" strokeWidth=".8" opacity=".8" />
-          <path d="M39 2v.1M39 12v.1M39 22v.1M61 2v.1M61 12v.1M61 22v.1"
+          <path d="M40-15v.1M40-2v.1M40 11v.1M60-15v.1M60-2v.1M60 11v.1"
             stroke="#d0cbbd" strokeWidth="2.1" />
-          <path d="M29 0v4m0 6v4m0 6v4M71 0v4m0 6v4m0 6v4"
+          <path d="M30-17v4m0 9v4m0 9v4M70-17v4m0 9v4m0 9v4"
             stroke="#c8c9c2" strokeWidth="2.8" />
           <path d="M40 30h20l2 126H38Z" fill="#392e27" stroke="#95836b" />
           <path d="M40 30h20" stroke="#ece3ca" strokeWidth="2.4" />
