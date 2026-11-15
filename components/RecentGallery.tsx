@@ -53,7 +53,7 @@ export default function RecentGallery({ photos }: { photos: GalleryPhoto[] }) {
         {photos.map(photo => (
           <div className="gallery-photo" key={photo.src} style={{ aspectRatio: `${photo.width} / ${photo.height}` }}>
             <div className="gallery-photo-frame">
-              <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 620px) 82vw, 28rem" className="object-cover" draggable={false} />
+              <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 620px) 103vw, 35rem" className="object-cover" draggable={false} />
             </div>
           </div>
         ))}

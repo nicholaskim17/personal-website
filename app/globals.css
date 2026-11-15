@@ -747,7 +747,7 @@ a.org-button:is(:hover, :focus-visible) {
 
 .gallery-photo {
   flex: none;
-  height: clamp(12.5rem, 24vw, 16rem);
+  height: clamp(15.625rem, 30vw, 20rem);
   scroll-snap-align: start;
 }
 
@@ -969,7 +969,7 @@ a.org-button:is(:hover, :focus-visible) {
 
   .touching-grass-page .guitar-card-image + p { margin-top: .5rem; line-height: 1.35; }
   .touching-grass-page .gallery-heading { margin-block: .9rem .4rem; }
-  .touching-grass-page .gallery-photo { height: clamp(7rem, 26svh, 12rem); }
+  .touching-grass-page .gallery-photo { height: clamp(8.75rem, 32.5svh, 15rem); }
   .touching-grass-page .gallery-control { width: 1.75rem; height: 1.75rem; }
 
   .site-content:has(.touching-grass-page) .site-footer {
@@ -1000,7 +1000,7 @@ a.org-button:is(:hover, :focus-visible) {
   .touching-grass-page .hobbies-grid { display: contents; }
   .touching-grass-page .gallery { grid-column: 2; grid-row: 3; min-width: 0; }
   .touching-grass-page .gallery-heading { margin-top: 0; }
-  .touching-grass-page .gallery-photo { height: clamp(6rem, 22svh, 10.5rem); }
+  .touching-grass-page .gallery-photo { height: clamp(7.5rem, 27.5svh, 13.125rem); }
   .touching-grass-page .guitar-card-image { height: clamp(5rem, 15svh, 7rem); }
 }
 
@@ -1023,6 +1023,7 @@ a.org-button:is(:hover, :focus-visible) {
   .touching-grass-page .last-workout-exercises { margin-top: .75rem; }
   .touching-grass-page .last-workout-exercises li { padding-block: .55rem; }
   .touching-grass-page .guitar-card-image { height: clamp(7rem, 22svh, 10.5rem); }
+  .touching-grass-page .gallery-photo { height: clamp(8.75rem, min(32.5svh, calc(100svh - 31.5rem)), 15rem); }
   .touching-grass-page .gallery { margin-top: auto; }
 }
 
