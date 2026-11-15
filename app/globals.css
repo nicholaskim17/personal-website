@@ -917,10 +917,12 @@ a.org-button:is(:hover, :focus-visible) {
 
 @media (min-width: 800px) {
   .site-sidebar:not(.landing-header) {
-    gap: clamp(.5rem, 1.5svh, 1rem);
-    padding-block: clamp(1.75rem, 5svh, 3rem) clamp(.5rem, 1.5svh, .9rem);
-    overflow: hidden;
+    gap: clamp(.3rem, 1svh, .65rem);
+    padding-block: clamp(1.75rem, 5svh, 3rem) 0;
   }
+
+  /* Give the space below the portrait the same share as the gaps above it. */
+  .site-sidebar:not(.landing-header)::after { content: ''; }
 
   .site-sidebar:not(.landing-header) .sidebar-portrait {
     width: min(100%, 9rem, 20svh);

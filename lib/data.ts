@@ -256,7 +256,7 @@ export const projects: Project[] = [
     year: 2026,
     description:
       'A Solana-based identity layer that gives AI agents verifiable, revocable permissions.',
-    result: 'Ran JamHacks, one of Canada’s largest high school hackathons.',
+    result: "Won Canada's largest highschool hackathon (JamHacks)",
     video: '/images/nomad-demo.mp4',
     poster: '/images/nomad.png',
     tags: ['Solana', 'Rust / Anchor', 'TypeScript'],
