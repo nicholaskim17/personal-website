@@ -236,8 +236,6 @@ a.sidebar-name:is(:hover, :focus-visible) {
   display: flex;
 }
 
-.logo-guitar[data-capo="1"] .logo-guitar-strings { top: var(--guitar-first-fret); }
-
 .guitar-capo {
   position: absolute;
   inset: var(--guitar-first-fret) 35% auto;
