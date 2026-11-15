@@ -1019,9 +1019,10 @@ a.org-button:is(:hover, :focus-visible) {
 
   .landing-header {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, min(30vw, 24rem)));
     grid-template-rows: auto minmax(0, 1fr);
     justify-items: center;
+    justify-content: center;
     align-content: center;
     gap: clamp(1rem, 2svh, 1.75rem) clamp(2rem, 8vw, 8rem);
     height: 100%;
@@ -1047,32 +1048,6 @@ a.org-button:is(:hover, :focus-visible) {
     grid-row: 2;
     width: min(30svh, 25vw, 20rem);
     max-width: 100%;
-  }
-
-  .landing-page:has(.logo-guitar-lesson[open]) {
-    height: auto;
-    min-height: 100svh;
-    overflow: visible;
-  }
-
-  .landing-page:has(.logo-guitar-lesson[open]) main { min-height: auto; }
-
-  .landing-page:has(.logo-guitar-lesson[open]) .landing-header {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    gap: clamp(1.25rem, 3svh, 2.25rem);
-    padding: clamp(2rem, 6svh, 4rem) 1rem .5rem;
-  }
-
-  .landing-page:has(.logo-guitar-lesson[open]) .logo-guitar {
-    width: clamp(70px, 10svh, 110px);
-    margin: 0 0 1.5rem;
-  }
-
-  .landing-page:has(.logo-guitar-lesson[open]) .sidebar-portrait {
-    width: clamp(9rem, 24svh, 18rem);
-    max-width: 70%;
   }
 }
 
