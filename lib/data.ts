@@ -38,6 +38,13 @@ export const hero = {
 
 export type HighlightTone = 'gold' | 'orange' | 'teal' | 'pink' | 'blue' | 'violet' | 'green'
 
+export interface GalleryPhoto {
+  src: string
+  alt: string
+  width: number
+  height: number
+}
+
 export const about = {
   waterloo: {
     name: 'University of Waterloo',
@@ -46,12 +53,25 @@ export const about = {
     highlight: 'gold' as const,
   },
   gallery: [
-    { src: '/images/gallery/golf.jpeg', alt: 'Lining up a putt on the green with a friend' },
-    { src: '/images/gallery/hockey.jpeg', alt: 'Carrying the puck during a hockey game' },
-    { src: '/images/gallery/hackathon.jpeg', alt: 'Posing with laptops at a hackathon judging round' },
-    { src: '/images/gallery/waterloo.jpeg', alt: 'With friends in University of Waterloo gear' },
-    { src: '/images/gallery/soccer.jpeg', alt: 'At a soccer match with family' },
-    { src: '/images/gallery/nomad-pitch.jpeg', alt: 'Presenting the Nomad project at a hackathon whiteboard' },
+    { src: '/images/gallery/recent-01.jpeg', alt: 'Five friends standing together at an event', width: 1024, height: 768 },
+    { src: '/images/gallery/recent-02.jpeg', alt: 'Friends in costumes outside a restaurant at night', width: 1536, height: 2048 },
+    { src: '/images/gallery/recent-03.jpeg', alt: 'Friends dressed for a costume party', width: 1024, height: 768 },
+    { src: '/images/gallery/recent-04.jpeg', alt: 'Three students posing in a classroom', width: 1024, height: 768 },
+    { src: '/images/gallery/recent-05.jpeg', alt: 'Robotics project in progress around a dining table', width: 1536, height: 2048 },
+    { src: '/images/gallery/recent-06.jpeg', alt: 'Three friends posing at a concert', width: 768, height: 1024 },
+    { src: '/images/gallery/recent-07.jpeg', alt: 'A speaker addressing students in a workshop', width: 1182, height: 665 },
+    { src: '/images/gallery/recent-08.jpeg', alt: 'A hackathon group posing onstage', width: 1086, height: 724 },
+    { src: '/images/gallery/recent-09.jpeg', alt: 'Two students holding a first-place prize check', width: 768, height: 1024 },
+    { src: '/images/gallery/recent-10.jpeg', alt: 'Friends together at a campus orientation event', width: 1024, height: 768 },
+    { src: '/images/gallery/recent-11.jpeg', alt: 'Friends playing cards around a table', width: 768, height: 1024 },
+    { src: '/images/gallery/recent-12.jpeg', alt: 'Three people together on a golf course', width: 1024, height: 768 },
+    { src: '/images/gallery/recent-13.jpeg', alt: 'Students posing beside a robot at a Google event', width: 1024, height: 768 },
+    { src: '/images/gallery/golf.jpeg', alt: 'Lining up a putt on the green with a friend', width: 360, height: 480 },
+    { src: '/images/gallery/hockey.jpeg', alt: 'Carrying the puck during a hockey game', width: 540, height: 360 },
+    { src: '/images/gallery/hackathon.jpeg', alt: 'Posing with laptops at a hackathon judging round', width: 1086, height: 724 },
+    { src: '/images/gallery/waterloo.jpeg', alt: 'With friends in University of Waterloo gear', width: 480, height: 360 },
+    { src: '/images/gallery/soccer.jpeg', alt: 'At a soccer match with family', width: 480, height: 360 },
+    { src: '/images/gallery/nomad-pitch.jpeg', alt: 'Presenting the Nomad project at a hackathon whiteboard', width: 1024, height: 768 },
   ],
 }
 
@@ -236,7 +256,7 @@ export const projects: Project[] = [
     year: 2026,
     description:
       'A Solana-based identity layer that gives AI agents verifiable, revocable permissions.',
-    result: 'Best Use of Solana, JamHacks',
+    result: 'Ran JamHacks, one of Canada’s largest high school hackathons.',
     video: '/images/nomad-demo.mp4',
     poster: '/images/nomad.png',
     tags: ['Solana', 'Rust / Anchor', 'TypeScript'],

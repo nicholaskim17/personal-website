@@ -38,27 +38,6 @@ function TrainingContent({ data }: { data: HevyDashboardData }) {
   return (
     <div className="mt-4">
       <CalendarGrid days={data.calendar} />
-
-      <dl className="mt-4 grid w-full grid-cols-3 gap-3 border-t border-border pt-3 text-center">
-        <div>
-          <dt className="text-xs text-ink-faint">Streak</dt>
-          <dd className="mt-1 text-lg font-semibold leading-7 text-ink">
-            {data.streakDays}d <span className="inline-block leading-none" aria-hidden="true">🔥</span>
-          </dd>
-        </div>
-        <div>
-          <dt className="text-xs text-ink-faint">Week</dt>
-          <dd className="mt-1 text-lg font-semibold leading-7 text-ink">
-            {data.workoutsThisWeek}x
-          </dd>
-        </div>
-        <div>
-          <dt className="text-xs text-ink-faint">Month</dt>
-          <dd className="mt-1 text-lg font-semibold leading-7 text-ink">
-            {data.workoutsThisMonth}x
-          </dd>
-        </div>
-      </dl>
     </div>
   )
 }
@@ -67,11 +46,6 @@ function TrainingSkeleton() {
   return (
     <div className="mt-4 space-y-4" role="status" aria-label="Loading training data">
       <div className="h-24 animate-pulse bg-border/40" />
-      <div className="grid grid-cols-3 gap-3 border-t border-border pt-3">
-        <div className="h-10 animate-pulse bg-border/40" />
-        <div className="h-10 animate-pulse bg-border/40" />
-        <div className="h-10 animate-pulse bg-border/40" />
-      </div>
     </div>
   )
 }

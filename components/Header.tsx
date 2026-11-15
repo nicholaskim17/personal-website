@@ -15,7 +15,7 @@ const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
 
 export default function Header({ landing = false }: { landing?: boolean }) {
   const pathname = usePathname()
-  const portraitSizes = landing ? "(max-width: 479px) 180px, 288px" : "(min-width: 800px) 256px, 1px"
+  const portraitSizes = landing ? "(min-width: 800px) and (min-height: 620px) 320px, (max-width: 479px) 180px, 288px" : "(min-width: 800px) 256px, 1px"
   const wordmark = (
     <>
       <span className="name-bench-press" aria-hidden="true">

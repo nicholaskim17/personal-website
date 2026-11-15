@@ -702,31 +702,56 @@ a.org-button:is(:hover, :focus-visible) {
   contain: size;
 }
 
-.gallery-title { margin-block: 2rem .65rem; font-size: 1.1rem; }
-
-.gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
-
-.gallery-photo { aspect-ratio: 4 / 3; }
-
-.gallery-photo-frame { height: 100%; }
-
-@media (hover: hover) and (pointer: fine) {
-  .gallery-photo-frame {
-    pointer-events: none;
-    transform-origin: var(--photo-origin-x, center) var(--photo-origin-y, center);
-    transition: scale .24s ease-out;
-  }
-
-  .gallery-photo:hover { z-index: 1; }
-  .gallery-photo:hover .gallery-photo-frame { scale: 1.25; }
+.gallery-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block: 2rem .65rem;
 }
 
-@media (width < 620px) {
-  .gallery-photo:nth-child(odd) { --photo-origin-x: left; }
-  .gallery-photo:nth-child(even) { --photo-origin-x: right; }
-  .gallery-photo:nth-child(-n+2) { --photo-origin-y: top; }
-  .gallery-photo:nth-last-child(-n+2) { --photo-origin-y: bottom; }
+.gallery-title { font-size: 1.1rem; }
+
+.gallery-controls { display: flex; gap: .4rem; }
+
+.gallery-control {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-ink);
+  transition: border-color .2s ease, color .2s ease;
 }
+
+.gallery-control:not(:disabled):hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.gallery-control:disabled { cursor: default; opacity: .35; }
+
+.gallery-track {
+  display: flex;
+  gap: .65rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  padding-bottom: .5rem;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-track:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.gallery-photo {
+  flex: none;
+  height: clamp(12.5rem, 24vw, 16rem);
+  scroll-snap-align: start;
+}
+
+.gallery-photo-frame { width: 100%; height: 100%; }
 
 .contact-invitation { margin-bottom: .55rem; }
 
@@ -841,11 +866,6 @@ a.org-button:is(:hover, :focus-visible) {
 
 @media (min-width: 620px) {
   .project-grid, .hobbies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .gallery-photo:nth-child(3n+1) { --photo-origin-x: left; }
-  .gallery-photo:nth-child(3n) { --photo-origin-x: right; }
-  .gallery-photo:nth-child(-n+3) { --photo-origin-y: top; }
-  .gallery-photo:nth-last-child(-n+3) { --photo-origin-y: bottom; }
 }
 
 @media (min-width: 800px) {
@@ -913,8 +933,8 @@ a.org-button:is(:hover, :focus-visible) {
   height: auto;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(1.6rem, 5svh, 4rem);
-  padding: clamp(3.3rem, 11.5svh, 8rem) 1rem .5rem;
+  gap: clamp(1.25rem, 3svh, 2.5rem);
+  padding: clamp(2rem, 6svh, 4rem) 1rem .5rem;
   border: 0;
   overflow: visible;
   text-align: center;
@@ -986,6 +1006,74 @@ a.org-button:is(:hover, :focus-visible) {
   display: block;
   width: clamp(9rem, 24svh, 18rem);
   max-width: 70%;
+}
+
+@media (min-width: 800px) and (min-height: 620px) {
+  .landing-page {
+    height: 100svh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .landing-page main { min-height: 0; }
+
+  .landing-header {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto minmax(0, 1fr);
+    justify-items: center;
+    align-content: center;
+    gap: clamp(1rem, 2svh, 1.75rem) clamp(2rem, 8vw, 8rem);
+    height: 100%;
+    min-height: 0;
+    padding: clamp(2.25rem, 6svh, 4rem) clamp(1.5rem, 5vw, 4rem) .5rem;
+  }
+
+  .landing-header .sidebar-identity {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .landing-header .logo-guitar {
+    --guitar-lift: 0px;
+    grid-column: 1;
+    grid-row: 2;
+    width: clamp(7rem, 17svh, 12rem);
+    margin: 0 0 1.5rem;
+  }
+
+  .landing-header .sidebar-portrait {
+    grid-column: 2;
+    grid-row: 2;
+    width: min(30svh, 25vw, 20rem);
+    max-width: 100%;
+  }
+
+  .landing-page:has(.logo-guitar-lesson[open]) {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .landing-page:has(.logo-guitar-lesson[open]) main { min-height: auto; }
+
+  .landing-page:has(.logo-guitar-lesson[open]) .landing-header {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    gap: clamp(1.25rem, 3svh, 2.25rem);
+    padding: clamp(2rem, 6svh, 4rem) 1rem .5rem;
+  }
+
+  .landing-page:has(.logo-guitar-lesson[open]) .logo-guitar {
+    width: clamp(70px, 10svh, 110px);
+    margin: 0 0 1.5rem;
+  }
+
+  .landing-page:has(.logo-guitar-lesson[open]) .sidebar-portrait {
+    width: clamp(9rem, 24svh, 18rem);
+    max-width: 70%;
+  }
 }
 
 .landing-footer {
