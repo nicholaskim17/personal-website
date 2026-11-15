@@ -58,7 +58,7 @@ export default function LogoGuitar() {
   const tabVisit = useRef(0)
   const buffers = useRef<Map<number, AudioBuffer> | null>(null)
   const sequence = useRef(0)
-  const [sound, setSound] = useState<'off' | 'on' | 'unavailable'>('off')
+  const [soundUnavailable, setSoundUnavailable] = useState(false)
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
   const [lessonOpen, setLessonOpen] = useState(false)
   const [selectedChord, setSelectedChord] = useState<GuitarChord | null>(null)
@@ -79,6 +79,16 @@ export default function LogoGuitar() {
   }, [])
 
   useEffect(() => {
+    function activateAudio() {
+      if (document.hidden || audio.current?.state === 'running') return
+      try {
+        const context = audio.current ??= new AudioContext()
+        void resumeAudio(context, true)?.catch(() => {})
+      } catch {
+        setSoundUnavailable(true)
+      }
+    }
+
     function restoreAudio() {
       previousPointer.current = null
       if (document.hidden) {
@@ -91,9 +101,13 @@ export default function LogoGuitar() {
     }
 
     document.addEventListener('visibilitychange', restoreAudio)
+    document.addEventListener('click', activateAudio)
+    document.addEventListener('keydown', activateAudio)
     window.addEventListener('focus', restoreAudio)
     return () => {
       document.removeEventListener('visibilitychange', restoreAudio)
+      document.removeEventListener('click', activateAudio)
+      document.removeEventListener('keydown', activateAudio)
       window.removeEventListener('focus', restoreAudio)
       const context = audio.current
       audio.current = null
@@ -129,30 +143,29 @@ export default function LogoGuitar() {
     source.start(when)
   }
 
-  async function playStrings(stringIndexes: number[], canEnableSound = false) {
+  async function playStrings(stringIndexes: number[], fromGesture = false) {
     const notesToPlay = stringIndexes.flatMap(string => {
       const fret = selectedChord?.frets[string]
       return fret === null ? [] : [{ string, fret }]
     })
-    if (document.hidden || (!notesToPlay.length && !canEnableSound)) return
+    if (document.hidden || !notesToPlay.length) return
+    const newNotes = notesToPlay.map(({ string }) => ({ id: ++sequence.current, string }))
+    setNotes(previous => [...previous, ...newNotes].slice(-8))
+
     try {
       const visit = tabVisit.current
-      const canStart = canEnableSound || navigator.userActivation?.hasBeenActive
-      const context = audio.current ?? (canStart ? new AudioContext() : null)
-      if (!context) return
-      audio.current = context
-      const resumed = resumeAudio(context, canEnableSound)
-      if (resumed) await resumed
+      const context = audio.current ??= new AudioContext()
+      const requestedAt = performance.now()
+      if (!fromGesture && resumingAudio.current && navigator.userActivation?.hasBeenActive === false) return
+      await resumeAudio(context, fromGesture)
+      // A browser may hold resume() until the first interaction. Drop old hover notes.
+      if (!fromGesture && performance.now() - requestedAt > 150) return
       if (audio.current !== context || context.state !== 'running' || visit !== tabVisit.current || document.hidden) return
-      setSound('on')
-      if (notesToPlay.length) {
-        const newNotes = notesToPlay.map(({ string }) => ({ id: ++sequence.current, string }))
-        setNotes(previous => [...previous, ...newNotes].slice(-8))
-      }
+      setSoundUnavailable(false)
       const start = context.currentTime + .01
       notesToPlay.forEach((note, offset) => pluck(note, context, start + offset * .012))
     } catch {
-      setSound('unavailable')
+      setSoundUnavailable(true)
     }
   }
 
@@ -250,7 +263,7 @@ export default function LogoGuitar() {
         </span>
       </div>
       <div className="logo-guitar-callout" aria-hidden="true">
-        <span>{sound === 'on' ? 'strum :)' : 'click :)'}</span>
+        <span>strum :)</span>
         <svg viewBox="0 0 39 24" fill="none">
           <path d="M36 3C29 15 18 19 4 16m0 0 8-7m-8 7 10 5" />
         </svg>
@@ -266,7 +279,6 @@ export default function LogoGuitar() {
             if (lessonOpen) setSelectedChord(null)
             setLessonOpen(!lessonOpen)
             previousPointer.current = null
-            void playStrings([], true)
           }}
         >wanna play your first song?</button>
         {lessonOpen && (
@@ -285,7 +297,6 @@ export default function LogoGuitar() {
                   onClick={() => {
                     setSelectedChord(previous => previous === chord ? null : chord)
                     previousPointer.current = null
-                    void playStrings([], true)
                   }}
                 >
                   {chord.name}
@@ -296,11 +307,7 @@ export default function LogoGuitar() {
         )}
       </div>
       <span id={hintId} className="sr-only" aria-live="polite">
-        {sound === 'on'
-          ? 'Move across the strings or tap to play.'
-          : sound === 'unavailable'
-            ? 'Sound unavailable.'
-            : 'Click or tap a string to start playing.'}
+        {soundUnavailable ? 'Sound unavailable.' : 'Move across the strings or tap a string to play.'}
       </span>
     </div>
   )
