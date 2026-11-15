@@ -24,7 +24,7 @@ export default function CalendarGrid({ days }: CalendarGridProps) {
   const monthLabel = new Date(year, month - 1, 1).toLocaleDateString('en-US', { month: 'long' })
 
   return (
-    <div>
+    <div className="training-calendar">
       <p className="text-base font-semibold text-ink">{monthLabel}</p>
 
       <div
@@ -48,7 +48,7 @@ export default function CalendarGrid({ days }: CalendarGridProps) {
           const label = `${monthLabel} ${dayNumber}${day.didWorkout ? ', workout logged' : ''}${isToday ? ' (today)' : ''}`
 
           return (
-            <div key={day.date} className="flex items-center justify-center py-0.5">
+            <div key={day.date} className="calendar-day flex items-center justify-center py-0.5">
               <span
                 aria-label={label}
                 title={label}
