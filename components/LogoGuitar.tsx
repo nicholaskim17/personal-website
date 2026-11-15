@@ -119,11 +119,6 @@ export default function LogoGuitar() {
       return fret === null ? [] : [{ string, fret }]
     })
     if (document.hidden || (!notesToPlay.length && !canEnableSound)) return
-    if (notesToPlay.length) {
-      const newNotes = notesToPlay.map(({ string }) => ({ id: ++sequence.current, string }))
-      setNotes(previous => [...previous, ...newNotes].slice(-8))
-    }
-
     try {
       const visit = tabVisit.current
       const canStart = canEnableSound || navigator.userActivation?.hasBeenActive
@@ -134,6 +129,10 @@ export default function LogoGuitar() {
       if (resumed) await resumed
       if (audio.current !== context || context.state !== 'running' || visit !== tabVisit.current || document.hidden) return
       setSound('on')
+      if (notesToPlay.length) {
+        const newNotes = notesToPlay.map(({ string }) => ({ id: ++sequence.current, string }))
+        setNotes(previous => [...previous, ...newNotes].slice(-8))
+      }
       const start = context.currentTime + .01
       notesToPlay.forEach((note, offset) => pluck(note, context, start + offset * .012))
     } catch {
@@ -162,6 +161,10 @@ export default function LogoGuitar() {
       <div
         className="logo-guitar-instrument"
         style={guitarLayout}
+        onPointerDown={event => {
+          if (event.target instanceof Element && event.target.closest('button')) return
+          void playStrings(guitarStrings.map((_, index) => index), true)
+        }}
         onPointerEnter={strum}
         onPointerMove={strum}
         onPointerLeave={event => {
@@ -231,7 +234,7 @@ export default function LogoGuitar() {
         </span>
       </div>
       <div className="logo-guitar-callout" aria-hidden="true">
-        <span>strum :)</span>
+        <span>{sound === 'on' ? 'strum :)' : 'click :)'}</span>
         <svg viewBox="0 0 39 24" fill="none">
           <path d="M36 3C29 15 18 19 4 16m0 0 8-7m-8 7 10 5" />
         </svg>
@@ -240,7 +243,7 @@ export default function LogoGuitar() {
         if (!event.currentTarget.open) setSelectedChord(null)
         previousPointer.current = null
       }}>
-        <summary>wanna play your first song?</summary>
+        <summary onClick={() => void playStrings([], true)}>wanna play your first song?</summary>
         <div className="logo-guitar-lesson-panel">
           <p>Play Riptide</p>
           <p className="logo-guitar-lesson-hint">Hint&#58; {guitarChords.map(({ name }) => name).join(' · ')}</p>

@@ -216,6 +216,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .logo-guitar-instrument {
   position: relative;
+  cursor: pointer;
   transform: rotate(22deg);
   transform-origin: 50% 68%;
 }
@@ -391,7 +392,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   position: absolute;
   top: 74%;
   left: 67%;
-  color: var(--color-ink-muted);
+  color: var(--color-guitar);
   pointer-events: none;
 }
 
@@ -401,6 +402,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   height: auto;
   opacity: 0;
   z-index: 2;
+  filter: drop-shadow(0 1px 2px var(--color-sidebar));
 }
 
 .logo-guitar-notes svg[data-string="0"],
@@ -1002,6 +1004,28 @@ a.org-button:is(:hover, :focus-visible) {
   .touching-grass-page .gallery-heading { margin-top: 0; }
   .touching-grass-page .gallery-photo { height: clamp(6rem, 22svh, 10.5rem); }
   .touching-grass-page .guitar-card-image { height: clamp(5rem, 15svh, 7rem); }
+}
+
+@media (min-width: 1060px) and (min-height: 680px) {
+  .site-content:has(.touching-grass-page) main { display: flex; flex-direction: column; min-height: 0; }
+
+  .touching-grass-page { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  .touching-grass-page .hobbies-grid { min-height: min(43svh, 21rem); }
+  .touching-grass-page .hobbies-grid article { padding-top: clamp(.75rem, 2svh, 1.25rem); }
+  .touching-grass-page .hobbies-grid h3 { font-size: 1rem; }
+  .touching-grass-page .hobbies-grid article > div:first-child a { font-size: .75rem; }
+  .touching-grass-page .hobbies-grid article > div:nth-child(2) { margin-top: 1rem; }
+  .touching-grass-page .training-calendar [role="group"] { margin-top: .65rem; }
+  .touching-grass-page .calendar-day span {
+    width: min(4svh, 3vw, 1.75rem);
+    height: min(4svh, 3vw, 1.75rem);
+    font-size: .75rem;
+  }
+
+  .touching-grass-page .last-workout-exercises { margin-top: .75rem; }
+  .touching-grass-page .last-workout-exercises li { padding-block: .55rem; }
+  .touching-grass-page .guitar-card-image { height: clamp(7rem, 22svh, 10.5rem); }
+  .touching-grass-page .gallery { margin-top: auto; }
 }
 
 .landing-page {
