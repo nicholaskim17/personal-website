@@ -22,7 +22,7 @@ export default function GuitarCard() {
       </div>
 
       <div className="guitar-card-image relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-sm">
-        <Image src={hobbies.guitar.image} alt={hobbies.guitar.imageAlt} fill sizes="200px" className="object-cover" />
+        <Image src={hobbies.guitar.image} alt={hobbies.guitar.imageAlt} fill sizes="(min-width: 1060px) 26vw, (min-width: 800px) 40vw, (min-width: 620px) 45vw, 100vw" className="object-cover object-top" />
       </div>
 
       <p className="mt-3 text-sm leading-6 text-ink-muted">{hobbies.guitar.sentence}</p>

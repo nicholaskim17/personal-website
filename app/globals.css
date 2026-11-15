@@ -948,11 +948,11 @@ a.org-button:is(:hover, :focus-visible) {
   .touching-grass-page .hobbies-grid article > div:first-child a { font-size: .65rem; }
   .touching-grass-page .hobbies-grid article > div:nth-child(2) { margin-top: .6rem; }
 
-  .touching-grass-page .training-calendar [role="group"] { margin-top: .4rem; gap: 0; }
+  .touching-grass-page .training-calendar [role="group"] { margin-top: .4rem; row-gap: .2rem; }
   .touching-grass-page .calendar-day { padding-block: 0; }
   .touching-grass-page .calendar-day span {
-    width: min(3.2svh, 2.8vw, 1.5rem);
-    height: min(3.2svh, 2.8vw, 1.5rem);
+    width: min(3.5svh, 3vw, 1.6rem);
+    height: min(3.5svh, 3vw, 1.6rem);
     font-size: .625rem;
   }
 
@@ -961,9 +961,9 @@ a.org-button:is(:hover, :focus-visible) {
     margin-top: .5rem;
   }
 
-  .touching-grass-page .last-workout-exercises li { padding-block: .35rem; }
+  .touching-grass-page .last-workout-exercises li { padding-block: .45rem; }
   .touching-grass-page .guitar-card-image {
-    height: clamp(5.5rem, 17svh, 8rem);
+    height: clamp(6.25rem, 19svh, 9rem);
     aspect-ratio: auto;
   }
 
@@ -1001,7 +1001,7 @@ a.org-button:is(:hover, :focus-visible) {
   .touching-grass-page .gallery { grid-column: 2; grid-row: 3; min-width: 0; }
   .touching-grass-page .gallery-heading { margin-top: 0; }
   .touching-grass-page .gallery-photo { height: clamp(7.5rem, 27.5svh, 13.125rem); }
-  .touching-grass-page .guitar-card-image { height: clamp(5rem, 15svh, 7rem); }
+  .touching-grass-page .guitar-card-image { height: clamp(5.75rem, 17svh, 8rem); }
 }
 
 @media (min-width: 1060px) and (min-height: 680px) {
@@ -1013,18 +1013,24 @@ a.org-button:is(:hover, :focus-visible) {
   .touching-grass-page .hobbies-grid h3 { font-size: 1rem; }
   .touching-grass-page .hobbies-grid article > div:first-child a { font-size: .75rem; }
   .touching-grass-page .hobbies-grid article > div:nth-child(2) { margin-top: 1rem; }
-  .touching-grass-page .training-calendar [role="group"] { margin-top: .65rem; }
+  .touching-grass-page .training-calendar [role="group"] { margin-top: .65rem; row-gap: .3rem; }
   .touching-grass-page .calendar-day span {
-    width: min(4svh, 3vw, 1.75rem);
-    height: min(4svh, 3vw, 1.75rem);
+    width: min(4.3svh, 3.2vw, 1.875rem);
+    height: min(4.3svh, 3.2vw, 1.875rem);
     font-size: .75rem;
   }
 
   .touching-grass-page .last-workout-exercises { margin-top: .75rem; }
-  .touching-grass-page .last-workout-exercises li { padding-block: .55rem; }
-  .touching-grass-page .guitar-card-image { height: clamp(7rem, 22svh, 10.5rem); }
+  .touching-grass-page .last-workout-exercises li { padding-block: .65rem; }
+  .touching-grass-page .guitar-card-image { height: clamp(7.75rem, 24svh, 12rem); }
   .touching-grass-page .gallery-photo { height: clamp(8.75rem, min(32.5svh, calc(100svh - 31.5rem)), 15rem); }
   .touching-grass-page .gallery { margin-top: auto; }
+}
+
+@media (min-width: 1060px) and (min-height: 820px) {
+  .touching-grass-page .hobbies-grid { min-height: min(46svh, 23rem); }
+  .touching-grass-page .training-calendar [role="group"] { row-gap: 1.15rem; }
+  .touching-grass-page .guitar-card-image { height: clamp(12rem, 27svh, 14rem); }
 }
 
 .landing-page {
