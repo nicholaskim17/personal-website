@@ -51,6 +51,7 @@ function getStrummedStrings(previous: GuitarPoint | null, current: GuitarPoint, 
 
 export default function LogoGuitar() {
   const shape = useRef<SVGSVGElement>(null)
+  const lessonTrigger = useRef<HTMLButtonElement>(null)
   const previousPointer = useRef<GuitarPoint | null>(null)
   const audio = useRef<AudioContext | null>(null)
   const resumingAudio = useRef<Promise<void> | null>(null)
@@ -59,9 +60,11 @@ export default function LogoGuitar() {
   const sequence = useRef(0)
   const [sound, setSound] = useState<'off' | 'on' | 'unavailable'>('off')
   const [notes, setNotes] = useState<{ id: number; string: number }[]>([])
+  const [lessonOpen, setLessonOpen] = useState(false)
   const [selectedChord, setSelectedChord] = useState<GuitarChord | null>(null)
-  const capo = selectedChord ? 1 : 0
+  const capo = lessonOpen ? 1 : 0
   const hintId = useId()
+  const lessonId = `${hintId}-lesson`
   const spruceId = `${hintId}-spruce`
 
   const resumeAudio = useCallback((context: AudioContext, fromGesture = false) => {
@@ -99,6 +102,19 @@ export default function LogoGuitar() {
       if (context && context.state !== 'closed') void context.close().catch(() => {})
     }
   }, [resumeAudio])
+
+  useEffect(() => {
+    if (!lessonOpen) return
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key !== 'Escape') return
+      setLessonOpen(false)
+      setSelectedChord(null)
+      previousPointer.current = null
+      lessonTrigger.current?.focus()
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [lessonOpen])
 
   function pluck({ string, fret }: GuitarNote, context: AudioContext, when: number) {
     // Fast Refresh may preserve the array used by the previous cache.
@@ -239,33 +255,46 @@ export default function LogoGuitar() {
           <path d="M36 3C29 15 18 19 4 16m0 0 8-7m-8 7 10 5" />
         </svg>
       </div>
-      <details className="logo-guitar-lesson" onToggle={event => {
-        if (!event.currentTarget.open) setSelectedChord(null)
-        previousPointer.current = null
-      }}>
-        <summary onClick={() => void playStrings([], true)}>wanna play your first song?</summary>
-        <div className="logo-guitar-lesson-panel">
-          <p>Play Riptide</p>
-          <p className="logo-guitar-lesson-hint">Hint&#58; {guitarChords.map(({ name }) => name).join(' · ')}</p>
-        </div>
-        <div className="logo-guitar-chords" role="group" aria-label="Riptide chords">
-          {guitarChords.map(chord => (
-            <button
-              key={chord.name}
-              type="button"
-              aria-label={`Select ${chord.name} chord`}
-              aria-pressed={selectedChord === chord}
-              onClick={() => {
-                setSelectedChord(previous => previous === chord ? null : chord)
-                previousPointer.current = null
-                void playStrings([], true)
-              }}
-            >
-              {chord.name}
-            </button>
-          ))}
-        </div>
-      </details>
+      <div className="logo-guitar-lesson">
+        <button
+          ref={lessonTrigger}
+          type="button"
+          className="logo-guitar-lesson-trigger"
+          aria-expanded={lessonOpen}
+          aria-controls={lessonId}
+          onClick={() => {
+            if (lessonOpen) setSelectedChord(null)
+            setLessonOpen(!lessonOpen)
+            previousPointer.current = null
+            void playStrings([], true)
+          }}
+        >wanna play your first song?</button>
+        {lessonOpen && (
+          <>
+            <div id={lessonId} className="logo-guitar-lesson-panel">
+              <p>Play Riptide</p>
+              <p className="logo-guitar-lesson-hint">Hint&#58; {guitarChords.map(({ name }) => name).join(' · ')}</p>
+            </div>
+            <div className="logo-guitar-chords" role="group" aria-label="Riptide chords">
+              {guitarChords.map(chord => (
+                <button
+                  key={chord.name}
+                  type="button"
+                  aria-label={`Select ${chord.name} chord`}
+                  aria-pressed={selectedChord === chord}
+                  onClick={() => {
+                    setSelectedChord(previous => previous === chord ? null : chord)
+                    previousPointer.current = null
+                    void playStrings([], true)
+                  }}
+                >
+                  {chord.name}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
       <span id={hintId} className="sr-only" aria-live="polite">
         {sound === 'on'
           ? 'Move across the strings or tap to play.'

@@ -324,17 +324,19 @@ a.sidebar-name:is(:hover, :focus-visible) {
   font: 400 .78rem/1.15 var(--font-pixel);
 }
 
-.logo-guitar-lesson :is(summary, .logo-guitar-lesson-panel) {
+.logo-guitar-lesson :is(.logo-guitar-lesson-trigger, .logo-guitar-lesson-panel) {
   position: absolute;
   width: max-content;
   pointer-events: auto;
 }
 
-.logo-guitar-lesson summary {
+.logo-guitar-lesson-trigger {
   top: 100%;
   left: 50%;
   transform: translateX(calc(-50% + .55rem));
-  list-style: none;
+  background: none;
+  border: 0;
+  font: inherit;
   cursor: pointer;
   padding-block: .2rem;
   color: var(--color-ink-muted);
@@ -343,9 +345,7 @@ a.sidebar-name:is(:hover, :focus-visible) {
   text-underline-offset: .2em;
 }
 
-.logo-guitar-lesson summary::-webkit-details-marker { display: none; }
-
-.logo-guitar-lesson summary:is(:hover, :focus-visible) {
+.logo-guitar-lesson-trigger:is(:hover, :focus-visible) {
   color: var(--color-guitar);
   text-decoration-color: currentColor;
 }
