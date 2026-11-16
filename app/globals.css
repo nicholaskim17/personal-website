@@ -833,15 +833,21 @@ a.org-button:is(:hover, :focus-visible) {
   place-items: center;
   width: 2rem;
   height: 2rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid #ff9f43;
   border-radius: 50%;
-  color: var(--color-ink);
+  background: #ff9f43;
+  color: #211207;
 }
 
-.portrait-track-play:hover,
-.portrait-track-play[aria-busy="true"] {
-  border-color: var(--color-guitar);
+.portrait-track-play:enabled:hover {
+  border-color: #ffbc73;
+  background: #ffbc73;
+}
+
+.portrait-track-play:disabled {
+  background: transparent;
   color: var(--color-guitar);
+  cursor: default;
 }
 
 .portrait-track-album {
@@ -864,15 +870,6 @@ a.org-button:is(:hover, :focus-visible) {
   border-radius: 50%;
   object-fit: cover;
 }
-
-.portrait-spotify-embed {
-  width: min(18rem, calc(100vw - 2rem));
-  margin-top: .55rem;
-  color: var(--color-ink-muted);
-  font-size: .75rem;
-}
-
-.portrait-spotify-embed iframe { display: block; width: 100%; border: 0; }
 
 .spotify-logo-light, .light .spotify-logo-dark { display: none; }
 
@@ -957,7 +954,6 @@ a.org-button:is(:hover, :focus-visible) {
 
 @media (min-width: 800px) {
   .site-shell { display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); }
-  .site-shell:has(.portrait-spotify-embed) { --sidebar-width: clamp(21rem, 30vw, 30rem); }
 
   .site-sidebar {
     height: 100svh;
