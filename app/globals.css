@@ -83,6 +83,8 @@ body { font-size: 1rem; }
   border-bottom: 1px solid var(--color-border);
 }
 
+.mobile-navigation { display: none; }
+
 .sidebar-tools {
   position: absolute;
   inset: .8rem var(--gutter) auto auto;
@@ -1168,6 +1170,83 @@ a.org-button:is(:hover, :focus-visible) {
     grid-row: 2;
     width: min(30svh, 25vw, 20rem);
     max-width: 100%;
+  }
+}
+
+@media (width < 800px) and (orientation: portrait) {
+  html { scroll-padding-top: calc(4rem + env(safe-area-inset-top)); }
+
+  .site-sidebar:not(.landing-header),
+  .landing-header :is(.sidebar-tools, .sidebar-socials, .sidebar-nav) {
+    display: none;
+  }
+
+  .site-content {
+    min-height: 100svh;
+    padding-top: calc(3.5rem + env(safe-area-inset-top));
+  }
+
+  .site-content .folio-section { padding-inline: 0; }
+
+  .landing-header { padding-top: calc(clamp(4.25rem, 8svh, 5rem) + env(safe-area-inset-top)); }
+
+  .mobile-navigation {
+    --menu-top: calc(.8rem + env(safe-area-inset-top));
+    --menu-edge: calc(1rem + env(safe-area-inset-right));
+    position: fixed;
+    z-index: 20;
+    inset: var(--menu-top) var(--menu-edge) auto auto;
+    display: block;
+  }
+
+  .mobile-menu-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid var(--color-ink-faint);
+    border-radius: 50%;
+    background: var(--color-surface-raised);
+    color: var(--color-ink);
+  }
+
+  .mobile-menu-panel {
+    position: absolute;
+    inset: calc(100% + .5rem) 0 auto auto;
+    width: min(18rem, calc(100vw - var(--menu-edge) - 1rem));
+    max-height: calc(100dvh - var(--menu-top) - 4.25rem - env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: .65rem;
+    border: 1px solid var(--color-ink-faint);
+    border-radius: 1rem;
+    background: var(--color-surface-raised);
+    box-shadow: 0 .6rem 1.5rem #0003;
+    text-align: center;
+  }
+
+  .mobile-menu-panel nav a {
+    display: grid;
+    place-items: center;
+    min-height: 2.75rem;
+    padding: .35rem .5rem;
+    border-radius: .5rem;
+    color: var(--color-ink);
+    font: 550 1.17rem/1.1 var(--font-pixel);
+  }
+
+  .mobile-menu-panel nav a:is([aria-current="page"], :hover) { color: var(--color-guitar); }
+  .mobile-menu-panel nav a[aria-current="page"] { background: var(--color-sidebar); }
+
+  .mobile-menu-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .85rem;
+    margin-top: .4rem;
+    padding-top: .55rem;
+    border-top: 1px solid var(--color-border);
   }
 }
 
