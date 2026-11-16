@@ -1,13 +1,11 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { hero, navLinks, site, socialLinks } from '@/lib/data'
 import LogoGuitar from './LogoGuitar'
-import PortraitSoundWaves from './PortraitSoundWaves'
 import PortraitTrack from './PortraitTrack'
 import ThemeToggle from './ThemeToggle'
 import XBrandIcon from './XBrandIcon'
@@ -137,13 +135,7 @@ export default function Header({ landing = false }: { landing?: boolean }) {
           </nav>
         </div>
         <LogoGuitar />
-        <figure className="sidebar-portrait">
-          <PortraitTrack />
-          <div className="portrait-frame">
-            <Image src={hero.portraitSrc} alt={hero.portraitAlt} fill sizes={portraitSizes} priority unoptimized className="object-cover" />
-            <PortraitSoundWaves />
-          </div>
-        </figure>
+        <PortraitTrack sizes={portraitSizes} />
       </header>
     </>
   )

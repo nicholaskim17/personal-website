@@ -788,15 +788,65 @@ a.org-button:is(:hover, :focus-visible) {
   text-underline-offset: .2em;
 }
 
+.portrait-track-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  margin-bottom: .3rem;
+}
+
 .portrait-track-source {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: .2rem .5rem;
-  margin-bottom: .25rem;
   color: var(--color-ink-muted);
   font-size: .69rem;
+}
+
+.portrait-track-play,
+.portrait-player-close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-ink);
+}
+
+:is(.portrait-track-play, .portrait-player-close):hover {
+  border-color: var(--color-guitar);
+  color: var(--color-guitar);
+}
+
+.portrait-player {
+  position: fixed;
+  z-index: 21;
+  inset: auto max(.5rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) auto;
+  width: min(20rem, calc(100vw - 1rem));
+  padding: .55rem;
+  border: 1px solid var(--color-border);
+  border-radius: .9rem;
+  background: var(--color-surface-raised);
+  box-shadow: 0 .5rem 1.5rem #0004;
+  color: var(--color-ink);
+  font-size: .85rem;
+}
+
+.portrait-player-close { margin: 0 0 .45rem auto; }
+.portrait-player iframe { display: block; max-width: 100%; border: 0; border-radius: .5rem; }
+.portrait-player > :is(p, a) { display: block; padding: .2rem .4rem .55rem; }
+
+@media (min-width: 800px) and (min-height: 620px) {
+  body:has(.landing-header) .portrait-player { inset-inline: max(.5rem, env(safe-area-inset-left)) auto; }
+}
+
+@media (width < 800px) and (orientation: portrait) {
+  .portrait-player { inset-block: calc(4.25rem + env(safe-area-inset-top)) auto; }
 }
 
 .spotify-logo-light, .light .spotify-logo-dark { display: none; }
