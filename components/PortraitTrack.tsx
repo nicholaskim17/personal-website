@@ -17,7 +17,7 @@ export default function PortraitTrack({ sizes }: { sizes: string }) {
     <figure className="sidebar-portrait">
       <figcaption className="portrait-track">
         {track ? (
-          <SpotifyTrackPlayer key={track.url} track={track} onPlaybackChange={setPlaying} />
+          <SpotifyTrackPlayer key={track.previewUrl ?? track.url} track={track} onPlaybackChange={setPlaying} />
         ) : (
           <span className="portrait-track-text">song stuck in my head…</span>
         )}

@@ -2,12 +2,16 @@ export interface RecentTrack {
   title: string
   artist: string
   url: string
+  artworkUrl?: string
+  previewUrl?: string
 }
 
 interface SpotifyTrack {
   name?: string
   artists?: { name?: string }[]
   external_urls?: { spotify?: string }
+  album?: { images?: { url?: string }[] }
+  preview_url?: string | null
 }
 
 let access: { token: string; expiresAt: number } | undefined
@@ -76,7 +80,11 @@ async function fetchRecentTrack(): Promise<RecentTrack | null> {
   const artist = track?.artists?.map(artist => artist.name).filter(Boolean).join(', ')
   const url = track?.external_urls?.spotify
   if (!track?.name || !artist || !url || !/^https:\/\/open\.spotify\.com\/track\/[a-zA-Z0-9]+(?:\?.*)?$/.test(url)) return null
-  return { title: track.name, artist, url }
+  const artwork = track.album?.images?.at(-1)?.url
+  const preview = track.preview_url
+  const artworkUrl = artwork?.startsWith('https://i.scdn.co/image/') ? artwork : undefined
+  const previewUrl = preview && /^https:\/\/[a-z0-9.-]+\.scdn\.co\//i.test(preview) ? preview : undefined
+  return { title: track.name, artist, url, artworkUrl, previewUrl }
 }
 
 export async function getRecentTrack() {
