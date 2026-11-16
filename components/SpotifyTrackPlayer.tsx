@@ -1,14 +1,16 @@
 'use client'
 
-import { Pause, Play, X } from 'lucide-react'
+import Image from 'next/image'
+import { Play, X } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
 import type { RecentTrack } from '@/lib/spotify'
 
 type PlaybackUpdate = {
   playingURI: string
   isPaused: boolean
   isBuffering: boolean
+  duration: number
+  position: number
 }
 
 type EmbedController = {
@@ -54,11 +56,10 @@ function loadEmbedApi() {
 
 interface SpotifyTrackPlayerProps {
   track: RecentTrack
-  playing: boolean
   onPlaybackChange: (playing: boolean) => void
 }
 
-export default function SpotifyTrackPlayer({ track, playing, onPlaybackChange }: SpotifyTrackPlayerProps) {
+export default function SpotifyTrackPlayer({ track, onPlaybackChange }: SpotifyTrackPlayerProps) {
   const uri = `spotify:track:${new URL(track.url).pathname.split('/').at(-1)}`
   const panelId = useId()
   const toggle = useRef<HTMLButtonElement>(null)
@@ -67,11 +68,16 @@ export default function SpotifyTrackPlayer({ track, playing, onPlaybackChange }:
   const host = useRef<HTMLDivElement>(null)
   const readyController = useRef<EmbedController | null>(null)
   const playWhenReady = useRef(false)
+  const restoreFocus = useRef(false)
   const [open, setOpen] = useState(false)
   const [status, setStatus] = useState<'loading' | 'ready' | 'unavailable'>('loading')
 
   useEffect(() => {
     if (open) close.current?.focus({ preventScroll: true })
+    else if (restoreFocus.current) {
+      restoreFocus.current = false
+      toggle.current?.focus({ preventScroll: true })
+    }
   }, [open])
 
   useEffect(() => {
@@ -88,10 +94,11 @@ export default function SpotifyTrackPlayer({ track, playing, onPlaybackChange }:
     container.appendChild(placeholder)
     let disposed = false
     let controller: EmbedController | undefined
+    let playbackEnd: number | undefined
 
     loadEmbedApi().then(api => {
       if (disposed) return
-      api.createController(placeholder, { uri, width: '100%', height: 152 }, embed => {
+      api.createController(placeholder, { uri, width: '100%', height: 80 }, embed => {
         if (disposed) {
           embed.destroy()
           return
@@ -107,8 +114,13 @@ export default function SpotifyTrackPlayer({ track, playing, onPlaybackChange }:
           }
         })
         embed.addListener('playback_update', ({ data }) => {
+          window.clearTimeout(playbackEnd)
           if (disposed || panel.current?.hidden) return
-          onPlaybackChange(data.playingURI === uri && !data.isPaused && !data.isBuffering)
+          const remaining = data.duration - data.position
+          const playing = data.playingURI === uri && !data.isPaused && !data.isBuffering && remaining > 0
+          onPlaybackChange(playing)
+          // Spotify can show its end screen without sending a final pause update.
+          if (playing) playbackEnd = window.setTimeout(() => onPlaybackChange(false), remaining)
         })
       })
     }).catch(() => {
@@ -117,6 +129,7 @@ export default function SpotifyTrackPlayer({ track, playing, onPlaybackChange }:
 
     return () => {
       disposed = true
+      window.clearTimeout(playbackEnd)
       readyController.current = null
       controller?.destroy()
       placeholder.remove()
@@ -124,11 +137,7 @@ export default function SpotifyTrackPlayer({ track, playing, onPlaybackChange }:
     }
   }, [uri, onPlaybackChange])
 
-  function togglePlayback() {
-    if (playing) {
-      readyController.current?.pause()
-      return
-    }
+  function openPlayer() {
     setOpen(true)
     if (readyController.current) readyController.current.resume()
     else playWhenReady.current = true
@@ -137,44 +146,64 @@ export default function SpotifyTrackPlayer({ track, playing, onPlaybackChange }:
   function closePlayer() {
     playWhenReady.current = false
     readyController.current?.pause()
+    restoreFocus.current = true
     setOpen(false)
     onPlaybackChange(false)
-    toggle.current?.focus()
   }
 
   return (
     <>
-      <button
-        ref={toggle}
-        className="portrait-track-play"
-        type="button"
-        aria-label={`${playing ? 'Pause' : 'Play'} ${track.title}`}
-        aria-controls={panelId}
-        onClick={togglePlayback}
-      >
-        {playing ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
-      </button>
-      {createPortal(
-        <div
-          ref={panel}
-          id={panelId}
-          className="portrait-player"
-          role="region"
-          aria-label="Spotify player"
-          hidden={!open}
-          onKeyDown={event => {
-            if (event.key === 'Escape') closePlayer()
-          }}
+      <div className="portrait-track-summary" hidden={open}>
+        <div className="portrait-track-heading">
+          <span className="portrait-track-source">
+            <span>Last played</span>
+            <Image className="spotify-logo-dark" src="/images/spotify-logo-white.svg" alt="Spotify" width={70} height={21} />
+            <Image className="spotify-logo-light" src="/images/spotify-logo-black.svg" alt="Spotify" width={70} height={21} />
+          </span>
+          <button
+            ref={toggle}
+            className="portrait-track-play"
+            type="button"
+            aria-label={`Play ${track.title}`}
+            aria-controls={panelId}
+            onClick={openPlayer}
+          >
+            <Play size={15} aria-hidden="true" />
+          </button>
+        </div>
+        <a
+          className="portrait-track-link"
+          href={track.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Last played: ${track.title} by ${track.artist}. Listen on Spotify.`}
         >
+          <span className="portrait-track-text">
+            <strong>{track.title}</strong>
+            <span>{track.artist}</span>
+          </span>
+        </a>
+      </div>
+      <div
+        ref={panel}
+        id={panelId}
+        className="portrait-player"
+        role="region"
+        aria-label="Spotify player"
+        hidden={!open}
+        onKeyDown={event => {
+          if (event.key === 'Escape') closePlayer()
+        }}
+      >
+        <div className="portrait-player-toolbar">
+          {status === 'loading' && <span role="status">Loading Spotify…</span>}
+          {status === 'unavailable' && <a href={track.url} target="_blank" rel="noopener noreferrer">Open in Spotify ↗</a>}
           <button ref={close} className="portrait-player-close" type="button" aria-label="Close Spotify player" onClick={closePlayer}>
             <X size={18} aria-hidden="true" />
           </button>
-          {status === 'loading' && <p role="status">Loading Spotify…</p>}
-          {status === 'unavailable' && <a href={track.url} target="_blank" rel="noopener noreferrer">Open in Spotify ↗</a>}
-          <div ref={host} hidden={status === 'unavailable'} />
-        </div>,
-        document.body,
-      )}
+        </div>
+        <div ref={host} hidden={status === 'unavailable'} />
+      </div>
     </>
   )
 }

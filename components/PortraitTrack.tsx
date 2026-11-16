@@ -17,28 +17,7 @@ export default function PortraitTrack({ sizes }: { sizes: string }) {
     <figure className="sidebar-portrait">
       <figcaption className="portrait-track">
         {track ? (
-          <>
-            <div className="portrait-track-heading">
-              <span className="portrait-track-source">
-                <span>Last played</span>
-                <Image className="spotify-logo-dark" src="/images/spotify-logo-white.svg" alt="Spotify" width={70} height={21} />
-                <Image className="spotify-logo-light" src="/images/spotify-logo-black.svg" alt="Spotify" width={70} height={21} />
-              </span>
-              <SpotifyTrackPlayer key={track.url} track={track} playing={playing} onPlaybackChange={setPlaying} />
-            </div>
-            <a
-              className="portrait-track-link"
-              href={track.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Last played: ${track.title} by ${track.artist}. Listen on Spotify.`}
-            >
-              <span className="portrait-track-text" key={track.url}>
-                <strong>{track.title}</strong>
-                <span>{track.artist}</span>
-              </span>
-            </a>
-          </>
+          <SpotifyTrackPlayer key={track.url} track={track} onPlaybackChange={setPlaying} />
         ) : (
           <span className="portrait-track-text">song stuck in my head…</span>
         )}
