@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { Pause, Play } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import type { RecentTrack } from '@/lib/spotify'
 
 type PlaybackUpdate = {
@@ -24,7 +25,7 @@ type EmbedController = {
 type EmbedApi = {
   createController(
     element: HTMLElement,
-    options: { uri: string; width: string; height: number },
+    options: { uri: string; width: string; height: number; theme: 'dark' },
     onCreate: (controller: EmbedController) => void,
   ): void
 }
@@ -108,7 +109,7 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
 
     loadEmbedApi().then(api => {
       if (disposed) return
-      api.createController(placeholder, { uri, width: '100%', height: 80 }, embed => {
+      api.createController(placeholder, { uri, width: '100%', height: 80, theme: 'dark' }, embed => {
         if (disposed) {
           embed.destroy()
           return
@@ -223,12 +224,13 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
           {playing ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
         </button>
       </div>
-      {embedAttempt > 0 && (
-        <div className="portrait-spotify-embed">
+      {embedAttempt > 0 && createPortal(
+        <aside className="spotify-dock" aria-label="Spotify player">
           {embedStatus === 'loading' && <span role="status">Loading Spotify…</span>}
           {embedStatus === 'failed' && <span role="status">Spotify couldn’t load. Press Play to retry.</span>}
           <div ref={embedHost} />
-        </div>
+        </aside>,
+        document.body,
       )}
       {preview && (
         <audio
