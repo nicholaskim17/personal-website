@@ -974,7 +974,7 @@ a.org-button:is(:hover, :focus-visible) {
 
   .spotify-dock { top: calc(1rem + env(safe-area-inset-top)); }
 
-  body:has(> .spotify-dock) .site-sidebar:not(.landing-header) {
+  body:has(> .spotify-dock:not([hidden])) .site-sidebar:not(.landing-header) {
     top: calc(7rem + env(safe-area-inset-top));
     height: calc(100svh - 7rem - env(safe-area-inset-top));
   }
@@ -1282,7 +1282,7 @@ a.org-button:is(:hover, :focus-visible) {
 }
 
 @media (800px <= width < 1080px) {
-  body:has(> .spotify-dock) .landing-header { padding-top: 8rem; }
+  body:has(> .spotify-dock:not([hidden])) .landing-header { padding-top: 8rem; }
 }
 
 @media (width < 800px) {
@@ -1352,9 +1352,9 @@ a.org-button:is(:hover, :focus-visible) {
 
   .landing-header { padding-top: calc(clamp(4.25rem, 8svh, 5rem) + env(safe-area-inset-top)); }
 
-  body:has(> .spotify-dock) .site-content { padding-top: calc(9.5rem + env(safe-area-inset-top)); }
+  body:has(> .spotify-dock:not([hidden])) .site-content { padding-top: calc(9.5rem + env(safe-area-inset-top)); }
 
-  body:has(> .spotify-dock) .landing-header { padding-top: calc(10.5rem + env(safe-area-inset-top)); }
+  body:has(> .spotify-dock:not([hidden])) .landing-header { padding-top: calc(10.5rem + env(safe-area-inset-top)); }
 
   .mobile-navigation {
     --menu-top: calc(.8rem + env(safe-area-inset-top));

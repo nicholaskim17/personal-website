@@ -72,12 +72,13 @@ interface SpotifyTrackPlayerProps {
 
 export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackChange }: SpotifyTrackPlayerProps) {
   const audio = useRef<HTMLAudioElement>(null)
+  const playButton = useRef<HTMLButtonElement>(null)
   const embedHost = useRef<HTMLDivElement>(null)
   const embedController = useRef<EmbedController | null>(null)
   const [playing, setPlaying] = useState(false)
   const [previewFailed, setPreviewFailed] = useState(false)
   const [embedAttempt, setEmbedAttempt] = useState(0)
-  const [embedStatus, setEmbedStatus] = useState<'loading' | 'ready' | 'failed'>('loading')
+  const [embedStatus, setEmbedStatus] = useState<'loading' | 'ready' | 'paused' | 'failed'>('loading')
   const preview = previewFailed ? undefined : track.previewUrl
   const uri = `spotify:track:${new URL(track.url).pathname.split('/').at(-1)}`
 
@@ -86,10 +87,18 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
     onPlaybackChange(active)
   }, [onPlaybackChange])
 
+  const restorePlayFocus = useCallback(() => {
+    if (document.activeElement === embedHost.current?.querySelector('iframe')) {
+      playButton.current?.focus({ preventScroll: true })
+    }
+  }, [])
+
   const finishPlayback = useCallback(() => {
+    restorePlayFocus()
+    setEmbedAttempt(0)
     updatePlayback(false)
     onTrackSelect(null)
-  }, [onTrackSelect, updatePlayback])
+  }, [onTrackSelect, restorePlayFocus, updatePlayback])
 
   useEffect(() => () => onPlaybackChange(false), [onPlaybackChange])
 
@@ -103,6 +112,7 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
     const placeholder = document.createElement('div')
     host.appendChild(placeholder)
     let disposed = false
+    let hasPlayed = false
     let controller: EmbedController | undefined
     let playbackEnd: number | undefined
     const readyTimeout = window.setTimeout(() => setEmbedStatus('failed'), 12_000)
@@ -123,13 +133,26 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
           embed.resume()
         })
         embed.addListener('playback_update', ({ data }) => {
-          if (disposed) return
+          if (disposed || data.playingURI !== uri) return
           window.clearTimeout(playbackEnd)
           const remaining = data.duration - data.position
-          const active = data.playingURI === uri && !data.isPaused && !data.isBuffering && remaining > 0
+          if (data.duration > 0 && remaining <= 0) {
+            finishPlayback()
+            return
+          }
+
+          const active = !data.isPaused && !data.isBuffering && remaining > 0
           updatePlayback(active)
-          if (active) playbackEnd = window.setTimeout(finishPlayback, remaining)
-          else if (data.playingURI === uri && data.duration > 0 && remaining <= 0) finishPlayback()
+          if (active) {
+            hasPlayed = true
+            setEmbedStatus('ready')
+            playbackEnd = window.setTimeout(finishPlayback, remaining + 250)
+          } else if (hasPlayed && data.isPaused && !data.isBuffering) {
+            // Ignore the paused state Spotify can report before playback starts.
+            hasPlayed = false
+            restorePlayFocus()
+            setEmbedStatus('paused')
+          }
         })
       })
     }).catch(() => {
@@ -145,7 +168,7 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
       controller?.destroy()
       placeholder.remove()
     }
-  }, [embedAttempt, finishPlayback, uri, updatePlayback])
+  }, [embedAttempt, finishPlayback, restorePlayFocus, uri, updatePlayback])
 
   function startEmbed() {
     onTrackSelect(track)
@@ -166,6 +189,7 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
         if (playing) embed.pause()
         else {
           onTrackSelect(track)
+          setEmbedStatus('ready')
           embed.resume()
         }
       } else if (!embedAttempt || embedStatus === 'failed') {
@@ -215,6 +239,7 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
           )}
         </a>
         <button
+          ref={playButton}
           className="portrait-track-play"
           type="button"
           aria-label={`${playing ? 'Pause' : 'Play'} ${track.title}`}
@@ -225,7 +250,7 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
         </button>
       </div>
       {embedAttempt > 0 && createPortal(
-        <aside className="spotify-dock" aria-label="Spotify player">
+        <aside className="spotify-dock" aria-label="Spotify player" hidden={embedStatus === 'paused'}>
           {embedStatus === 'loading' && <span role="status">Loading Spotify…</span>}
           {embedStatus === 'failed' && <span role="status">Spotify couldn’t load. Press Play to retry.</span>}
           <div ref={embedHost} />
