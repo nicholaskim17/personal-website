@@ -10,14 +10,21 @@ import SpotifyTrackPlayer from './SpotifyTrackPlayer'
 
 export default function PortraitTrack({ sizes }: { sizes: string }) {
   const state = useJsonFetch<{ track: RecentTrack | null }>('/api/spotify/recent', 90_000)
-  const track = state.status === 'ready' ? state.data.track : null
+  const [selectedTrack, setSelectedTrack] = useState<RecentTrack | null>(null)
   const [playing, setPlaying] = useState(false)
+  // Keep the current song available while the listener is playing or paused.
+  const track = selectedTrack ?? (state.status === 'ready' ? state.data.track : null)
 
   return (
     <figure className="sidebar-portrait">
       <figcaption className="portrait-track">
         {track ? (
-          <SpotifyTrackPlayer key={track.previewUrl ?? track.url} track={track} onPlaybackChange={setPlaying} />
+          <SpotifyTrackPlayer
+            key={`${track.url}:${track.previewUrl ?? ''}`}
+            track={track}
+            onTrackSelect={setSelectedTrack}
+            onPlaybackChange={setPlaying}
+          />
         ) : (
           <span className="portrait-track-text">song stuck in my head…</span>
         )}
