@@ -75,7 +75,7 @@ body:has(> .landing-page) {
 }
 
 .site-shell {
-  --sidebar-width: clamp(16rem, 30vw, 30rem);
+  --sidebar-width: clamp(21rem, 30vw, 30rem);
   --gutter: clamp(1.2rem, 4.25vw, 5.5rem);
   min-height: 100svh;
 }
@@ -783,6 +783,8 @@ a.org-button:is(:hover, :focus-visible) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
+  min-height: calc(40px + .35rem + 80px);
   margin-bottom: .65rem;
   color: var(--color-guitar);
   text-align: center;
@@ -999,7 +1001,6 @@ a.org-button:is(:hover, :focus-visible) {
 
 @media (min-width: 800px) {
   .site-shell { display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); }
-  .site-shell:has(.portrait-track-summary[data-embedded="true"]) { --sidebar-width: clamp(21rem, 30vw, 30rem); }
 
   .site-sidebar {
     height: 100svh;
@@ -1203,7 +1204,10 @@ a.org-button:is(:hover, :focus-visible) {
 }
 
 @media (min-width: 800px) and (height < 440px) {
-  .site-sidebar:not(.landing-header) .portrait-track { margin-bottom: 0; }
+  .site-sidebar:not(.landing-header) .portrait-track {
+    min-height: 0;
+    margin-bottom: 0;
+  }
 
   .site-sidebar:not(.landing-header) .portrait-frame { display: none; }
 }
@@ -1389,13 +1393,19 @@ a.org-button:is(:hover, :focus-visible) {
 }
 
 @media (orientation: landscape) and (height < 415px) and (min-width: 520px) {
-  .landing-header:has(.portrait-track-summary[data-embedded="true"]) {
+  .landing-header {
     grid-template-columns: minmax(0, 1fr) minmax(23rem, 1fr);
   }
 
-  .landing-header .sidebar-portrait:has(.portrait-track-summary[data-embedded="true"]) {
+  .landing-header .sidebar-portrait {
     width: min(100%, 23rem);
   }
+
+  .landing-header .portrait-track { min-height: 5.625rem; }
+
+  .landing-header .portrait-track-text { font-size: .83rem; }
+
+  .landing-header .portrait-frame { width: min(17dvh, 9rem); }
 
   .landing-header .portrait-track-summary[data-embedded="true"] {
     grid-template-columns: auto auto minmax(280px, 1fr);
@@ -1407,9 +1417,7 @@ a.org-button:is(:hover, :focus-visible) {
 }
 
 @media (orientation: landscape) and (height < 380px) and (width < 520px) {
-  .landing-header .sidebar-portrait:has(.portrait-track-summary[data-embedded="true"]) .portrait-frame {
-    display: none;
-  }
+  .landing-header .portrait-frame { display: none; }
 }
 
 @media (width < 800px) and (orientation: portrait) and (height < 720px) {
@@ -1447,7 +1455,10 @@ a.org-button:is(:hover, :focus-visible) {
     display: none;
   }
 
-  .site-sidebar:not(.landing-header) .portrait-track { margin: 0; }
+  .site-sidebar:not(.landing-header) .portrait-track {
+    min-height: 0;
+    margin: 0;
+  }
 
   .site-sidebar:not(.landing-header) .portrait-track-summary[data-embedded="false"] {
     display: flex;
