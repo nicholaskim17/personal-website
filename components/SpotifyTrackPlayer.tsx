@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { Pause, Play } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
 import type { RecentTrack } from '@/lib/spotify'
 
 type PlaybackUpdate = {
@@ -80,6 +79,7 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
   const [embedAttempt, setEmbedAttempt] = useState(0)
   const [embedStatus, setEmbedStatus] = useState<'loading' | 'ready' | 'paused' | 'failed'>('loading')
   const preview = previewFailed ? undefined : track.previewUrl
+  const showEmbed = embedAttempt > 0 && embedStatus !== 'paused'
   const uri = `spotify:track:${new URL(track.url).pathname.split('/').at(-1)}`
 
   const updatePlayback = useCallback((active: boolean) => {
@@ -215,29 +215,35 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
 
   return (
     <>
-      <div className="portrait-track-summary">
-        <a
-          className="portrait-track-link"
-          href={track.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Last played: ${track.title} by ${track.artist}. Open in Spotify.`}
-        >
-          <span className="portrait-track-source">
-            <span>Last played</span>
-            <Image className="spotify-logo-dark" src="/images/spotify-logo-white.svg" alt="Spotify" width={70} height={21} />
-            <Image className="spotify-logo-light" src="/images/spotify-logo-black.svg" alt="Spotify" width={70} height={21} />
-          </span>
-          <span className="portrait-track-text">
-            <strong>{track.title}</strong>
-            <span>{track.artist}</span>
-          </span>
-          {track.artworkUrl && (
-            <span className="portrait-track-album">
-              <Image className="portrait-album-disc" data-playing={playing} src={track.artworkUrl} alt="" width={40} height={40} unoptimized />
-            </span>
-          )}
-        </a>
+      <div className="portrait-track-summary" data-embedded={showEmbed}>
+        {(!showEmbed || track.artworkUrl) && (
+          <a
+            className="portrait-track-link"
+            href={track.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Last played: ${track.title} by ${track.artist}. Open in Spotify.`}
+          >
+            {!showEmbed && (
+              <>
+                <span className="portrait-track-source">
+                  <span>Last played</span>
+                  <Image className="spotify-logo-dark" src="/images/spotify-logo-white.svg" alt="Spotify" width={70} height={21} />
+                  <Image className="spotify-logo-light" src="/images/spotify-logo-black.svg" alt="Spotify" width={70} height={21} />
+                </span>
+                <span className="portrait-track-text">
+                  <strong>{track.title}</strong>
+                  <span>{track.artist}</span>
+                </span>
+              </>
+            )}
+            {track.artworkUrl && (
+              <span className="portrait-track-album">
+                <Image className="portrait-album-disc" data-playing={playing} src={track.artworkUrl} alt="" width={40} height={40} unoptimized />
+              </span>
+            )}
+          </a>
+        )}
         <button
           ref={playButton}
           className="portrait-track-play"
@@ -248,15 +254,14 @@ export default function SpotifyTrackPlayer({ track, onTrackSelect, onPlaybackCha
         >
           {playing ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
         </button>
+        {embedAttempt > 0 && (
+          <div className="portrait-spotify-embed" role="group" aria-label="Spotify player" hidden={!showEmbed}>
+            {embedStatus === 'loading' && <span role="status">Loading Spotify…</span>}
+            {embedStatus === 'failed' && <span role="status">Spotify couldn’t load. Press Play to retry.</span>}
+            <div ref={embedHost} />
+          </div>
+        )}
       </div>
-      {embedAttempt > 0 && createPortal(
-        <aside className="spotify-dock" aria-label="Spotify player" hidden={embedStatus === 'paused'}>
-          {embedStatus === 'loading' && <span role="status">Loading Spotify…</span>}
-          {embedStatus === 'failed' && <span role="status">Spotify couldn’t load. Press Play to retry.</span>}
-          <div ref={embedHost} />
-        </aside>,
-        document.body,
-      )}
       {preview && (
         <audio
           ref={audio}

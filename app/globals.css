@@ -864,28 +864,36 @@ a.org-button:is(:hover, :focus-visible) {
   object-fit: cover;
 }
 
-.spotify-dock {
-  position: fixed;
-  z-index: 19;
-  inset: calc(4rem + env(safe-area-inset-top)) auto auto calc(1rem + env(safe-area-inset-left));
-  width: 280px;
-  max-width: calc(100vw - 2rem - env(safe-area-inset-left) - env(safe-area-inset-right));
+.portrait-track-summary[data-embedded="true"] {
+  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  width: min(280px, calc(100vw - 2rem - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  max-width: none;
+  gap: .35rem;
+}
+
+.portrait-track-summary[data-embedded="true"] .portrait-track-link {
+  display: block;
+  grid-area: 1 / 1;
+}
+
+.portrait-spotify-embed:not([hidden]) {
+  display: grid;
+  grid-area: 2 / 1 / 3 / -1;
+  min-height: 80px;
   color: var(--color-ink-muted);
   font-size: .75rem;
 }
 
-.spotify-dock iframe {
+.portrait-spotify-embed > * { grid-area: 1 / 1; }
+
+.portrait-spotify-embed [role="status"] { place-self: center; }
+
+.portrait-spotify-embed iframe {
   display: block;
   width: 100%;
   border: 0;
   border-radius: .75rem;
-}
-
-@media (width < 800px) and (orientation: landscape) {
-  .spotify-dock {
-    top: auto;
-    bottom: calc(1rem + env(safe-area-inset-bottom));
-  }
 }
 
 .spotify-logo-light, .light .spotify-logo-dark { display: none; }
@@ -971,13 +979,7 @@ a.org-button:is(:hover, :focus-visible) {
 
 @media (min-width: 800px) {
   .site-shell { display: grid; grid-template-columns: var(--sidebar-width) minmax(0, 1fr); }
-
-  .spotify-dock { top: calc(1rem + env(safe-area-inset-top)); }
-
-  body:has(> .spotify-dock:not([hidden])) .site-sidebar:not(.landing-header) {
-    top: calc(7rem + env(safe-area-inset-top));
-    height: calc(100svh - 7rem - env(safe-area-inset-top));
-  }
+  .site-shell:has(.portrait-track-summary[data-embedded="true"]) { --sidebar-width: clamp(21rem, 30vw, 30rem); }
 
   .site-sidebar {
     height: 100svh;
@@ -1281,10 +1283,6 @@ a.org-button:is(:hover, :focus-visible) {
   }
 }
 
-@media (800px <= width < 1080px) {
-  body:has(> .spotify-dock:not([hidden])) .landing-header { padding-top: 8rem; }
-}
-
 @media (width < 800px) {
   .site-sidebar:not(.landing-header) .sidebar-portrait:has(.portrait-track-summary) { display: block; }
 
@@ -1294,7 +1292,7 @@ a.org-button:is(:hover, :focus-visible) {
 
   .site-sidebar:not(.landing-header) .portrait-track { margin: 0; }
 
-  .site-sidebar:not(.landing-header) .portrait-track-summary {
+  .site-sidebar:not(.landing-header) .portrait-track-summary[data-embedded="false"] {
     display: flex;
     max-width: min(12rem, calc(100vw - 5.5rem - env(safe-area-inset-left) - env(safe-area-inset-right)));
     gap: .4rem;
@@ -1304,7 +1302,7 @@ a.org-button:is(:hover, :focus-visible) {
     background: var(--color-surface-raised);
   }
 
-  .site-sidebar:not(.landing-header) .portrait-track-link {
+  .site-sidebar:not(.landing-header) .portrait-track-summary[data-embedded="false"] .portrait-track-link {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -1343,6 +1341,10 @@ a.org-button:is(:hover, :focus-visible) {
     left: calc(1rem + env(safe-area-inset-left));
   }
 
+  .site-sidebar:not(.landing-header) .portrait-track-summary[data-embedded="true"] {
+    grid-template-rows: 2.75rem auto;
+  }
+
   .site-content {
     min-height: 100svh;
     padding-top: calc(3.5rem + env(safe-area-inset-top));
@@ -1352,9 +1354,9 @@ a.org-button:is(:hover, :focus-visible) {
 
   .landing-header { padding-top: calc(clamp(4.25rem, 8svh, 5rem) + env(safe-area-inset-top)); }
 
-  body:has(> .spotify-dock:not([hidden])) .site-content { padding-top: calc(9.5rem + env(safe-area-inset-top)); }
-
-  body:has(> .spotify-dock:not([hidden])) .landing-header { padding-top: calc(10.5rem + env(safe-area-inset-top)); }
+  .site-shell:has(.portrait-track-summary[data-embedded="true"]) .site-content {
+    padding-top: calc(9.5rem + env(safe-area-inset-top));
+  }
 
   .mobile-navigation {
     --menu-top: calc(.8rem + env(safe-area-inset-top));
