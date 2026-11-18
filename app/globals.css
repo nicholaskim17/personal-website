@@ -50,11 +50,19 @@
 }
 
 html {
+  overscroll-behavior-y: none;
   scroll-behavior: smooth;
   scroll-padding-top: 1.25rem;
 }
 
 body { font-size: 1rem; }
+
+html:has(.landing-page),
+body:has(> .landing-page) {
+  min-height: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
 
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -593,6 +601,8 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .org-button img { width: 1em; height: 1em; object-fit: contain; }
 
+.org-button-name { align-self: baseline; }
+
 a.org-button:is(:hover, :focus-visible) {
   border-color: var(--color-ink-faint);
 }
@@ -794,6 +804,13 @@ a.org-button:is(:hover, :focus-visible) {
   overflow-wrap: anywhere;
 }
 
+.portrait-track-text strong {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .portrait-track-link {
   grid-area: 1 / 1 / 3 / 3;
   display: grid;
@@ -903,7 +920,10 @@ a.org-button:is(:hover, :focus-visible) {
 .portrait-track-text > span {
   display: block;
   margin-top: .1rem;
+  overflow: hidden;
   color: var(--color-ink-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .portrait-sound-waves {
@@ -988,7 +1008,8 @@ a.org-button:is(:hover, :focus-visible) {
     align-items: center;
     justify-content: space-between;
     gap: clamp(.75rem, 2.4svh, 1.5rem);
-    overflow: auto;
+    overflow: hidden;
+    overscroll-behavior: none;
     padding: clamp(3rem, 9svh, 7rem) 1.5rem 1.4rem;
   }
 
@@ -1035,7 +1056,12 @@ a.org-button:is(:hover, :focus-visible) {
   .site-sidebar:not(.landing-header)::after { content: ''; }
 
   .site-sidebar:not(.landing-header) .sidebar-portrait {
-    width: min(100%, 9rem, 20svh);
+    width: min(100%, 14rem);
+  }
+
+  .site-sidebar:not(.landing-header) .portrait-frame {
+    width: min(100%, 9rem, 20dvh);
+    margin-inline: auto;
   }
 
   .site-content:has(.touching-grass-page) {
@@ -1145,10 +1171,48 @@ a.org-button:is(:hover, :focus-visible) {
   .touching-grass-page .guitar-card-image { height: clamp(12rem, 27svh, 14rem); }
 }
 
+@media (min-width: 800px) and (height < 680px) {
+  .site-sidebar:not(.landing-header) {
+    gap: .4rem;
+    padding-block: clamp(1rem, 3dvh, 1.75rem) .4rem;
+  }
+
+  .site-sidebar:not(.landing-header) .sidebar-nav { margin-top: .45rem; }
+
+  .site-sidebar:not(.landing-header) .sidebar-nav a { padding-block: .25rem; }
+
+  .site-sidebar:not(.landing-header) .logo-guitar {
+    width: clamp(2rem, 6.5dvh, 3rem);
+    margin-block-end: 1.25rem;
+  }
+
+  .site-sidebar:not(.landing-header) .portrait-frame { width: min(100%, 15dvh); }
+}
+
+@media (min-width: 800px) and (height < 500px) {
+  .site-sidebar:not(.landing-header)::after { content: none; }
+
+  .site-sidebar:not(.landing-header) .sidebar-name { font-size: 2rem; }
+
+  .site-sidebar:not(.landing-header) .sidebar-nav ul { display: flex; }
+
+  .site-sidebar:not(.landing-header) .sidebar-nav a {
+    --nav-inline-padding: .35rem;
+    font-size: .82rem;
+  }
+}
+
+@media (min-width: 800px) and (height < 440px) {
+  .site-sidebar:not(.landing-header) .portrait-track { margin-bottom: 0; }
+
+  .site-sidebar:not(.landing-header) .portrait-frame { display: none; }
+}
+
 .landing-page {
   display: flex;
   flex-direction: column;
-  min-height: 100svh;
+  height: 100dvh;
+  overflow: clip;
   background: var(--color-sidebar);
 }
 
@@ -1157,6 +1221,7 @@ a.org-button:is(:hover, :focus-visible) {
 .landing-main {
   display: flex;
   flex: 1;
+  min-height: 0;
 }
 
 .landing-header {
@@ -1241,14 +1306,6 @@ a.org-button:is(:hover, :focus-visible) {
 }
 
 @media (min-width: 800px) and (min-height: 620px) {
-  .landing-page {
-    height: 100svh;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .landing-main { min-height: 0; }
-
   .landing-header {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, min(30vw, 24rem)));
@@ -1271,15 +1328,115 @@ a.org-button:is(:hover, :focus-visible) {
     --guitar-lift: 0px;
     grid-column: 1;
     grid-row: 2;
-    width: clamp(7rem, 17svh, 12rem);
+    width: clamp(6.25rem, 16dvh, 12rem);
     margin: 0 0 1.5rem;
   }
 
   .landing-header .sidebar-portrait {
     grid-column: 2;
     grid-row: 2;
-    width: min(30svh, 25vw, 20rem);
+    width: min(100%, 20rem);
     max-width: 100%;
+  }
+
+  .landing-header .portrait-frame {
+    width: min(30dvh, 25vw, 20rem);
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 800px) and (620px <= height < 760px) {
+  .landing-header .portrait-frame { width: min(25dvh, 25vw); }
+}
+
+@media (orientation: landscape) and (height < 620px) {
+  .landing-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(min(280px, 58vw), 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    justify-items: center;
+    gap: .45rem clamp(.7rem, 4vw, 4rem);
+    padding: clamp(.85rem, 4dvh, 1.75rem) 1rem .3rem;
+  }
+
+  .landing-header .sidebar-identity { grid-column: 1 / -1; }
+
+  .landing-header .sidebar-name { font-size: clamp(2rem, min(7vw, 11dvh), 4rem); }
+
+  .landing-header .sidebar-nav { margin-top: .3rem; }
+
+  .landing-header .sidebar-nav ul { display: flex; }
+
+  .landing-header .sidebar-nav a {
+    padding-block: .3rem;
+    font-size: clamp(.8rem, 2vw, 1.1rem);
+  }
+
+  .landing-header .logo-guitar {
+    width: clamp(2rem, 14dvh, 5rem);
+    margin: 0 0 1.3rem;
+  }
+
+  .landing-header .sidebar-portrait {
+    width: min(100%, 280px);
+    max-width: 100%;
+  }
+
+  .landing-header .portrait-frame {
+    width: min(18dvh, 9rem);
+    margin-inline: auto;
+  }
+}
+
+@media (orientation: landscape) and (height < 415px) and (min-width: 520px) {
+  .landing-header:has(.portrait-track-summary[data-embedded="true"]) {
+    grid-template-columns: minmax(0, 1fr) minmax(23rem, 1fr);
+  }
+
+  .landing-header .sidebar-portrait:has(.portrait-track-summary[data-embedded="true"]) {
+    width: min(100%, 23rem);
+  }
+
+  .landing-header .portrait-track-summary[data-embedded="true"] {
+    grid-template-columns: auto auto minmax(280px, 1fr);
+    grid-template-rows: auto;
+    width: max-content;
+  }
+
+  .landing-header .portrait-spotify-embed:not([hidden]) { grid-area: 1 / 3; }
+}
+
+@media (orientation: landscape) and (height < 380px) and (width < 520px) {
+  .landing-header .sidebar-portrait:has(.portrait-track-summary[data-embedded="true"]) .portrait-frame {
+    display: none;
+  }
+}
+
+@media (width < 800px) and (orientation: portrait) and (height < 720px) {
+  .landing-page .landing-header {
+    gap: clamp(.6rem, 1.6dvh, 1rem);
+    padding-top: calc(3.25rem + env(safe-area-inset-top));
+  }
+
+  .landing-header .logo-guitar {
+    width: clamp(2.3rem, 9dvh, 3.75rem);
+    margin: 0 0 1.25rem;
+  }
+
+  .landing-header .sidebar-portrait {
+    width: min(100%, 14rem);
+    max-width: 100%;
+  }
+
+  .landing-header .portrait-frame {
+    width: min(18dvh, 8rem);
+    margin-inline: auto;
+  }
+
+  .landing-page .landing-footer {
+    gap: .5rem;
+    padding-block: .35rem .5rem;
+    font-size: .7rem;
   }
 }
 
@@ -1317,10 +1474,38 @@ a.org-button:is(:hover, :focus-visible) {
     animation: none;
   }
 
+  .site-sidebar:not(.landing-header) .portrait-track-text strong { display: inline; }
+
   .site-sidebar:not(.landing-header) :is(.portrait-track-album, .portrait-track-play) {
     flex: none;
     width: 2rem;
     height: 2rem;
+  }
+}
+
+@media (width < 800px) and (orientation: landscape) {
+  .site-sidebar:not(.landing-header) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(min(280px, 58vw), 1fr);
+    justify-items: center;
+    gap: .4rem;
+    padding: .65rem 1rem .4rem;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  .site-sidebar:not(.landing-header) .sidebar-identity {
+    grid-column: 1 / -1;
+    padding: 0;
+  }
+
+  .site-sidebar:not(.landing-header) .sidebar-name { font-size: clamp(1.8rem, 8dvh, 2.4rem); }
+
+  .site-sidebar:not(.landing-header) .sidebar-nav a { padding-block: .35rem; }
+
+  .site-sidebar:not(.landing-header) .logo-guitar {
+    width: clamp(1.8rem, 7.5dvh, 2.75rem);
+    margin-block-end: 1.05rem;
   }
 }
 

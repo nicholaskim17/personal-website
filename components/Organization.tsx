@@ -10,7 +10,7 @@ export default function Organization({ name, href, logo, highlight }: {
   const label = (
     <>
       <Image src={logo} alt="" width={16} height={16} />
-      {name}
+      <span className="org-button-name">{name}</span>
     </>
   )
 
