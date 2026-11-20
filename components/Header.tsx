@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Github, Linkedin, Mail, Menu, X } from 'lucide-react'
+import { Check, Copy, Github, Linkedin, Mail, Menu, X } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { hero, navLinks, site, socialLinks } from '@/lib/data'
 import LogoGuitar from './LogoGuitar'
@@ -14,9 +14,41 @@ const iconFor = { github: Github, linkedin: Linkedin, x: XBrandIcon } as const
 const mobileLinks = [{ href: '/', label: 'Home' }, ...navLinks]
 
 function SocialLinks() {
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'failed'>('idle')
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(site.email)
+      setCopyStatus('copied')
+    } catch {
+      setCopyStatus('failed')
+    }
+  }
+
   return (
     <div className="sidebar-socials" aria-label="Social links">
-      <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>
+      <span
+        className="social-email"
+        onMouseLeave={() => setCopyStatus('idle')}
+        onBlur={event => {
+          if (!event.currentTarget.contains(event.relatedTarget)) setCopyStatus('idle')
+        }}
+      >
+        <a href={`mailto:${site.email}`} aria-label="Email Nick"><Mail size={17} aria-hidden="true" /></a>
+        <button
+          className="email-copy-button"
+          type="button"
+          aria-label={copyStatus === 'copied' ? 'Email copied' : 'Copy email address'}
+          title={copyStatus === 'failed' ? 'Copy failed. Try again.' : 'Copy email address'}
+          onClick={copyEmail}
+        >
+          {copyStatus === 'copied' ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}
+        </button>
+        <span role="status" className="sr-only">
+          {copyStatus === 'copied' && 'Email address copied.'}
+          {copyStatus === 'failed' && 'Couldn’t copy the email address. Try again.'}
+        </span>
+      </span>
       {socialLinks.map(({ label, href, icon }) => {
         const Icon = iconFor[icon]
         return <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}><Icon size={17} aria-hidden="true" /></a>

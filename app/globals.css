@@ -442,6 +442,57 @@ a.sidebar-name:is(:hover, :focus-visible) {
 
 .sidebar-socials a:is(:hover, :focus-visible) { color: var(--color-guitar); }
 
+.social-email {
+  position: relative;
+  display: block;
+}
+
+.social-email::before {
+  position: absolute;
+  inset: 0 100% 0 auto;
+  width: .35rem;
+  content: '';
+}
+
+.email-copy-button {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + .25rem);
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: .25rem;
+  background: var(--color-surface-raised);
+  color: var(--color-ink-muted);
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(.3rem, -50%);
+}
+
+.social-email:is(:hover, :focus-within) .email-copy-button {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.sidebar-socials button.email-copy-button svg { width: 15px; height: 15px; }
+
+.email-copy-button:is(:hover, :focus-visible) { color: var(--color-guitar); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .email-copy-button { transition: opacity .15s ease, transform .15s ease, visibility .15s; }
+}
+
+@media (hover: none) {
+  .email-copy-button {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
 .sidebar-nav { margin-top: .45rem; }
 
 .sidebar-nav ul {
@@ -502,6 +553,10 @@ a.sidebar-name:is(:hover, :focus-visible) {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
+  background: var(--color-surface);
+}
+
+.light .site-content {
   background: linear-gradient(155deg, var(--color-content-tint), var(--color-surface) 36rem);
 }
 
@@ -1065,16 +1120,7 @@ a.org-button:is(:hover, :focus-visible) {
     margin-inline: auto;
   }
 
-  .site-content:has(.touching-grass-page) {
-    padding-top: clamp(.8rem, 2svh, 1.5rem);
-  }
-
-  .touching-grass-page {
-    margin-bottom: 0;
-    padding: clamp(.7rem, 1.6svh, 1rem);
-  }
-
-  .touching-grass-page .section-heading { margin-bottom: .7rem; }
+  .touching-grass-page { margin-bottom: 0; }
 
   .touching-grass-page .hobbies-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1116,19 +1162,11 @@ a.org-button:is(:hover, :focus-visible) {
   }
 }
 
-@media (min-width: 800px) and (min-height: 620px) {
-  .site-content:has(.touching-grass-page) {
-    height: 100svh;
-    min-height: 0;
-    overflow: hidden;
-  }
-}
-
 @media (min-width: 800px) and (max-width: 1059px) {
   .touching-grass-page {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .8rem 1rem;
+    gap: 1.25rem 1rem;
   }
 
   .touching-grass-page .section-heading {
@@ -1144,10 +1182,14 @@ a.org-button:is(:hover, :focus-visible) {
 }
 
 @media (min-width: 1060px) and (min-height: 680px) {
-  .site-content:has(.touching-grass-page) main { display: flex; flex-direction: column; min-height: 0; }
+  .site-content:has(.touching-grass-page) main { display: flex; flex-direction: column; }
 
-  .touching-grass-page { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-  .touching-grass-page .hobbies-grid { min-height: min(43svh, 21rem); }
+  .touching-grass-page { display: flex; flex-direction: column; flex: 1; }
+  .touching-grass-page .hobbies-grid {
+    flex-shrink: 0;
+    min-height: min(43svh, 21rem);
+    margin-top: auto;
+  }
   .touching-grass-page .hobbies-grid article { padding-top: clamp(.75rem, 2svh, 1.25rem); }
   .touching-grass-page .hobbies-grid h3 { font-size: 1rem; }
   .touching-grass-page .hobbies-grid article > div:first-child a { font-size: .75rem; }
@@ -1163,7 +1205,7 @@ a.org-button:is(:hover, :focus-visible) {
   .touching-grass-page .last-workout-exercises li { padding-block: .65rem; }
   .touching-grass-page .guitar-card-image { height: clamp(7.75rem, 24svh, 12rem); }
   .touching-grass-page .gallery-photo { height: clamp(8.75rem, min(32.5svh, calc(100svh - 31.5rem)), 15rem); }
-  .touching-grass-page .gallery { margin-top: auto; }
+  .touching-grass-page .gallery { flex-shrink: 0; margin-top: 0; }
 }
 
 @media (min-width: 1060px) and (min-height: 820px) {
